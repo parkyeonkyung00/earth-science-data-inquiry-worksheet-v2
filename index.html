@@ -1,0 +1,2245 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="2022 개정 교육과정에 맞춘 지구과학 데이터 탐구와 비판적 검증을 위한 워크시트입니다.">
+  <title>지구과학 데이터 탐구 프롬프트 워크시트</title><style>
+:root {
+  --bg: #EEF2F1;
+  --surface: #FFFFFF;
+  --sunk: #E3E9E7;
+  --ink: #14201D;
+  --muted: #56635F;
+  --line: #CCD6D3;
+  --accent: #145C78;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #DCEBF1;
+  --ok: #2C7A4B;
+  --ok-soft: #DDF0E3;
+  --warn: #9A6400;
+  --warn-soft: #F6EBD3;
+  --bad: #B0281F;
+  --bad-soft: #F7DEDB;
+  --grid: rgba(20, 92, 120, .07);
+  --f-display: "Gowun Batang", "Nanum Myeongjo", "Batang", serif;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --r: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1513;
+    --surface: #161F1D;
+    --sunk: #1D2826;
+    --ink: #E1E9E6;
+    --muted: #97A6A1;
+    --line: #2B3835;
+    --accent: #6CB6D3;
+    --accent-ink: #082029;
+    --accent-soft: #18323C;
+    --ok: #6CC892;
+    --ok-soft: #173326;
+    --warn: #E2B04F;
+    --warn-soft: #352A12;
+    --bad: #F08A80;
+    --bad-soft: #3A1C19;
+    --grid: rgba(108, 182, 211, .06);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0E1513;
+  --surface: #161F1D;
+  --sunk: #1D2826;
+  --ink: #E1E9E6;
+  --muted: #97A6A1;
+  --line: #2B3835;
+  --accent: #6CB6D3;
+  --accent-ink: #082029;
+  --accent-soft: #18323C;
+  --ok: #6CC892;
+  --ok-soft: #173326;
+  --warn: #E2B04F;
+  --warn-soft: #352A12;
+  --bad: #F08A80;
+  --bad-soft: #3A1C19;
+  --grid: rgba(108, 182, 211, .06);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0 16px 48px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.wrap { max-width: 1180px; margin: 0 auto; }
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--f-display);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+h1 { font-size: 1.55rem; line-height: 1.25; }
+h2 { font-size: 1.35rem; line-height: 1.3; }
+h3 { font: 600 1.05rem/1.4 var(--f-body); }
+p { margin: 0; }
+a { color: var(--accent); overflow-wrap: anywhere; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--f-mono); font-size: .86em; }
+.muted { color: var(--muted); }
+.small { font-size: .86rem; }
+.label {
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.top {
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  margin: 0 -16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.top .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.brand { display: flex; flex: 1 1 260px; align-items: baseline; gap: 10px; min-width: 0; }
+.brand b { font: 700 1.12rem var(--f-display); overflow-wrap: anywhere; }
+.brand span { overflow: hidden; color: var(--muted); font-size: .84rem; text-overflow: ellipsis; white-space: nowrap; }
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+.review-panel { margin-block: 20px; }
+.review-table { width: 100%; min-width: 760px; border-collapse: collapse; }
+.review-table th, .review-table td { padding: 10px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.review-table caption { padding: 8px; text-align: left; font-weight: 600; }
+.review-table .btn { margin-top: 8px; }
+.data-how, .datacard { overflow-wrap: anywhere; }
+.seg button {
+  padding: 5px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-weight: 500;
+}
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.survey-link { text-decoration: none; }
+.survey-link[hidden] { display: none; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: none; }
+.btn.sm { padding: 4px 10px; font-size: .86rem; }
+.loading, .error { max-width: 760px; margin: 28px auto 0; }
+.error { padding: 16px; border: 1px solid var(--bad); border-radius: 10px; background: var(--bad-soft); }
+.foot { max-width: 80ch; margin-top: 28px; color: var(--muted); font-size: .8rem; }
+.foot-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; color: var(--muted); font-size: .8rem; }
+.intro-note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+.intro-note p { margin-top: 4px; }
+
+.teacher {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 22px;
+}
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tab {
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: .9rem;
+}
+.tab[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.unit { margin-top: 14px; }
+.unit h3 { margin-bottom: 6px; font-size: .92rem; }
+.std {
+  display: block;
+  width: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: .88rem;
+  line-height: 1.45;
+  text-align: left;
+}
+.std:hover { background: var(--sunk); }
+.std[aria-current="true"] { background: var(--accent-soft); }
+.std .code { display: block; color: var(--muted); font: .78rem var(--f-mono); }
+.std .act { display: block; color: var(--accent); font-weight: 600; }
+.std.none, .std.none .act { color: var(--muted); font-weight: 400; }
+.teacher-detail { min-width: 0; }
+.panel {
+  min-width: 0;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.panel + .panel { margin-top: 16px; }
+.stack { display: grid; gap: 14px; }
+.kv {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr);
+  gap: 6px 14px;
+  font-size: .92rem;
+}
+.kv dt { color: var(--muted); }
+.kv dd { min-width: 0; margin: 0; }
+.plain { margin: 0; padding-left: 1.1em; }
+.plain li { margin: .15em 0; }
+.std-quote {
+  padding: 4px 0 4px 14px;
+  border-left: 3px solid var(--accent);
+  font: 1.02rem var(--f-display);
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: .84rem;
+}
+.tbl-wrap { overflow-x: auto; }
+.levels { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.levels td { padding: 8px 6px; border-top: 1px solid var(--line); vertical-align: top; }
+.levels td:first-child { width: 2.2em; color: var(--accent); font: 500 1rem var(--f-mono); }
+.field { display: grid; gap: 6px; min-width: 0; }
+.note { padding: 10px 12px; border-radius: 8px; background: var(--sunk); font-size: .86rem; }
+.ver-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ver {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+}
+.ver[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.ver b { color: var(--accent); font: 500 1.1rem var(--f-mono); }
+.code-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px dashed var(--accent);
+  border-radius: 10px;
+}
+.code-box .code-value { font-size: 1.3rem; font-weight: 500; letter-spacing: .06em; }
+.activity-title { margin-top: 4px; }
+.data-how, .panel-description, .version-description { margin-top: 4px; }
+.level-description { margin-top: 8px; }
+.copy-input { position: fixed; opacity: 0; }
+
+.start { max-width: 760px; margin: 28px auto 0; }
+.lead { max-width: 68ch; color: var(--muted); font-size: .94rem; }
+.panel-description { margin-top: 4px; }
+.join { display: flex; flex-wrap: wrap; gap: 8px; }
+.join input {
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+  font-family: var(--f-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.err { color: var(--bad); font-size: .88rem; }
+.pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 10px; }
+.pick button {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: pointer;
+  line-height: 1.45;
+  text-align: left;
+}
+.pick button:hover { border-color: var(--accent); }
+.pick .code { color: var(--muted); font: .76rem var(--f-mono); }
+.subject-picks { margin-top: 16px; }
+
+.work { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 24px; margin-top: 20px; }
+.rail { position: sticky; top: 70px; align-self: start; }
+.rail ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.rail ol button {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 2.6em minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: .9rem;
+  text-align: left;
+}
+.rail ol button .n { font: .8rem var(--f-mono); }
+.rail ol button[aria-current="step"] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: inset 3px 0 0 var(--accent);
+  font-weight: 600;
+}
+.dot { width: 8px; height: 8px; border: 1.5px solid var(--line); border-radius: 50%; }
+.dot.done { border-color: var(--ok); background: var(--ok); }
+.meta { display: grid; gap: 8px; margin-top: 16px; padding: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.vbadge { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: .8rem; }
+.vbadge b { color: var(--accent); font-family: var(--f-mono); }
+.sheet { min-width: 0; }
+.sheet-head {
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.sheet-head .code { color: var(--accent); font: .8rem var(--f-mono); }
+.sec { display: grid; gap: 18px; min-width: 0; margin-top: 16px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.section-intro { gap: 6px; }
+.sec-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+.sec-title .n { color: var(--accent); font: .95rem var(--f-mono); }
+.field > label, .field > .flabel { font-size: .92rem; font-weight: 600; }
+.field > label.check { font-size: .94rem; font-weight: 400; }
+.field .hint { color: var(--muted); font-size: .84rem; }
+input[type="text"], input[type="number"], select, textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg);
+}
+textarea { min-height: 84px; resize: vertical; line-height: 1.6; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: 0; box-shadow: 0 0 0 3px var(--accent-soft); }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.fill { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: .98rem; line-height: 2.2; }
+.fill input { width: auto; max-width: 260px; flex: 1 1 130px; padding: 4px 9px; border-style: dashed; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+.card {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: pointer;
+  line-height: 1.45;
+  text-align: left;
+}
+.card[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.card b { display: block; font-size: .92rem; }
+.card span { color: var(--muted); font-size: .82rem; }
+.card-label { display: flex; align-items: flex-start; gap: 8px; }
+.card-label > input { flex: 0 0 auto; margin-top: .3em; accent-color: var(--accent); }
+.card-label > span { flex: 1; }
+.check { display: flex; align-items: flex-start; gap: 10px; font-size: .94rem; }
+.check input { flex: 0 0 auto; margin-top: .35em; accent-color: var(--accent); }
+.datacard { display: grid; gap: 8px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--sunk); }
+.vars { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.vars th { padding: 6px 8px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .8rem; font-weight: 600; text-align: left; }
+.vars td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.vars td.u { font: .82rem var(--f-mono); }
+.vars input[type="text"] { padding: 4px 8px; }
+.prompt-out {
+  max-height: 420px;
+  overflow: auto;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--sunk);
+  font: .84rem/1.7 var(--f-mono);
+  white-space: pre-wrap;
+}
+.copyrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.scale { display: flex; flex-wrap: wrap; gap: 6px; }
+.scale button {
+  min-width: 3.2em;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+  font-family: var(--f-mono);
+}
+.scale button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.scale-legend { display: flex; max-width: 330px; justify-content: space-between; color: var(--muted); font-size: .78rem; }
+.vrow { display: grid; gap: 8px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.vrow.ok { border-color: var(--ok); background: var(--ok-soft); }
+.vrow.bad { border-color: var(--bad); background: var(--bad-soft); }
+.vrow.unk { border-color: var(--warn); background: var(--warn-soft); }
+.vrow-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px 14px; }
+.vrow-top p { flex: 1 1 260px; min-width: 0; font-weight: 500; }
+.tri { display: inline-flex; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.tri button { padding: 4px 10px; border: 0; background: none; color: var(--muted); cursor: pointer; font-size: .84rem; }
+.tri button + button { border-left: 1px solid var(--line); }
+.tri button[aria-pressed="true"][data-v="ok"] { background: var(--ok); color: #fff; }
+.tri button[aria-pressed="true"][data-v="bad"] { background: var(--bad); color: #fff; }
+.tri button[aria-pressed="true"][data-v="unk"] { background: var(--warn); color: #fff; }
+.vhint { color: var(--muted); font-size: .84rem; }
+.tally { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { padding: 2px 10px; border-radius: 999px; font-size: .82rem; font-weight: 600; }
+.pill.ok { background: var(--ok-soft); color: var(--ok); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.unk { background: var(--warn-soft); color: var(--warn); }
+.predict-recap { padding: 6px 0 6px 12px; border-left: 3px solid var(--warn); font-size: .92rem; }
+.round { display: grid; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; }
+.round h3 .mono { color: var(--accent); }
+.starters { display: flex; flex-wrap: wrap; gap: 6px; }
+.starters button { padding: 3px 9px; border: 1px dashed var(--line); border-radius: 6px; background: none; color: var(--muted); cursor: pointer; font-size: .84rem; }
+.starters button:hover { border-color: var(--accent); color: var(--ink); }
+.navrow { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 16px; }
+.details summary { color: var(--accent); cursor: pointer; font-size: .9rem; }
+.details[open] summary { margin-bottom: 8px; }
+.summary-out {
+  max-height: 560px;
+  overflow: auto;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--sunk);
+  font-size: .9rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+.level-options { gap: 6px; }
+
+@media (max-width: 820px) {
+  .brand { flex-basis: 100%; }
+  .teacher { grid-template-columns: minmax(0, 1fr); }
+  .work { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .rail { position: static; }
+  .rail ol { display: flex; overflow-x: auto; gap: 4px; padding-bottom: 4px; }
+  .rail li { flex: 0 0 auto; }
+  .rail ol button { grid-template-columns: auto auto; padding: 6px 10px; white-space: nowrap; }
+  .rail button .t, .rail button .dot, .rail .meta { display: none; }
+  .rail button[aria-current="step"] .t { display: inline; }
+  .ver-grid { grid-template-columns: minmax(0, 1fr); }
+  .sec, .panel { padding: 18px 16px; }
+  .kv { grid-template-columns: minmax(0, 1fr); }
+  .kv dt { margin-top: 6px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main { animation: rise .25s ease-out; }
+  @keyframes rise { from { transform: translateY(4px); } to { transform: none; } }
+}
+
+@media print {
+  @page { margin: 14mm; }
+  body { padding: 0; background: #fff; color: #000; font-size: 11pt; }
+  .top, .rail, .navrow, button, .foot-meta { display: none !important; }
+  .wrap { max-width: none; }
+  .teacher { display: block; margin: 0; }
+  .teacher nav, .intro-note { display: none !important; }
+  .work { display: block; margin: 0; }
+  .sheet-head, .sec, .summary-out {
+    max-height: none;
+    overflow: visible;
+    border-color: #999;
+    background: #fff;
+    color: #000;
+    box-shadow: none;
+  }
+  .sheet-head { margin-bottom: 8mm; }
+  .sec { break-inside: auto; }
+  .summary-out { padding: 0; white-space: pre-wrap; }
+  input, select, textarea { background: #fff !important; color: #000 !important; }
+  details:not([open]) > *:not(summary) { display: none !important; }
+  .foot { color: #444; }
+}
+
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <b>지구과학 데이터 탐구 프롬프트 워크시트</b>
+        <span id="topSub">2022 개정 교육과정 · 데이터 탐구</span>
+      </div>
+      <a id="surveyLink" class="btn sm survey-link" href="" target="_blank" rel="noopener noreferrer" hidden>설문 참여하기</a>
+      <div class="seg" role="group" aria-label="화면 선택">
+        <button id="modeT" type="button" aria-pressed="true">교사</button>
+        <button id="modeS" type="button" aria-pressed="false">학생</button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap" id="app" aria-live="polite">
+    <p class="loading">자료를 불러오는 중입니다.</p>
+  </main>
+<script type="application/json" id="worksheet-data">{"activities":[{"id":"is1-0102","subj":"is1","code":"10통과1-01-02","title":"우리 지역 기상 관측 자료의 단위와 규모 읽기","questions":["우리 지역의 하루 동안 기온, 기압, 풍속은 각각 어느 정도 범위에서 변할까?","같은 날 측정한 강수량과 습도는 어떤 단위로 기록되고, 어떤 관계가 있을까?","기압(hPa)이나 풍속(m/s)은 어떤 기본량의 단위를 조합해 만든 유도량일까?"],"data":{"name":"종관기상관측(ASOS) 시간자료","org":"기상청 기상자료개방포털","url":"https://data.kma.go.kr","how":"기상관측 > 지상 > 종관기상관측(ASOS)에서 지점과 날짜를 고르고 시간 자료를 CSV로 내려받습니다."},"vars":[{"n":"기온","u":"°C","r":"-20 ~ 40"},{"n":"해면기압","u":"hPa","r":"980 ~ 1040 (해면기압 기준)"},{"n":"풍속","u":"m/s","r":"0 ~ 20 (평상시)"},{"n":"강수량","u":"mm","r":"0 이상"},{"n":"상대습도","u":"%","r":"0 ~ 100"}],"tasks":["각 변수의 최솟값, 최댓값, 평균을 표로 정리하기","시간에 따른 기온과 기압 변화를 꺾은선 그래프로 그리기","단위가 다른 변수를 보조 축을 써서 한 그래프에 나타내기","각 변수의 단위를 기본량 단위와 유도량 단위로 나누어 표로 정리하기 (예: hPa = 100 N/m²)"],"chart":"시간-값 꺾은선 그래프 (보조 y축)","predict":"하루 중 기온이 가장 높은 시각과 기압의 변화 폭을 예상해 보세요.","checks":[{"t":"모든 축과 표에 단위가 붙어 있는가?","h":"기온 °C, 기압 hPa, 풍속 m/s, 강수량 mm, 습도 %"},{"t":"상대습도가 0~100 % 범위를 벗어나지 않는가?","h":"100 %를 넘거나 음수면 처리 오류입니다."},{"t":"기압 값이 1,000 hPa 근처인가?","h":"10 hPa나 100,000처럼 보이면 단위 변환(Pa, kPa)을 의심하세요."},{"t":"강수량 결측(빈칸)을 0으로 바꾸지 않았는가?","h":"관측 자료에서 빈칸은 '비가 안 옴'이 아닐 수도 있습니다."},{"t":"유도량 단위를 기본량 단위로 풀어 쓴 것이 맞는가?","h":"1 hPa = 100 Pa = 100 N/m², 1 N = 1 kg·m/s²"}],"pitfalls":["Pa와 hPa를 혼동해 기압이 100배 차이 나게 표시함","빈칸 강수량을 0으로 채우고 이를 알리지 않음","보조 축 없이 기압과 기온을 한 축에 그려 기온 변화가 보이지 않게 함"],"tip":"첫 차시 도입 활동으로 적합합니다. 단위를 확인하는 습관이 이후 모든 활동의 검증 단계(섹션 4)로 이어집니다.","time":"1차시","textbook":"비상교육 통합과학1 Ⅰ단원 활동 '자연 현상을 나타내는 단위의 의미'(기본량·유도량). 교과서의 측정 보고서 대신 실제 기상 관측 자료로 같은 활동을 합니다."},{"id":"is1-0104","subj":"is1","code":"10통과1-01-04","title":"센서로 측정한 교실 온도 데이터 분석하기","questions":["냉난방기를 켠 뒤 교실의 위치에 따라 온도는 얼마나 다르게 변할까?","온도가 일정해지기까지 걸리는 시간은 위치마다 다를까?"],"data":{"name":"온도 센서 측정 자료 (학생 직접 측정)","org":"모둠별 온도 센서 · 스마트 기기 앱","url":"","how":"교과서 탐구처럼 교실 두세 곳에 온도 센서를 두고 냉난방기 가동 전후를 일정 시간 측정합니다. 측정 앱에서 시간-온도 자료를 CSV로 내보내 씁니다. 위치마다 파일이 따로 생기면 파일 이름에 위치를 적어 둡니다."},"vars":[{"n":"시간","u":"s 또는 분","r":"측정 시작부터 0 이상"},{"n":"온도","u":"°C","r":"실내 약 10 ~ 35"},{"n":"측정 위치","u":"(창가, 문 쪽, 냉난방기 앞 등)","r":""}],"tasks":["위치별 시간-온도 그래프를 한 그래프에 겹쳐 그리기","냉난방기를 켠 시각을 표시하고 위치별 온도 변화율(°C/분) 계산하기","온도가 거의 변하지 않게 될 때까지 걸린 시간을 위치별로 비교하기"],"chart":"시간-온도 꺾은선 그래프 (위치별 색 구분, 가동 시각 표시)","predict":"냉난방기 바로 앞과 가장 먼 곳의 온도 변화가 어떻게 다를지 예상해 보세요.","checks":[{"t":"시간 축 단위(초·분)가 원자료와 같은가?","h":"초 단위 자료를 분으로 착각하면 변화율이 60배 달라집니다."},{"t":"위치별 측정 시작 시각을 맞춰서 그렸는가?","h":"센서마다 기록을 시작한 시각이 다르면 그래프가 어긋나 보입니다."},{"t":"센서마다 처음 온도가 다르다면, 실제 차이인지 센서 오차인지 확인했는가?","h":"측정 전 같은 곳에 센서를 모아 두고 값을 비교해 보면 알 수 있습니다."},{"t":"갑자기 튀는 값(센서를 손으로 만진 순간 등)을 확인했는가?","h":""},{"t":"두세 곳의 측정으로 교실 전체를 일반화하지 않았는가?","h":""}],"pitfalls":["시간 열을 문자열로 읽어 축 순서가 뒤섞임","위치별 파일을 합치면서 시작 시각을 맞추지 않음","온도 변화율 단위를 °C/s와 °C/분으로 섞어 씀"],"tip":"학생이 직접 만든 데이터라 출처와 측정 조건을 섹션 2에 기록하는 연습이 자연스럽습니다. 측정값 자체의 오차를 의심해 보는 경험이 AI 결과 검증과 이어집니다.","time":"2차시","textbook":"비상교육 통합과학1 Ⅰ단원 탐구 '센서를 활용하여 교실 내 위치별 온도 측정·분석하기'. 교과서는 앱 그래프를 비교하고, 이 활동은 같은 자료를 AI로 분석·검증합니다."},{"id":"is1-0301","subj":"is1","code":"10통과1-03-01","title":"대형 화산 분출 뒤 지구 평균 기온 변화 찾기","questions":["1991년 피나투보 화산 분출 뒤 지구 평균 기온은 어떻게 변했을까?","지권의 화산 활동이 기권과 수권에 어떤 영향을 주었다고 볼 수 있을까?"],"data":{"name":"GISTEMP 전 지구 월평균 기온 편차","org":"NASA GISS","url":"https://data.giss.nasa.gov/gistemp/","how":"Tables of Global and Hemispheric Monthly Means에서 Global-mean monthly 자료(CSV)를 내려받습니다."},"vars":[{"n":"기온 편차","u":"°C (1951~1980 평균 기준)","r":"-0.6 ~ +1.5"},{"n":"연도·월","u":"년, 월","r":"1880 ~ 현재"}],"tasks":["1985~2000년 월별 기온 편차를 꺾은선 그래프로 그리기","분출 시점(1991년 6월)에 세로선 표시하기","분출 전 2년과 후 2년의 평균 편차 비교하기","화산 폭발로 어떤 권역에서 어떤 권역으로 물질과 에너지가 이동했는지 근거와 함께 논증 문장으로 정리하기"],"chart":"시간-기온 편차 꺾은선 그래프 (사건 표시선)","predict":"분출 뒤 기온이 오를지 내릴지, 변화 폭이 몇 °C 정도일지 예상해 보세요.","checks":[{"t":"y축이 '기온'이 아니라 '기온 편차'로 표시되었는가?","h":"편차는 기준 기간 평균과의 차이입니다. 15 °C 같은 값이 나오면 잘못 읽은 것입니다."},{"t":"분출 시점 표시가 1991년 6월에 정확히 있는가?","h":""},{"t":"변화 폭이 0.1~0.5 °C 수준인가?","h":"수 °C씩 변했다면 축 범위나 자료를 다시 확인하세요."},{"t":"AI가 화산 외 다른 요인(엘니뇨 등)을 함께 언급했는가, 또는 그 가능성을 내가 검토했는가?","h":"하나의 그래프로 원인을 단정할 수 없습니다."}],"pitfalls":["GISTEMP 자료의 '***' 결측 표시를 숫자로 읽지 못해 오류를 내거나 행을 통째로 버림","편차를 실제 기온으로 해석함","상관을 인과로 단정하는 설명을 덧붙임"],"tip":"화산재·이산화 황 에어로졸이 햇빛을 반사한다는 권역 간 상호작용 설명과 연결하세요. 원인 단정을 경계하는 섹션 6 성찰 질문과 잘 맞습니다.","time":"1~2차시","textbook":"비상교육 통합과학1 Ⅲ단원 탐구 '지구시스템의 물질 순환과 에너지 흐름 논증하기'(화산 폭발 사례). 교과서의 논증을 실제 기온 자료로 뒷받침합니다."},{"id":"is1-0302","subj":"is1","code":"10통과1-03-02","title":"지진의 깊이 분포로 판 경계 해석하기","questions":["대서양 중앙 해령, 칠레 해구, 산안드레아스 단층 주변에서 지진의 깊이 분포는 어떻게 다를까?","칠레 해구에서 남아메리카 대륙 쪽으로 갈수록 진원 깊이는 어떻게 달라질까?"],"data":{"name":"USGS 지진 목록 (Earthquake Catalog)","org":"미국 지질조사국(USGS)","url":"https://earthquake.usgs.gov/earthquakes/search/","how":"USGS Earthquake Catalog에서 기간과 규모 하한(예: M4.5)을 같게 설정하고, 대서양 중앙 해령·칠레 해구·산안드레아스 단층을 각각 포함하는 검색 영역을 정해 CSV로 내려받습니다. 영역의 경계와 자료 건수를 기록하고, 크기가 다른 영역의 지진 개수를 그대로 비교하지 않습니다."},"vars":[{"n":"위도·경도","u":"°","r":"위도 -90~90, 경도 -180~180"},{"n":"진원 깊이","u":"km","r":"0 ~ 700"},{"n":"규모","u":"(단위 없음)","r":"검색 조건 이상"}],"tasks":["진앙을 지도에 점으로 찍고 깊이를 색으로 구분하기","대서양 중앙 해령, 칠레 해구, 산안드레아스 단층 부근 지진의 깊이 분포를 비교하기","칠레 해구를 가로지르는 거리-깊이 단면도 그리기"],"chart":"산점도 지도 + 깊이 단면도 (y축 아래로 갈수록 깊음)","predict":"세 판 경계 중 깊은 지진(300 km 이상)이 나타나는 곳을 예상해 보세요.","checks":[{"t":"단면도에서 깊이가 아래쪽으로 커지도록 y축이 뒤집혀 있는가?","h":"깊은 지진이 위에 그려지면 실제 모습과 반대입니다."},{"t":"진원 깊이가 0~700 km 범위 안에 있는가?","h":"700 km보다 깊은 지진은 관측되지 않습니다."},{"t":"경도·위도를 뒤바꿔 찍지 않았는가?","h":"일본은 대략 북위 30~45°, 동경 130~145°입니다."},{"t":"깊은 지진이 수렴형 경계(섭입대)에서만 나타나는가?","h":"발산형·보존형 경계의 지진은 대부분 얕습니다."},{"t":"깊어지는 경향선이 어느 판이 어느 판 아래로 들어가는지와 맞는가?","h":""}],"pitfalls":["CSV의 latitude/longitude 열을 바꿔 그려 지도가 엉뚱한 위치에 찍힘","단면도의 깊이 축을 뒤집지 않음","날짜 범위를 지정하지 않아 최근 30일 자료만 사용함"],"tip":"섭입대의 경사진 지진대(와다티-베니오프대)가 드러나는지 확인하게 하세요. 지도 라이브러리 설치가 안 되는 환경이면 위도·경도 산점도로 대신해도 됩니다.","time":"2차시","textbook":"비상교육 통합과학1 Ⅲ단원 활동 '빅데이터 기반 프로그램으로 지진과 화산 활동이 자주 일어나는 지역 알아보기'와 판 경계 본문. 교과서는 프로그램으로 분포를 보고, 이 활동은 같은 종류의 자료를 내려받아 깊이까지 분석합니다."},{"id":"is2-0101","subj":"is2","code":"10통과2-01-01","title":"해양 생물 과의 수 변화로 대멸종 가설 평가하기","questions":["지질 시대 동안 해양 생물 과(科)의 수는 언제 크게 줄었을까?","내가 고른 대멸종의 원인 가설(기후 변화, 해양 무산소, 화산 폭발, 소행성 충돌)은 감소 폭과 회복 기간 자료로 뒷받침될까?"],"data":{"name":"Paleobiology Database 다양성 곡선","org":"Paleobiology Database","url":"https://paleobiodb.org","how":"Analyze/Download > Diversity curve 기능에서 분류 단위를 과(family)로 정해 해양 무척추동물의 지질 시대별 과의 수를 내려받습니다. 어렵다면 교사가 미리 정리한 CSV를 사용합니다."},"vars":[{"n":"시간","u":"Ma (백만 년 전)","r":"541 ~ 0"},{"n":"과의 수","u":"개","r":"0 이상"}],"tasks":["시간에 따른 과의 수 변화를 꺾은선 그래프로 그리기","5대 대멸종 시기를 표시하고 직전·직후 감소율(%) 계산하기","고른 대멸종 뒤 과의 수가 직전 수준으로 회복되기까지 걸린 시간 구하기"],"chart":"지질 시대-과의 수 꺾은선 그래프 (왼쪽이 과거)","predict":"가장 큰 감소가 일어난 시기를 예상하고, 그 시기에 어울리는 원인 가설을 하나 골라 보세요.","checks":[{"t":"x축이 왼쪽 과거(541 Ma)에서 오른쪽 현재(0 Ma)로 가는가?","h":"Ma 값을 그대로 그리면 축이 뒤집혀 시간이 거꾸로 흐릅니다."},{"t":"대멸종 표시가 지질시대 경계와 맞는가?","h":"예: 페름기 말 약 252 Ma, 백악기 말 약 66 Ma"},{"t":"감소율 계산이 (직전-직후)/직전 × 100인가?","h":""},{"t":"과의 수 감소를 종의 수 감소와 같은 크기로 단정하지 않았는가?","h":"과는 종보다 큰 분류 단위라 종 감소율은 더 큽니다."},{"t":"그래프의 감소 폭만으로 가설을 '증명'했다고 쓰지 않았는가?","h":"감소 폭과 회복 기간은 가설을 평가하는 근거 중 하나일 뿐입니다."}],"pitfalls":["Ma를 '년'으로 착각해 단위를 잘못 붙임","시간축을 뒤집지 않아 과거와 현재가 바뀜","대멸종 연대를 틀리게 표시함"],"tip":"지질시대 표준 연대는 국제층서위원회(ICS) 연대표와 대조하게 하세요. 섹션 4에서 '외부 기준과 대조하기' 습관을 기르기 좋습니다.","time":"2차시","textbook":"비상교육 통합과학2 Ⅰ단원 탐구 '대멸종의 원인을 설명하는 여러 가설 알아보기'. 교과서의 해양 생물 과의 수 그래프를 실제 자료로 직접 그려 봅니다."},{"id":"is2-0203","subj":"is2","code":"10통과2-02-03","title":"지구 평균 기온 상승과 엘니뇨 해 비교하기","questions":["최근 40년 동안 지구 평균 기온은 얼마나 올랐을까?","엘니뇨가 강했던 해에 지구 평균 기온이 특히 높았을까?","페트병 온실 효과 실험에서 확인한 경향이 실제 지구 관측 자료에서도 나타날까?"],"data":{"name":"GISTEMP 연평균 기온 편차 + 해양 니뇨 지수(ONI)","org":"NASA GISS / NOAA 기후예측센터","url":"https://data.giss.nasa.gov/gistemp/","how":"GISTEMP 연평균 자료와 NOAA CPC의 ONI 표(https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php)를 각각 내려받습니다."},"vars":[{"n":"기온 편차","u":"°C","r":"-0.5 ~ +1.5"},{"n":"ONI","u":"°C (해수면 온도 편차)","r":"-2.5 ~ +2.7"}],"tasks":["1980년 이후 기온 편차와 추세선을 그리고 10년당 상승률 구하기","ONI가 +0.5 °C 이상인 해를 엘니뇨 해로 표시하기","추세선에서 벗어난 정도(잔차)와 ONI의 관계 살펴보기"],"chart":"연도-기온 편차 꺾은선 + 추세선, 엘니뇨 해 강조","predict":"10년마다 기온이 대략 몇 °C씩 올랐을지 예상해 보세요.","checks":[{"t":"추세 상승률이 10년당 약 0.2 °C 수준인가?","h":"1 °C를 넘는다면 단위(년/10년)나 계산을 확인하세요."},{"t":"엘니뇨 판정 기준(+0.5 °C)을 정확히 썼는가?","h":"엄밀하게는 3개월 이동평균이 5번 연속 기준 이상이어야 합니다."},{"t":"두 자료의 기준 기간이 다름을 알고 해석했는가?","h":"GISTEMP와 ONI는 기준 평균 기간이 다릅니다."},{"t":"엘니뇨가 온난화의 원인이라는 결론으로 비약하지 않았는가?","h":"엘니뇨는 해마다 오르내림을 만들고, 장기 추세는 따로 봐야 합니다."}],"pitfalls":["ONI의 계절(DJF, JFM…) 열을 연도로 묶을 때 잘못 평균함","추세 기울기를 연 단위로 구하고 10년당이라고 표기함","엘니뇨와 온난화의 인과를 단정함"],"tip":"온실효과 강화의 장기 추세와 엘니뇨의 단기 변동을 구분하는 것이 성취기준의 핵심입니다. 섹션 6에서 'AI 설명 중 내가 동의하지 않은 부분'을 쓰게 하세요.","time":"2차시","textbook":"비상교육 통합과학2 Ⅱ단원 탐구 '지구 온난화에 따른 지구 열수지 변동'(페트병 실험)과 활동 '엘니뇨가 지구 환경과 인간 생활에 미치는 영향'."},{"id":"is2-0302","subj":"is2","code":"10통과2-03-02","title":"미세먼지 빅데이터의 결측값과 이상값 다루기","questions":["한 달 동안 우리 지역 PM10 농도 자료에는 결측과 이상값이 얼마나 있을까?","결측값을 어떻게 처리하느냐에 따라 월평균 농도가 달라질까?","충분히 검증되지 않은 데이터를 그대로 쓰면 어떤 문제가 생길까?"],"data":{"name":"대기오염 측정소 시간별 자료","org":"한국환경공단 에어코리아","url":"https://www.airkorea.or.kr","how":"통계정보 > 최종확정 측정자료에서 측정소와 기간을 골라 내려받습니다."},"vars":[{"n":"PM10","u":"µg/m³","r":"0 ~ 수백 (황사 때 1,000 이상 가능)"},{"n":"PM2.5","u":"µg/m³","r":"0 ~ 수백"},{"n":"측정 시각","u":"년-월-일 시","r":"1~24시"}],"tasks":["결측값과 음수 값의 개수 세기","결측 제외 / 0으로 채우기 / 앞뒤 값으로 보간하기 세 방법의 월평균 비교하기","시간별 농도 변화 그래프 그리기"],"chart":"시간-농도 꺾은선 그래프 + 처리 방법별 평균 비교 막대그래프","predict":"결측을 0으로 채우면 월평균이 커질지 작아질지 예상해 보세요.","checks":[{"t":"농도에 음수가 남아 있지 않은가?","h":"농도는 음수가 될 수 없습니다. -999 같은 값은 결측 표시입니다."},{"t":"결측 처리 방법을 AI가 명시했는가?","h":"말없이 행을 지웠다면 다시 물어보세요."},{"t":"24시가 다음 날 0시로 처리되는 등 시각 형식 문제는 없는가?","h":""},{"t":"평균이 처리 방법마다 어떻게 달라졌는지 숫자로 확인했는가?","h":""}],"pitfalls":["-999 같은 결측 코드를 실제 값으로 평균에 포함함","결측 행을 알리지 않고 삭제함","'24시' 표기를 날짜 형식으로 바꾸다 오류를 냄"],"tip":"교과서가 빅데이터의 문제점으로 드는 '충분히 검증되지 못한 데이터의 활용'과 '지나친 데이터 의존'을 직접 겪어 보는 활동입니다. 같은 데이터에서 처리 방식에 따라 결론이 달라지는 경험이 과신 방지의 핵심 사례가 됩니다.","time":"1~2차시","textbook":"비상교육 통합과학2 Ⅲ단원 탐구 '과학 기술 사회에서 빅데이터 활용의 장점과 문제점'(기상청 날씨마루 사례). 교과서는 조사·토의 중심이고, 이 활동은 실제 데이터로 문제점을 확인합니다."},{"id":"es-0101","subj":"es","code":"12지구01-01","title":"인공위성과 ARGO 자료로 해수의 성질 비교하기","questions":["2월과 8월에 북반구, 적도 부근, 남반구 해역의 표층 수온은 어떻게 다를까?","같은 해역이라도 계절에 따라 수온과 염분의 연직 분포, T-S도 모양이 달라질까?"],"data":{"name":"천리안위성 2A호 해수면 온도 + ARGO 플로트 수온·염분 자료","org":"국가기상위성센터 / 국립기상과학원 ARGO","url":"https://nmsc.kma.go.kr","how":"표층 수온은 국가기상위성센터의 위성 영상(해수면 온도 10일 합성)에서 해역별 값을 읽어 표로 정리합니다. 연직 자료는 국립기상과학원 ARGO(http://argo.nims.go.kr)에서 플로트를 골라 수심별 수온·염분 자료를 내려받습니다. 우리나라 연안을 더 자세히 보려면 KODC 정선해양관측 자료(https://www.nifs.go.kr/kodc/)를 함께 씁니다."},"vars":[{"n":"표층 수온","u":"°C","r":"-2 ~ 32"},{"n":"수심","u":"m (dbar로 기록되기도 함)","r":"0 ~ 2,000 (ARGO)"},{"n":"수온","u":"°C","r":"-2 ~ 30"},{"n":"염분","u":"psu","r":"32 ~ 37 (대양)"},{"n":"밀도","u":"g/cm³","r":"약 1.020 ~ 1.030"}],"tasks":["해역(북반구·적도·남반구)과 계절(2월·8월)별 표층 수온을 표와 막대그래프로 비교하기","ARGO 수심-수온, 수심-염분 그래프 그리기 (깊이 축 아래로)","T-S도에 등밀도선을 함께 그리고 계절별로 비교하기"],"chart":"해역·계절별 막대그래프 + 연직 분포 그래프 + 등밀도선이 있는 T-S도","predict":"8월에 북반구(제주도 부근)와 남반구(시드니 부근) 해역 중 어느 쪽 표층 수온이 더 높을지, 그 이유와 함께 예상해 보세요.","checks":[{"t":"계절이 반대인 남반구에서 2월·8월 수온 관계가 북반구와 반대로 나타나는가?","h":"남반구는 8월이 겨울입니다."},{"t":"수심 축이 아래로 갈수록 깊어지게 그려졌는가?","h":"해양 연직 분포는 수심을 세로축 아래 방향으로 둡니다."},{"t":"T-S도 등밀도선의 숫자를 바르게 해석했는가?","h":"등밀도선 24는 1.024 g/cm³를 뜻합니다."},{"t":"염분이 32~37 psu 근처이고, 깊어질수록 수온이 낮아지는가?","h":"0이나 100 같은 값은 단위·열 혼동입니다."},{"t":"ARGO 자료의 압력(dbar)을 수심(m)처럼 썼다면 그 사실을 밝혔는가?","h":"1 dbar는 대략 수심 1 m에 해당하지만 같은 값은 아닙니다."}],"pitfalls":["수심을 x축에 두고 위로 증가하게 그림","T-S도에 등밀도선 없이 점만 찍고 밀도를 해석함","ARGO 품질 표시(QC flag)가 나쁜 값을 그대로 사용함","남반구의 계절을 북반구와 같게 해석함"],"tip":"교과서 탐구는 위성 영상과 ARGO 누리집 그래프를 눈으로 비교하는 데서 끝납니다. 이 활동은 같은 자료를 내려받아 AI로 직접 그래프를 만들고 검증하는 단계로 확장한 것입니다. 성취수준 A의 '디지털 실측 자료를 그래프로 변환하고 해석'에 해당합니다.","time":"2차시","textbook":"미래엔 지구과학 Ⅰ단원 탐구 '인공위성 및 ARGO 자료로 해수의 성질 비교하기' (탐구 1 위성 표층 수온, 탐구 2 ARGO T-S도)"},{"id":"es-0103","subj":"es","code":"12지구01-03","title":"한랭 전선 통과 전후의 날씨 변화 분석하기","questions":["한랭 전선이 지나갈 때 기온, 기압, 풍향은 어떻게 변할까?","관측 자료만으로 전선이 지나간 시각을 찾을 수 있을까?"],"data":{"name":"종관기상관측(ASOS) 시간자료 + 일기도","org":"기상청 기상자료개방포털","url":"https://data.kma.go.kr","how":"기상청 날씨누리의 과거 일기도·위성 영상·레이더 영상으로 전선이 지나간 날을 고른 뒤, 기상자료개방포털에서 해당 지점의 앞뒤 48시간 시간 자료(기온, 해면기압, 풍향, 풍속, 강수량)를 내려받습니다."},"vars":[{"n":"기온","u":"°C","r":"계절에 따라"},{"n":"해면기압","u":"hPa","r":"990 ~ 1035"},{"n":"풍향","u":"° (북=0, 동=90)","r":"0 ~ 360"},{"n":"강수량","u":"mm","r":"0 이상"}],"tasks":["기온·기압·강수량을 한 화면에 시간 순으로 그리기","풍향을 16방위로 바꾸어 시간에 따라 표시하기","급변 시점을 찾아 전선 통과 시각 추정하기"],"chart":"다중 패널 시계열 그래프 (공통 시간축)","predict":"전선 통과 직후 기온과 기압이 각각 오를지 내릴지, 풍향은 어느 쪽으로 바뀔지 예상해 보세요.","checks":[{"t":"풍향 값이 0~360° 범위이고 360°와 0°를 같은 방향으로 해석했는가?","h":"350°에서 10°로 바뀐 것은 큰 변화가 아니라 북풍 근처의 작은 변화입니다."},{"t":"한랭 전선 통과 뒤 기온이 내려가고 기압이 오르는 경향이 보이는가?","h":"반대라면 온난 전선이거나 시각을 잘못 고른 것일 수 있습니다."},{"t":"시각이 한국 표준시(KST) 기준인가?","h":"일기도의 UTC 시각과 9시간 차이가 납니다."},{"t":"관측 자료에서 찾은 변화 시각이 일기도·레이더 영상에서 전선이 지나간 시각과 맞는가?","h":"일기도는 보통 3~12시간 간격이므로 시각 차이가 조금 날 수 있습니다."},{"t":"통과 시각 판단 근거를 두 가지 이상 들었는가?","h":""}],"pitfalls":["풍향을 숫자 그대로 평균하여 북풍 근처에서 엉뚱한 값을 만듦","UTC와 KST를 섞어 일기도와 관측 시각이 어긋남","각 변수를 따로 그려 동시 변화를 비교하기 어려움"],"tip":"성취수준의 탐구 활동 '일기도와 위성 및 레이더 영상 등을 이용하여 과거 날씨 분석하기'와 직접 연결됩니다. 날씨누리의 과거 일기도와 함께 보게 하세요.","time":"2차시","textbook":"미래엔 지구과학 Ⅰ단원 탐구 '일기도와 위성 및 레이더 영상 등을 이용하여 기압계와 연관된 과거 날씨 분석하기'. 교과서는 영상 비교 중심이고, 이 활동은 같은 날의 관측 시계열을 더해 검증합니다."},{"id":"es-0104","subj":"es","code":"12지구01-04","title":"태풍의 중심 기압과 최대 풍속의 관계","questions":["태풍의 중심 기압이 낮을수록 최대 풍속은 강할까?","우리나라에 영향을 준 태풍은 북상하면서 세력이 어떻게 변했을까?"],"data":{"name":"태풍 최적 경로 자료","org":"기상청 기상자료개방포털 / NOAA IBTrACS","url":"https://data.kma.go.kr","how":"기상청 태풍 자료에서 연도별 태풍 정보를 내려받거나, IBTrACS(https://www.ncei.noaa.gov/products/international-best-track-archive)에서 서태평양(WP) 자료를 씁니다."},"vars":[{"n":"중심 기압","u":"hPa","r":"약 870 ~ 1000"},{"n":"최대 풍속","u":"m/s","r":"17 이상 (태풍 기준)"},{"n":"위도·경도","u":"°","r":"서태평양"}],"tasks":["중심 기압-최대 풍속 산점도와 추세선 그리기","한 태풍의 경로를 지도에 그리고 지점마다 중심 기압 표시하기","위도에 따른 중심 기압 변화 살펴보기"],"chart":"산점도 (x 중심 기압, y 최대 풍속) + 경로 지도","predict":"중심 기압이 10 hPa 낮아지면 최대 풍속이 대략 얼마나 강해질지 예상해 보세요.","checks":[{"t":"중심 기압과 최대 풍속이 반비례 경향(음의 상관)을 보이는가?","h":"양의 상관이 나오면 열을 바꿔 읽었을 수 있습니다."},{"t":"풍속 단위가 m/s인가, knot인가?","h":"IBTrACS는 knot(1 knot ≈ 0.514 m/s)를 씁니다."},{"t":"중심 기압이 870~1010 hPa 범위 안에 있는가?","h":""},{"t":"열대 저압부 단계(17 m/s 미만) 자료를 포함할지 정하고 밝혔는가?","h":""}],"pitfalls":["knot를 m/s로 착각해 풍속을 약 2배로 표시함","관측 기관별 풍속 평균 시간(1분·10분)이 다름을 무시함","경도 180°를 넘는 경로를 잘못 이어 지도에 가로선이 생김"],"tip":"태풍 영향권의 위험 반원(진행 방향 오른쪽) 설명으로 확장할 수 있습니다. 기관별 자료 정의 차이는 데이터 맥락 기술(섹션 2)의 좋은 사례입니다.","time":"2차시","textbook":"미래엔 지구과학 Ⅰ단원 태풍 본문과 연계한 보충 활동입니다. 교과서에는 같은 자료 탐구가 없습니다."},{"id":"es-0105","subj":"es","code":"12지구01-05","title":"해양 니뇨 지수로 엘니뇨·라니냐 시기 찾기","questions":["최근 30년 동안 엘니뇨와 라니냐는 몇 번, 얼마나 자주 나타났을까?","강한 엘니뇨 시기의 지수 변화는 어떤 모양일까?","엘니뇨가 있던 겨울에 우리나라 겨울 날씨도 평년과 달랐을까?"],"data":{"name":"해양 니뇨 지수(ONI)","org":"NOAA 기후예측센터(CPC)","url":"https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php","how":"표를 복사해 스프레드시트에 붙이거나, CPC의 oni.ascii.txt 파일을 사용합니다."},"vars":[{"n":"ONI","u":"°C (니뇨 3.4 해역 해수면 온도 편차, 3개월 이동평균)","r":"-2.5 ~ +2.7"},{"n":"시기","u":"연도 + 3개월(DJF…NDJ)","r":"1950 ~ 현재"}],"tasks":["ONI 시계열을 막대 또는 꺾은선 그래프로 그리기","+0.5 이상은 빨강, -0.5 이하는 파랑으로 색칠하기","5회 연속 기준 이상인 구간을 엘니뇨·라니냐 사건으로 판정해 목록 만들기"],"chart":"시계열 막대그래프 (기준선 ±0.5)","predict":"엘니뇨는 대략 몇 년 간격으로 나타날지 예상해 보세요.","checks":[{"t":"판정에 '5개 연속 시기' 조건을 적용했는가?","h":"한 번만 0.5를 넘은 것은 사건으로 보지 않습니다."},{"t":"ONI가 3개월 이동평균임을 그래프 제목이나 설명에 밝혔는가?","h":""},{"t":"엘니뇨 주기를 정확히 일정한 값으로 단정하지 않았는가?","h":"ENSO는 대략 2~7년으로 불규칙합니다."},{"t":"색 구분 기준선이 ±0.5 °C에 있는가?","h":""}],"pitfalls":["5회 연속 조건 없이 한 번 기준을 넘은 시기를 모두 사건으로 셈","계절 표기(DJF 등)를 월로 바꾸는 과정에서 연도가 어긋남","해수면 온도 자체와 편차를 혼동함"],"tip":"용승·침강, 워커 순환 변화와 연결해 '왜 동태평양 수온이 높아지는가'를 섹션 6에서 자기 말로 설명하게 하세요.","time":"1~2차시","textbook":"미래엔 지구과학 Ⅰ단원 엘니뇨·라니냐와 엔소 본문. 교과서가 제시하는 기상청 기후정보포털의 엘니뇨·라니냐 영향 자료와 함께 보면 좋습니다."},{"id":"es-0106","subj":"es","code":"12지구01-06","title":"기후 변화의 원인 가설을 자료로 비교하기","questions":["1960년 이후 지구 기온 상승은 태양 활동 변화와 이산화 탄소 증가 중 어느 쪽과 더 잘 맞을까?","대규모 화산 폭발은 기온에 오래 가는 영향을 줄까, 짧게 지나가는 영향을 줄까?"],"data":{"name":"마우나로아 CO₂ 연평균 + GISTEMP 기온 편차 + 태양 흑점 수","org":"NOAA 지구감시연구소(GML) / NASA GISS / 벨기에 왕립천문대 SILSO","url":"https://gml.noaa.gov/ccgg/trends/","how":"GML에서 CO₂ 연평균, GISTEMP(https://data.giss.nasa.gov/gistemp/)에서 전 지구 연평균 기온 편차, SILSO(https://www.sidc.be/SILSO/)에서 연평균 흑점 수를 내려받습니다."},"vars":[{"n":"CO₂ 농도","u":"ppm","r":"315 (1959) ~ 약 425 (최근)"},{"n":"기온 편차","u":"°C","r":"-0.2 ~ +1.5"},{"n":"흑점 수","u":"개 (연평균)","r":"0 ~ 약 270"}],"tasks":["세 변수를 같은 시간축의 위아래 그래프로 나란히 그리기","기온 편차와 CO₂, 기온 편차와 흑점 수의 상관 계수를 각각 구하기","대규모 화산 폭발 연도(1963, 1982, 1991)를 표시하고 전후 기온 비교하기"],"chart":"공통 시간축 3단 그래프 + 산점도 2개","predict":"기온 변화와 가장 비슷한 모양을 보일 요인을 하나 고르고, 그렇게 생각한 이유를 써 보세요.","checks":[{"t":"CO₂ 단위가 ppm이고 값이 300~430 범위인가?","h":"% 로 표시되었다면 0.04 % 수준이어야 합니다."},{"t":"흑점 수의 약 11년 주기가 그래프에 보이는가?","h":"주기가 보이지 않으면 월·연 자료를 섞었는지 확인하세요."},{"t":"보조 축 범위를 조작해 상관이 과장되어 보이지 않는가?","h":"축 범위를 바꾸면 두 곡선이 겹쳐 보이게 만들 수 있습니다."},{"t":"상관 계수만으로 원인을 결론 내리지 않고 물리적 원리(온실효과, 태양 복사량)로 설명했는가?","h":""},{"t":"자료로 검증하기 어려운 가설(자전축 기울기 변화 등)은 시간 규모가 다르다는 점을 고려했는가?","h":"자전축 기울기 변화는 수만 년 규모로 일어납니다."}],"pitfalls":["보조 축 범위를 임의로 맞춰 두 곡선이 완벽히 겹쳐 보이게 함","흑점 수 자료의 버전(1.0, 2.0) 차이를 무시함","상관 계수만으로 인과를 결론 냄","수만 년 규모 요인을 수십 년 자료로 판단함"],"tip":"교과서 탐구의 네 요인(자전축 기울기, 태양 활동, 화산 폭발, 화석 연료) 중 수십 년 자료로 검증할 수 있는 세 요인을 실제 자료로 비교합니다. 섹션 6에서 자료로 확인할 수 없는 가설을 하나 이상 적게 하세요.","time":"2차시","textbook":"미래엔 지구과학 Ⅰ단원 탐구 '기후 변화의 원인을 설명하는 다양한 가설 추론하기'"},{"id":"es-0201","subj":"es","code":"12지구02-01","title":"방사성 붕괴 자료로 반감기와 절대 연령 구하기","questions":["모원소 비율이 시간에 따라 어떻게 줄어드는가?","남은 모원소 비율로 암석의 절대 연령을 구할 수 있을까?"],"data":{"name":"방사성 붕괴 수업용 자료","org":"교사 제공 또는 직접 생성","url":"","how":"교사가 제공한 모원소·자원소 개수 표를 쓰거나, 동전·주사위 붕괴 모형 실험 결과를 표로 정리해 씁니다. 이 자료는 실제 관측값이 아니라 수업용 자료임을 밝힙니다."},"vars":[{"n":"경과 시간","u":"반감기 수 또는 년","r":"0 이상"},{"n":"모원소 비율","u":"% 또는 (0~1)","r":"0 ~ 100 %"},{"n":"자원소 비율","u":"%","r":"0 ~ 100 %"}],"tasks":["시간-모원소 비율 그래프 그리기","지수 함수로 맞춰 반감기 구하기","모원소가 25 % 남은 시료의 연령 계산하기"],"chart":"시간-비율 꺾은선 (지수 감소 곡선)","predict":"반감기가 두 번 지나면 모원소가 몇 % 남을지 예상해 보세요.","checks":[{"t":"모원소와 자원소 비율의 합이 100 %인가?","h":""},{"t":"감소 곡선이 직선이 아니라 지수 곡선으로 맞춰졌는가?","h":"직선으로 맞추면 반감기가 틀리게 나옵니다."},{"t":"25 % 남았을 때 연령이 반감기의 2배로 계산되었는가?","h":""},{"t":"수업용 자료와 실제 암석 자료의 차이를 이해했는가?","h":""}],"pitfalls":["선형 회귀로 반감기를 구함","남은 비율이 아니라 자원소 비율로 연령을 계산함","로그 계산에서 자연로그와 상용로그를 섞음"],"tip":"실제 데이터가 아닌 수업용 자료를 쓰는 활동이므로, 섹션 2에서 '자료의 출처와 성격'을 정직하게 기록하는 연습이 됩니다.","time":"1차시","textbook":"미래엔 지구과학 Ⅱ단원 탐구 '지질 단면도에서 층서 대비하기' 중 탐구 2 절대연령 계산하기"},{"id":"es-0202","subj":"es","code":"12지구01-06","title":"남극 빙하 코어로 본 과거 40만 년의 기후 변화","alignment":"빙하 코어는 과거 기후와 자연적 기후변화 요인을 해석하는 자료이므로 [12지구01-06]에 연결합니다. 기별 지질시대 구분과 지층·화석을 요구하는 [12지구02-02]의 대체 활동으로 사용하지 않습니다. 현대 인위적 요인과 해결 방안은 같은 기준의 다른 활동과 함께 탐구합니다.","questions":["과거 40만 년 동안 남극의 기온은 어떤 주기로 변했을까?","기온 변화와 이산화 탄소 농도 변화는 함께 움직였을까?","빙하 코어는 다른 고기후 연구 방법보다 어떤 점에서 유리하고, 어떤 한계가 있을까?"],"data":{"name":"보스토크 빙하 코어 자료","org":"NOAA 국립환경정보센터(NCEI) 고기후 자료","url":"https://www.ncei.noaa.gov/products/paleoclimatology/ice-core","how":"Vostok ice core의 기온 편차(중수소 기반)와 CO₂(기포 분석) 자료를 내려받습니다."},"vars":[{"n":"연대","u":"년 전 (BP)","r":"0 ~ 약 420,000"},{"n":"기온 편차","u":"°C (현재 대비)","r":"약 -9 ~ +3"},{"n":"CO₂ 농도","u":"ppm","r":"약 180 ~ 300"}],"tasks":["연대-기온 편차, 연대-CO₂ 그래프를 위아래로 나란히 그리기","빙기와 간빙기 구간 표시하기","두 변수의 상관 계수 구하기","빙하 코어 자료의 장점과 한계를 다른 고기후 연구 방법(꽃가루 화석, 나이테, 동굴 생성물 등)과 비교해 표로 정리하기"],"chart":"공통 시간축 2단 그래프 (왼쪽이 과거)","predict":"빙기와 간빙기가 대략 몇 만 년 주기로 반복될지 예상해 보세요.","checks":[{"t":"x축이 왼쪽 과거에서 오른쪽 현재로 가는가?","h":"'년 전' 값을 그대로 그리면 시간이 거꾸로 흐릅니다."},{"t":"과거 CO₂가 180~300 ppm 범위에 머무르는가?","h":"400 ppm 이상이 나오면 현대 자료가 섞였는지 확인하세요."},{"t":"두 자료의 연대 측정 간격이 달라 맞춰야 함을 처리했는가?","h":"기온과 CO₂ 자료는 연대 간격이 다릅니다."},{"t":"약 10만 년 주기를 밀란코비치 주기 등과 연결해 해석했는가?","h":""}],"pitfalls":["간격이 다른 두 자료를 행 번호로 짝지어 상관을 계산함","시간축을 뒤집지 않음","현재 CO₂(약 420 ppm)를 같은 그래프에 단위 없이 이어 붙임"],"tip":"성취수준 탐구 활동 '고기후 연구 방법 비교·평가하기'와 연결됩니다. 빙하 코어의 장점과 한계를 섹션 6에서 정리하게 하세요.","time":"2차시","textbook":"미래엔 지구과학 Ⅱ단원 탐구 '고기후 연구 방법 비교·평가하기'. 교과서는 연구 방법을 조사·비교하고, 이 활동은 그중 빙하 시추물 자료를 직접 분석합니다."},{"id":"es-0302","subj":"es","code":"12지구03-02","title":"별 목록 자료로 H-R도 그리기","questions":["가까운 별들을 표면 온도와 광도로 나타내면 어떤 무리를 이룰까?","분광형에 따라 별의 절대 등급은 어떻게 다를까?"],"data":{"name":"HYG 별 목록","org":"HYG Database (Hipparcos·Yale·Gliese 통합 목록)","url":"https://github.com/astronexus/HYG-Database","how":"교과서 탐구처럼 가까운 별 20개 안팎의 분광형과 절대 등급 표를 직접 입력해 CSV로 만들거나, HYG 저장소의 CSV에서 거리 50 pc 이내 별을 골라 분광형(spect), 절대 등급(absmag), 색지수(ci) 열을 씁니다."},"vars":[{"n":"색지수 B-V","u":"등급","r":"약 -0.4 ~ 2.0"},{"n":"절대 등급","u":"등급","r":"약 -10 ~ +17"},{"n":"분광형","u":"O, B, A, F, G, K, M","r":""}],"tasks":["분광형을 O, B, A, F, G, K, M 순서로 x축에 놓고 절대 등급과 함께 산점도 그리기","같은 자료를 색지수-절대 등급 산점도로도 그려 비교하기","주계열, 적색 거성, 백색 왜성 영역 표시하기"],"chart":"H-R도 산점도 (y축 뒤집기: 밝은 별이 위)","predict":"태양(G2형, 절대 등급 약 4.8)이 그래프의 어디쯤 놓일지 표시해 보세요.","checks":[{"t":"x축 분광형이 알파벳 순서가 아니라 O B A F G K M 순서인가?","h":"AI가 문자열을 알파벳순(A B F G K M O)으로 정렬하는 실수가 잦습니다."},{"t":"y축이 뒤집혀 밝은 별(등급 작음)이 위에 있는가?","h":"등급은 숫자가 작을수록 밝습니다."},{"t":"x축 왼쪽이 고온(푸른 별), 오른쪽이 저온(붉은 별)인가?","h":"색지수가 작을수록 고온입니다. 온도로 바꾸어 그리면 축이 오른쪽으로 갈수록 낮아져야 합니다."},{"t":"주계열이 왼쪽 위에서 오른쪽 아래로 이어지는가?","h":""},{"t":"색지수가 없는 별을 어떻게 처리했는지 확인했는가?","h":""}],"pitfalls":["분광형을 알파벳순으로 정렬해 O형 별이 오른쪽 끝에 놓임","절대 등급 축을 뒤집지 않아 그림이 위아래로 뒤바뀜","표면 온도로 바꿀 때 축 방향을 일반 그래프처럼 왼쪽 저온으로 그림","겉보기 등급(mag)과 절대 등급(absmag)을 혼동함"],"tip":"성취수준 탐구 활동 '별의 분광형과 광도 자료를 분석하여 H-R도 작성하기'와 그대로 맞습니다. 축 방향 오류는 AI가 매우 자주 내는 실수라 섹션 4 검증 연습에 좋습니다.","time":"2차시","textbook":"미래엔 지구과학 Ⅲ단원 탐구 '별의 분광형과 절대 등급 자료를 분석하여 H-R도 작성하기'. 교과서는 손으로 그리고, 이 활동은 AI로 그린 뒤 축 방향을 검증합니다."},{"id":"es-0304","subj":"es","code":"12지구03-04","title":"인공지능 은하 분류 결과를 데이터로 검증하기","questions":["내가 학습시킨 인공지능은 타원·나선·불규칙 은하를 얼마나 정확하게 분류할까?","어떤 종류의 은하에서 인공지능이 가장 자주 틀릴까?"],"data":{"name":"은하 사진 + 인공지능 분류 결과표","org":"유럽우주기구 허블 사진 자료 / Galaxy Zoo","url":"https://esahubble.org/images/archive/category/galaxies/","how":"교과서 탐구처럼 은하 사진을 종류별로 모아 이미지 학습 도구(예: 티처블 머신)로 학습시킵니다. 학습에 쓰지 않은 새 사진으로 분류해 본 결과를 '사진 이름, 실제 종류, AI 분류, 확신도' 표로 정리합니다. 사람의 분류와 비교하려면 Galaxy Zoo 자료(https://data.galaxyzoo.org)를 씁니다."},"vars":[{"n":"실제 종류","u":"타원 / 나선 / 불규칙","r":""},{"n":"AI 분류","u":"타원 / 나선 / 불규칙","r":""},{"n":"확신도","u":"% 또는 (0~1)","r":"0 ~ 100 %"},{"n":"종류별 학습 사진 수","u":"장","r":"종류마다 5장 이상"}],"tasks":["실제 종류와 AI 분류로 혼동 행렬(3×3 표) 만들기","전체 정확도와 종류별 정확도 계산하기","틀린 사진만 모아 확신도와 함께 정리하기"],"chart":"혼동 행렬 표(색으로 개수 표시) + 종류별 정확도 막대그래프","predict":"세 종류 중 인공지능이 가장 많이 틀릴 은하를 예상하고 이유를 써 보세요.","checks":[{"t":"학습에 쓴 사진으로 시험하지 않았는가?","h":"학습에 쓴 사진으로 시험하면 정확도가 실제보다 높게 나옵니다."},{"t":"혼동 행렬의 모든 칸을 더한 값이 시험한 사진 수와 같은가?","h":""},{"t":"종류별 사진 수가 크게 다르지 않은가?","h":"한 종류의 사진만 많으면 AI가 그 종류로 쏠려 분류합니다."},{"t":"확신도가 높은데 틀린 사례가 있는가, 있다면 그 사진의 특징은?","h":"확신도가 높다고 정답이라는 뜻은 아닙니다."},{"t":"허블 분류 기준(모양, 나선팔, 막대 구조)으로 틀린 이유를 설명할 수 있는가?","h":""}],"pitfalls":["학습용 사진과 시험용 사진을 섞어 정확도를 부풀림","혼동 행렬의 행(실제)과 열(예측)을 바꿔 해석함","확신도가 높으면 정답이라고 설명함","종류별 사진 수 불균형을 무시함"],"tip":"교과서 탐구가 '인공지능으로 분류하기'에서 끝난다면, 이 활동은 그 결과를 검증하는 단계입니다. AI 분류기의 확신도를 무비판적으로 믿는 문제가 그대로 드러나 과신 방지 학습에 특히 알맞습니다.","time":"2차시","textbook":"미래엔 지구과학 Ⅲ단원 탐구 '빅데이터와 인공지능을 이용하여 은하 분류하기'. 교과서 탐구 3번(분류 정확도를 높이는 방법)과 직접 이어집니다."},{"id":"es-0305","subj":"es","code":"12지구03-05","title":"외부 은하의 거리와 후퇴 속도로 허블 상수 구하기","questions":["멀리 있는 은하일수록 더 빨리 멀어질까?","관측 자료로 구한 허블 상수는 얼마이고, 우주의 나이는 대략 얼마로 추정될까?"],"data":{"name":"외부 은하 거리·적색 이동 자료","org":"NASA/IPAC 외부은하 데이터베이스(NED)","url":"https://ned.ipac.caltech.edu","how":"교과서 탐구처럼 은하별 거리(Mpc)와 흡수선의 관측 파장을 표로 정리하거나, NED에서 은하 10~20개의 거리와 적색 이동(z)을 찾아 씁니다."},"vars":[{"n":"거리","u":"Mpc","r":"수 ~ 수백"},{"n":"후퇴 속도","u":"km/s","r":"수백 ~ 수만"},{"n":"흡수선 관측 파장","u":"nm","r":"고유 파장보다 큼 (예: 칼슘 395 nm)"},{"n":"적색 이동 z","u":"(단위 없음)","r":"0 ~ 0.1"}],"tasks":["흡수선 파장 변화로 후퇴 속도 구하기 (v = c × Δλ / λ₀)","거리-후퇴 속도 산점도와 원점을 지나는 추세선 그리기","기울기로 허블 상수(km/s/Mpc) 구하기","1/H₀로 우주 나이 어림하기"],"chart":"산점도 + 원점 통과 추세선","predict":"허블 상수 값이 대략 어느 범위일지 예상해 보세요.","checks":[{"t":"후퇴 속도 계산에 빛의 속도를 km/s 단위(약 3 × 10⁵ km/s)로 썼는가?","h":"m/s로 쓰면 속도가 1000배 커집니다."},{"t":"허블 상수가 약 60~80 km/s/Mpc 범위인가?","h":"현재 측정값은 약 67~73입니다. 크게 벗어나면 단위 변환을 의심하세요."},{"t":"우주 나이 계산에서 Mpc를 km로, 초를 년으로 바르게 바꾸었는가?","h":"1 Mpc ≈ 3.086 × 10¹⁹ km"},{"t":"추세선이 원점을 지나도록 맞췄는가?","h":"v = H₀d 형태여야 합니다."},{"t":"아주 가까운 은하(국부 은하군)의 고유 운동을 고려했는가?","h":"가까운 은하는 우주 팽창보다 고유 운동의 영향이 큽니다."}],"pitfalls":["Mpc와 광년을 섞어 허블 상수가 엉뚱한 크기로 나옴","절편이 있는 추세선을 써서 기울기가 달라짐","1/H₀ 계산에서 단위 변환을 빠뜨림"],"tip":"허블의 1929년 원래 값(약 500 km/s/Mpc)과 현재 값을 비교하며 '측정 방법이 발전하면 결론도 바뀐다'는 과학의 본성을 다룰 수 있습니다.","time":"1~2차시","textbook":"미래엔 지구과학 Ⅲ단원 탐구 '외부 은하의 거리와 후퇴 속도의 관계 알아보기'"},{"id":"ess-0102","subj":"ess","code":"12지시01-02","title":"관측소별 이산화 탄소 계절 변동으로 탄소 순환 추적하기","questions":["북반구와 남반구 관측소의 CO₂ 계절 변동 폭은 왜 다를까?","CO₂ 농도가 가장 높은 달과 낮은 달은 육상 생물권 활동과 어떤 관계가 있을까?"],"data":{"name":"관측소별 대기 CO₂ 월평균","org":"NOAA 지구감시연구소(GML)","url":"https://gml.noaa.gov/ccgg/trends/","how":"마우나로아(MLO)와 남극점(SPO) 월평균 자료를 내려받습니다. 배로(BRW, 알래스카) 자료를 더하면 비교가 더 뚜렷합니다."},"vars":[{"n":"CO₂ 농도","u":"ppm","r":"약 400 ~ 430 (최근)"},{"n":"연·월","u":"","r":""}],"tasks":["최근 5년 월평균을 관측소별로 겹쳐 그리기","관측소별 연간 진폭(최댓값-최솟값) 비교하기","월별 평균으로 계절 주기 모양 그리기"],"chart":"관측소별 시계열 꺾은선 + 월별 주기 그래프","predict":"세 관측소 중 계절 진폭이 가장 큰 곳과 가장 작은 곳을 예상하고 이유를 써 보세요.","checks":[{"t":"북반구 관측소의 CO₂ 최대가 봄(5월 무렵), 최소가 가을(9~10월 무렵)인가?","h":"광합성이 활발한 여름에 CO₂가 줄어듭니다."},{"t":"남극점 진폭이 마우나로아보다 작은가?","h":"남반구는 육지와 식생이 적습니다."},{"t":"월평균 결측(예: -99.99) 값을 제외했는가?","h":""},{"t":"장기 증가 추세와 계절 변동을 구분해서 설명했는가?","h":""}],"pitfalls":["결측 코드 -99.99를 값으로 그려 그래프가 아래로 꺾임","탈계절화(deseasonalized) 열과 원자료 열을 혼동함","계절 변동을 해양 흡수만으로 설명함"],"tip":"지권·수권·기권·생물권 사이 탄소 순환을 실제 자료로 '추적'하는 활동입니다. 섹션 6에서 탄소가 어디서 어디로 이동했는지 화살표 문장으로 정리하게 하세요.","time":"2차시","textbook":"미래엔 지구시스템과학 Ⅰ단원 물·탄소·산소 순환 본문과 연계한 보충 활동입니다. 교과서에는 같은 자료 탐구가 없습니다."},{"id":"ess-0105","subj":"ess","code":"12지시01-05","title":"한반도 지진 분포와 지진파 자료로 지각 두께 구하기","questions":["최근 20년 동안 한반도 지진은 규모 범위별로 어디에 많이 발생했을까?","여러 관측소의 지진파 도착 시간으로 우리나라 지각의 두께를 구할 수 있을까?"],"data":{"name":"국내 지진 목록 + 관측소별 진앙 거리·P파 도착 시간","org":"기상청 날씨누리","url":"https://www.weather.go.kr","how":"지진·화산 > 지진 조회 > 국내에서 최근 20년, 규모 범위를 정해 스프레드시트로 내려받습니다. 지각 두께 실습은 한 지진에 대해 관측소별 진앙 거리(km)와 진원 시각부터 잰 P파 도착 시간(s)이 함께 있는 표(교과서 또는 교사 제공 자료)를 씁니다. 속도-깊이 표가 아니라 거리-도착 시간 자료를 분석합니다."},"vars":[{"n":"규모","u":"(단위 없음)","r":"2.0 ~ 5.8 (2016 경주 최대)"},{"n":"진원 깊이","u":"km","r":"대부분 20 이하"},{"n":"진앙 거리","u":"km","r":"0 이상"},{"n":"P파 도착 시간","u":"s (지진 발생 후)","r":"0 이상"}],"tasks":["규모 범위(2~3, 3~4, 4~5, 5~6)별로 나누어 진앙 분포 지도 그리기","x축을 진앙 거리(km), y축을 P파 도착 시간(s)으로 한 주시 곡선을 그리고 근거리 직접파와 원거리 굴절파 구간에 각각 추세선 긋기","두 추세선의 교차 거리 x_c를 읽고 기울기(s/km)의 역수로 지각파 속도 v1과 맨틀 굴절파 속도 v2를 구한 뒤, h = (x_c/2) × √((v2−v1)/(v2+v1))로 지각 두께 어림하기"],"chart":"규모별 색 구분 진앙 지도 + 주시 곡선(x축 진앙 거리 km, y축 P파 도착 시간 s, 두 구간 추세선)","predict":"우리나라 지각의 두께가 몇 km쯤일지 예상해 보세요.","checks":[{"t":"그래프가 진앙 거리(km)-P파 도착 시간(s)이고, 각 추세선 기울기(s/km)의 역수로 속도(km/s)를 구했는가?","h":"기울기는 느린 정도(s/km)이고 속도는 그 역수(km/s)입니다. 근거리 지각파는 약 5.5~7.0 km/s, 원거리 맨틀 굴절파는 약 8.0~8.5 km/s인지 확인하세요."},{"t":"두 구간 추세선의 교차 거리 x_c로 지각 두께를 계산했는가?","h":"수평 2층 굴절 모형에서 h = (x_c/2) × √((v2−v1)/(v2+v1))이며, v1은 지각파 속도, v2는 맨틀 굴절파 속도입니다. 단일 추세선이나 속도-깊이 그래프의 8.0 km/s 도달점으로 판정하지 마세요."},{"t":"계산한 지각 두께가 약 30~35 km 범위인가?","h":"우리나라 지각의 근사 범위입니다. 크게 벗어나면 거리·시간 단위, 두 구간의 선택, 교차 거리와 식을 확인하세요."},{"t":"규모 범위의 경계값(예: 3.0)을 어느 구간에 넣었는지 일관되게 처리했는가?","h":"'이상 ~ 미만'으로 나누어야 중복이 없습니다."},{"t":"규모와 진도를 혼동하지 않았는가?","h":"규모는 에너지, 진도는 지역별 흔들림 정도입니다."},{"t":"2016년 경주, 2017년 포항 지진의 여진이 지역별 개수에 큰 영향을 준다는 점을 고려했는가?","h":""}],"pitfalls":["도착 시간-거리 그래프의 기울기(s/km)를 속도(km/s)로 그대로 사용함","두 구간 대신 하나의 추세선만 그리거나 교차 거리를 지각 두께로 바로 간주함","규모와 진도를 같은 것으로 설명함","여진을 포함한 개수를 '지진 위험 증가'로 단정함"],"tip":"교과서의 두 탐구(한반도 지진 분포, 지각 두께 구하기)를 한 활동으로 묶었습니다. 지각 두께 실습은 진앙 거리-도착 시간 주시 곡선에서 직접파·굴절파의 두 추세선을 비교합니다. 수평 2층·일정 속도 근사에서 교차 거리 x_c와 각 구간 속도(v1, v2)로 h = (x_c/2) × √((v2−v1)/(v2+v1))를 어림합니다. 적용 가정과 단위를 확인하고, AI가 다른 그래프나 식을 사용하면 교과서 및 제공 자료와 대조하세요.","time":"2차시","textbook":"미래엔 지구시스템과학 Ⅰ단원 탐구 '한반도 지진의 분포 특성과 지진 발생 가능성 예측하기', '지진파 자료를 활용하여 지각의 두께 구하기'"},{"id":"ess-0204","subj":"ess","code":"12지시02-04","title":"실시간 조위 자료로 서해와 동해의 조석 양상 비교","questions":["인천과 묵호의 하루 조위 변화는 어떻게 다를까?","만조와 간조는 하루에 몇 번, 몇 시간 간격으로 나타날까?"],"data":{"name":"실시간 조위 자료","org":"국립해양조사원","url":"https://www.khoa.go.kr","how":"해양정보 > 해양생활 > 실시간 고조 정보에서 인천과 묵호(또는 속초) 관측소의 조위 그래프와 자료를 확인합니다. 해외 관측소와 비교하려면 하와이대학교 해수면 센터(https://uhslc.soest.hawaii.edu) 자료를 씁니다."},"vars":[{"n":"조위","u":"cm","r":"인천 약 0 ~ 900, 동해 수십 cm 변화"},{"n":"관측 시각","u":"분 단위","r":""}],"tasks":["두 관측소의 3일간 조위 그래프를 겹쳐 그리기","만조 시각을 찾아 간격 계산하기","하루 조차(최고-최저) 비교하기"],"chart":"시계열 꺾은선 (관측소별 색 구분)","predict":"인천의 조차가 묵호의 몇 배쯤 될지 예상해 보세요.","checks":[{"t":"만조 간격이 약 12시간 25분 안팎인가?","h":"반일주조는 하루에 약 50분씩 늦어집니다."},{"t":"조위 단위가 cm인지 m인지 확인했는가?","h":"인천 조위가 9 cm처럼 보이면 단위 오류입니다."},{"t":"두 관측소의 기준면이 다를 수 있음을 알고 조위 절댓값보다 조차를 비교했는가?","h":""},{"t":"실측 조위와 예측 조위 열을 구분해서 썼는가?","h":"조위 자료에는 실측값과 예측값이 함께 있는 경우가 많습니다."},{"t":"측정 오류(급격한 튐) 값을 확인했는가?","h":""}],"pitfalls":["두 관측소 기준면 차이를 무시하고 조위 절댓값을 비교함","분 단위 자료를 시간 단위로 묶을 때 평균을 내서 만조 시각이 흐려짐","동해의 작은 조차를 '조석이 없다'고 단정함"],"tip":"성취수준 탐구 활동 '실시간 자료를 이용한 조석 현상의 패턴 추론하기'와 같습니다. 달의 위상(사리·조금)과 연결해 2주 자료로 확장할 수 있습니다.","time":"1~2차시","textbook":"미래엔 지구시스템과학 Ⅱ단원 탐구 '실시간 자료를 이용한 조석 현상의 양상 추론하기'"},{"id":"ess-0302","subj":"ess","code":"12지시03-02","title":"지구 복사 수지 자료로 지표·대기 열 출입 해석하기","questions":["같은 기간의 CERES 자료에서 지표와 대기권 상단의 순복사는 각각 얼마이며, 단파·장파 복사 플럭스는 어떻게 기여할까?","위도·계절별 순복사 차이는 에너지 수송과 어떻게 연결될까?"],"data":{"name":"지구 복사 수지·열수지 자료","org":"NASA CERES","url":"https://ceres.larc.nasa.gov/data/","how":"대기권 상단(TOA)과 지표(Surface)의 월평균 상향·하향 단파·장파 복사 플럭스를 같은 기간으로 수집합니다. 잠열·현열 자료는 별도 출처와 정의를 명시하고, 서로 다른 고도 기준의 항목을 섞지 않습니다."},"vars":[{"n":"상향·하향 단파·장파 복사 플럭스","u":"W/m²","r":"부호·고도 확인"},{"n":"위도·계절","u":"°·월","r":"자료 기간 확인"},{"n":"순복사","u":"W/m²","r":"수준별 부호 규약 확인"}],"tasks":["지표·대기·대기권 상단의 열 출입 항목과 상향·하향 복사 구별하기","같은 고도 기준에서 순복사=(하향 단파−상향 단파)+(하향 장파−상향 장파) 계산하기","위도별 순복사를 그래프로 나타내고 cos(위도) 면적 가중 평균으로 전 지구 에너지 과부족 해석하기"],"chart":"지표·대기권 상단별 복사 수지 흐름도 + 위도별 순복사 그래프","predict":"전 지구 평균과 적도 지역의 순복사가 같은지 예상하세요.","checks":[{"t":"순복사에서 하향 플럭스는 더하고 상향 플럭스는 빼며, 같은 고도 기준의 항목끼리 계산했는가?","h":"순복사=(하향 단파−상향 단파)+(하향 장파−상향 장파)입니다. 대기권 상단과 지표 수지를 섞지 마세요."},{"t":"전 지구 평균에 위도별 면적 차이를 반영하고, 적도 잉여와 극 쪽 적자를 확인했는가?","h":"규칙적인 위경도 격자는 cos(위도) 가중을 적용합니다. 잔차를 임의로 0으로 맞추지 마세요."},{"t":"상향·하향 단파·장파 플럭스의 부호를 적용해 순복사를 계산했는가?","h":"자료별 부호 정의를 먼저 확인하고 같은 고도 기준에서 (SW↓−SW↑)+(LW↓−LW↑)를 계산하세요. 부호를 반대로 적용하면 E13입니다."}],"pitfalls":["상향·하향 플럭스 부호를 뒤섞어 순복사를 반대로 계산함","대기권 상단과 지표의 복사 수지를 한 식에 섞음","위도별 면적 차이를 무시하고 단순 평균함"],"tip":"Version A 질문을 만들 때 대상(지표·대기권 상단), 기간, 복사 플럭스와 단위를 구체적으로 선택하세요. 위도별 전 지구 평균은 cos(위도) 면적 가중을 적용하고, CERES가 제공하는 고도·부호 정의를 먼저 확인합니다.","time":"2차시","textbook":"지구시스템과학 지표와 대기의 열수지에 연계한 재구성 활동."},{"id":"ess-0303","subj":"ess","code":"12지시03-03","title":"고층 관측 자료로 대기 안정도 판단하기","questions":["오늘 오산 상공의 대기는 안정할까, 불안정할까?","기온 감률을 계산하면 구름이 생길 높이를 어림할 수 있을까?","대기가 안정한 날, 낮은 굴뚝에서 나온 대기 오염 물질은 어떻게 퍼질까?"],"data":{"name":"고층기상관측(라디오존데) 자료","org":"기상청 기상자료개방포털","url":"https://data.kma.go.kr","how":"기상관측 > 고층 > 레윈존데에서 오산(47122) 등 관측소의 기압면별 기온·이슬점·고도 자료를 내려받습니다."},"vars":[{"n":"고도","u":"m (지위고도)","r":"0 ~ 약 30,000"},{"n":"기압","u":"hPa","r":"1000 ~ 10"},{"n":"기온","u":"°C","r":"약 -80 ~ 40"},{"n":"이슬점","u":"°C","r":"기온 이하"}],"tasks":["지상 ~ 500 m 구간의 기온 감률부터 계산해 교과서 표 자료와 같은 방법으로 안정도 판정하기","고도-기온, 고도-이슬점 연직 분포 그리기","층별 기온 감률(°C/km) 계산하기","건조 단열 감률(약 9.8 °C/km)·습윤 단열 감률과 비교해 안정도 판정하기"],"chart":"연직 분포 그래프 (y축 고도 위로 증가) 또는 단열선도","predict":"지상에서 3 km까지 기온이 몇 °C 내려갈지 예상해 보세요.","checks":[{"t":"이슬점이 기온보다 높은 층이 없는가?","h":"이슬점은 기온보다 높을 수 없습니다."},{"t":"감률 계산에서 단위가 °C/km인가?","h":"°C/m로 계산하면 1000배 작은 값이 나옵니다."},{"t":"대류권 계면(기온이 더 이상 내려가지 않는 높이)이 약 10~17 km에 나타나는가?","h":""},{"t":"안정도 판정 기준(환경 감률과 단열 감률 비교)을 바르게 적용했는가?","h":"환경 감률이 건조 단열 감률보다 크면 절대 불안정입니다."}],"pitfalls":["기압 축을 선형으로 그려 하층이 지나치게 넓게 보임","°C/m와 °C/km 혼동","절대 안정·조건부 불안정 판정 기준을 거꾸로 적용함"],"tip":"성취수준 탐구 활동 '단열선도를 이용하여 대기 안정도 해석하기'의 데이터 기반 버전입니다. 같은 날 위성 영상의 구름과 대조하게 하면 검증이 풍부해집니다.","time":"2차시","textbook":"미래엔 지구시스템과학 Ⅲ단원 탐구 '단열선도를 이용하여 대기 안정도 해석하기'. 교과서는 높이별 기온 표를 쓰고, 이 활동은 실제 고층 관측 자료로 같은 판정을 합니다."}],"extraActivities":[{"id":"is1-0203","subj":"is1","code":"10통과1-02-03","title":"지각·생명체 주요 원소의 주기성과 결합 이유 해석하기","questions":["주기율표의 원소 성질은 어떤 규칙을 보일까?","지각과 생명체의 주요 원소가 결합을 만드는 이유는 무엇일까?"],"data":{"name":"원자 번호·전자 배치·원소 성질 표","org":"IUPAC / 공개 원소 자료","url":"https://iupac.org/what-we-do/periodic-table-of-elements/","how":"원자 번호 1~20의 전자 배치와 교사가 선정한 원소 성질을 출처·단위와 함께 기록합니다. 지각·생명체의 주요 원소에 표시합니다."},"vars":[{"n":"원자 번호","u":"단위 없음","r":"1~20"},{"n":"원자가 전자 수","u":"개","r":"전자 배치 확인"}],"tasks":["원자 번호별 성질의 반복 규칙 도출하기","같은 족 원소의 전자 배치 비교하기","산소·규소·탄소 등 주요 원소의 결합 형성 이유를 전자 배치로 해석하기"],"chart":"원자 번호에 따른 성질 변화 그래프","predict":"같은 족 원소의 성질이 비슷한 이유를 예상하세요.","checks":[{"t":"자료의 단위·정의를 동일하게 맞추었는가?","h":"원자 반지름 등은 정의에 따라 값이 다릅니다."},{"t":"주기성을 단순한 원자량 순서로 설명하지 않았는가?","h":"원자 번호와 전자 배치를 함께 봅니다."}],"pitfalls":["성질의 예외를 임의로 삭제함","전자 배치를 확인하지 않고 모든 원소가 같은 결합을 한다고 설명함"],"time":"1~2차시","textbook":"통합과학1 원소의 주기성·결합 · 지구 구성 원소와 연결한 영역 통합 활동."},{"id":"is1-0204","subj":"is1","code":"10통과1-02-04","title":"물·산소·소금의 결합과 물성 자료 비교하기","questions":["물·산소·소금의 녹는점과 전기 전도성은 어떻게 다를까?","결합 방식의 차이는 각 물질의 성질과 어떻게 연결될까?"],"data":{"name":"물·산소·염화 나트륨의 결합·물성 표","org":"PubChem / 교사 제공 측정 자료","url":"https://pubchem.ncbi.nlm.nih.gov/","how":"압력·상태·온도가 명시된 녹는점·끓는점·전도성을 수집합니다. 물질의 전도성과 수용액의 전도성을 구별합니다."},"vars":[{"n":"녹는점·끓는점","u":"°C","r":"압력 조건 확인"},{"n":"전기 전도성","u":"S/m 또는 범주","r":"상태·농도 확인"}],"tasks":["같은 조건의 물성 비교 표 만들기","이온 결합·공유 결합의 차이 설명하기","결합과 물성의 관계를 지구 환경 속 물·산소·소금의 사례로 설명하기"],"chart":"물질별 물성 비교 표·막대그래프","predict":"고체 소금과 소금물의 전도성이 같은지 예상하세요.","checks":[{"t":"상태·농도·압력이 다른 값을 직접 비교하지 않았는가?","h":"조건에 따라 물성이 달라집니다."},{"t":"분자 내 결합과 분자 사이 상호작용을 구별했는가?","h":"끓을 때 모든 공유 결합이 끊어지는 것은 아닙니다."}],"pitfalls":["순수한 물과 소금물의 전도성을 혼동함","끓는점 차이를 결합 종류 하나로만 단정함"],"time":"1차시","textbook":"통합과학1 결합과 물질의 성질 · 지구 환경 물질과 연결한 영역 통합 활동."},{"id":"is1-0206","subj":"is1","code":"10통과1-02-06","title":"지구 구성 물질의 전기적 성질과 소재 활용 비교하기","questions":["구리·규소·석영의 전기적 성질은 어떻게 다를까?","물질의 전기적 성질은 일상·첨단 소재 활용과 어떻게 연결될까?"],"data":{"name":"물질별 전기 저항률·활용 표","org":"공개 재료 데이터 / 교사 제공 자료","url":"","how":"같은 온도 조건의 구리·규소·유리 등의 저항률과 활용 사례를 출처별로 기록합니다. 반도체 도핑·순도 조건을 표시합니다."},"vars":[{"n":"저항률","u":"Ω·m","r":"0 초과"},{"n":"온도","u":"°C","r":"조건 확인"},{"n":"전기적 분류","u":"범주","r":"도체·반도체·절연체"}],"tasks":["저항률의 규모를 로그 축으로 비교하기","전기적 성질로 물질 분류하기","전선·센서·반도체·절연 소재의 활용과 한계 설명하기"],"chart":"물질별 저항률 로그 막대그래프","predict":"자연 상태 규소와 가공 반도체의 전기적 성질이 항상 같은지 예상하세요.","checks":[{"t":"저항과 저항률을 구별했는가?","h":"저항은 시료의 길이와 단면적에도 의존합니다."},{"t":"반도체 순도·도핑·온도 조건을 확인했는가?","h":"조건에 따라 전도성이 크게 달라집니다."}],"pitfalls":["단위가 다른 저항값을 그대로 비교함","물질 분류만 하고 활용 사례를 생략함"],"time":"1차시","textbook":"통합과학1 물질의 전기적 성질 · 지구 자원과 첨단 소재를 연결한 활동."},{"id":"is1-0304","subj":"is1","code":"10통과1-03-04","title":"충돌 시간·힘 자료로 안전장치의 효과 분석하기","questions":["같은 운동량 변화에서 충돌 시간이 길어지면 평균 힘은 어떻게 달라질까?","충돌 안전장치나 스포츠 동작은 충격량과 어떤 관계가 있을까?"],"data":{"name":"교사 제공 카트 충돌 힘–시간·속도 자료","org":"교사 제공 모형 실험","url":"","how":"사람의 충돌 실험은 하지 않습니다. 안전한 카트 실험 또는 출처가 있는 모형 자료의 질량·전후 속도·힘·시간을 기록합니다."},"vars":[{"n":"힘","u":"N","r":"부호 정의"},{"n":"시간","u":"s","r":"0 이상"},{"n":"질량·속도","u":"kg, m/s","r":"조건 확인"}],"tasks":["힘–시간 그래프의 넓이로 충격량 구하기","운동량 변화와 충격량 비교하기","상호작용이 없을 때의 운동과 안전장치·스포츠 동작의 원리 설명하기"],"chart":"완충 조건별 힘–시간 그래프","predict":"완충 시간이 길어지면 최대 힘과 평균 힘이 어떻게 될지 예상하세요.","checks":[{"t":"N·s와 kg·m/s의 일치를 확인했는가?","h":"단위와 속도 부호를 함께 확인합니다."},{"t":"최대 힘과 평균 힘을 구별했는가?","h":"곡선 아래 넓이를 시간으로 나눕니다."}],"pitfalls":["시간이 길어지면 충격량도 반드시 작아진다고 주장함","외력이 없는 운동을 정지로만 설명함"],"time":"2차시","textbook":"통합과학1 충격량·운동량과 안전에 연계한 데이터 활동."},{"id":"is1-0305","subj":"is1","code":"10통과1-03-05","title":"발효 과정의 기체·질량 자료로 생명 시스템의 반응 해석하기","questions":["발효 조건에 따라 기체 발생과 질량 변화는 어떻게 다를까?","생명 시스템 유지에 필요한 반응과 물질 출입을 어떻게 설명할까?"],"data":{"name":"교사 제공 안전한 효모 발효 실험 자료","org":"교사 제공 측정 자료","url":"","how":"온도·당 농도·효모 양이 기록된 시간–기체 부피 표를 사용합니다. 밀폐 압력 상승 실험은 하지 않고 식품을 섭취하지 않습니다."},"vars":[{"n":"시간","u":"분","r":"0 이상"},{"n":"기체 부피","u":"mL","r":"0 이상"},{"n":"온도","u":"°C","r":"실험 조건"}],"tasks":["조건별 기체 발생량·변화율 비교하기","세포 내 반응과 물질 출입의 필요성 설명하기","식품 등 일상생활에서 화학 반응을 활용하는 사례 조사·발표하기"],"chart":"조건별 시간–기체 부피 그래프","predict":"온도가 계속 높아져도 반응 속도가 계속 증가할지 예상하세요.","checks":[{"t":"기체 부피의 온도·압력 조건을 확인했는가?","h":"부피 차이는 반응량 외의 영향도 받습니다."},{"t":"질량 변화를 물질 소멸로 설명하지 않았는가?","h":"열린계의 기체 출입을 확인합니다."}],"pitfalls":["대조 조건 없이 한 변수의 효과를 확정함","세포 유지와 일상 활용의 연결을 생략함"],"time":"2차시","textbook":"통합과학1 생명 시스템의 화학 반응에 연계한 데이터 활동."},{"id":"is1-0306","subj":"is1","code":"10통과1-03-06","title":"염기 서열과 번역 결과로 세포 내 정보 흐름 탐구하기","questions":["DNA 서열의 변화는 단백질 아미노산 서열에 항상 영향을 줄까?","유전자 정보가 단백질로 이어지는 과정은 어떤 규칙을 따를까?"],"data":{"name":"교사 제공 짧은 모형 DNA·mRNA 서열과 코돈 표","org":"NCBI 교육 자료 / 교사 제작 모형","url":"https://www.ncbi.nlm.nih.gov/education/","how":"개인 유전 정보는 사용하지 않습니다. 가닥 방향과 시작 위치가 명시된 교육용 모형 서열을 CSV로 기록합니다."},"vars":[{"n":"염기 위치","u":"번호","r":"1 이상"},{"n":"염기·아미노산","u":"기호","r":"표준 코드"}],"tasks":["주형·암호화 가닥과 mRNA 구별하기","코돈별 번역 표를 만들고 변이 전후 비교하기","유전자에서 단백질로 정보가 흐르는 과정과 시스템 유지의 관계 설명하기"],"chart":"서열–코돈–아미노산 대응 표","predict":"염기 하나의 변화가 아미노산을 항상 바꿀지 예상하세요.","checks":[{"t":"가닥 방향과 상보적 염기 대응을 확인했는가?","h":"주형과 암호화 가닥을 혼합하지 않습니다."},{"t":"시작·종결 코돈과 읽는 틀을 확인했는가?","h":"한 칸 이동하면 번역 결과가 달라집니다."}],"pitfalls":["DNA의 T를 mRNA에 그대로 남김","모든 변이가 같은 효과를 낸다고 단정함"],"time":"1~2차시","textbook":"통합과학1 생명 시스템의 정보 흐름에 연계한 데이터 활동."},{"id":"is2-0102","subj":"is2","code":"10통과2-01-02","title":"형질 빈도 모형 자료로 변이·자연선택과 다양성 추론하기","questions":["환경 조건이 달라지면 형질의 빈도는 어떻게 변할까?","자연선택 과정은 생물다양성의 형성과 어떻게 연결될까?"],"data":{"name":"환경별 형질·생존·번식 수 모형 자료","org":"교사 제공 자연선택 모형","url":"","how":"여러 형질과 환경에서 세대별 생존·번식 수를 기록한 모형 표를 사용합니다. 실제 생태 관측이 아니라는 점과 초기 조건을 명시합니다."},"vars":[{"n":"세대","u":"번호","r":"0 이상"},{"n":"형질별 개체 수","u":"개체","r":"0 이상"}],"tasks":["세대별 형질 빈도 계산하기","변이 발생과 환경에 따른 선택을 구별하기","반복 모형의 차이와 자연선택·진화·생물다양성의 관계 추론하기"],"chart":"세대별 형질 빈도 시계열","predict":"같은 환경의 반복 모형이 완전히 같은 결과를 낼지 예상하세요.","checks":[{"t":"개체 수와 상대 빈도를 구별했는가?","h":"전체 수가 변하면 빈도 해석이 달라집니다."},{"t":"환경이 필요한 변이를 의도적으로 만든다고 설명하지 않았는가?","h":"변이 발생과 선택은 구별합니다."}],"pitfalls":["개체 하나의 적응을 집단의 진화와 동일시함","모형을 생물다양성 전체의 직접 관측으로 주장함"],"time":"2차시","textbook":"통합과학2 진화와 생물다양성에 연계한 데이터 활동."},{"id":"is2-0103","subj":"is2","code":"10통과2-01-03","title":"광합성·연료 사용·제련의 반응 자료로 산화·환원 비교하기","questions":["광합성·화석 연료 사용·철 제련에는 어떤 공통 변화가 있을까?","생활 주변 반응을 어떤 근거로 산화·환원으로 분류할까?"],"data":{"name":"반응식·산소 출입·생성물 기록 표","org":"교사 제공 반응 자료","url":"","how":"실제 연소·제련은 수행하지 않습니다. 균형 잡힌 교육용 반응식과 관찰 기록을 출처와 함께 표로 정리합니다."},"vars":[{"n":"반응 전후 물질","u":"화학식","r":"균형식"},{"n":"산소·전자 이동","u":"모형 범주","r":"배운 개념 범위"}],"tasks":["세 역사적 반응의 공통점·차이 비교하기","산화·환원 특징과 규칙성으로 반응 분류하기","부식 등 생활 주변 변화의 근거 설명하기"],"chart":"반응별 산화·환원 대응 표","predict":"산소가 기체로 참여하지 않는 경우에도 산화·환원이 가능한지 예상하세요.","checks":[{"t":"반응식의 원자 수와 전하를 확인했는가?","h":"계수를 임의로 바꾸지 않습니다."},{"t":"한 반응에서 산화와 환원이 함께 일어남을 확인했는가?","h":"반응물·생성물을 짝지어 봅니다."}],"pitfalls":["모든 산소 포함 반응을 산화로만 분류함","광합성·연소·제련의 연결을 생략함"],"time":"1~2차시","textbook":"통합과학2 산화와 환원 · 지구 환경의 물질 변화와 연결한 활동."},{"id":"is2-0104","subj":"is2","code":"10통과2-01-04","title":"중화 자료로 산·염기의 특징과 생활 속 활용 해석하기","questions":["산·염기를 섞을 때 pH와 온도는 어떻게 변할까?","중화 반응은 생활 주변에서 어떻게 활용될까?"],"data":{"name":"교사 제공 묽은 산·염기 중화 곡선","org":"교사 제공 안전 실험 자료","url":"","how":"농도·부피·온도 조건이 명시된 pH–첨가 부피 표를 사용합니다. 생활 세제·약품을 임의로 혼합하지 않습니다."},"vars":[{"n":"첨가 부피","u":"mL","r":"0 이상"},{"n":"pH","u":"단위 없음","r":"실험 조건 확인"},{"n":"온도","u":"°C","r":"측정 조건"}],"tasks":["대표적 산·염기의 특징 정리하기","첨가량에 따른 pH·온도 변화 분석하기","토양 산도 조절 등 중화 활용 사례를 조건·주의점과 함께 설명하기"],"chart":"첨가 부피–pH·온도 그래프","predict":"같은 부피의 산과 염기를 섞으면 항상 중성이 될지 예상하세요.","checks":[{"t":"농도와 반응 비율을 함께 확인했는가?","h":"같은 부피라도 몰수가 다를 수 있습니다."},{"t":"pH를 단순 산술 평균하지 않았는가?","h":"pH는 로그 척도입니다."}],"pitfalls":["중화점을 언제나 pH 7로 단정함","서로 다른 농도를 무시함"],"time":"1~2차시","textbook":"통합과학2 산·염기와 중화 · 토양 환경과 연결한 활동."},{"id":"is2-0105","subj":"is2","code":"10통과2-01-05","title":"온도 변화 자료로 에너지 흡수·방출의 활용 비교하기","questions":["냉각 팩과 발열 팩 모형의 온도 변화는 어떻게 다를까?","생활 속 에너지 흡수·방출은 어떤 조건에서 유용할까?"],"data":{"name":"교사 제공 흡열·발열 과정의 온도 기록","org":"교사 제공 실험 자료","url":"","how":"물질·질량·물의 양·용기·주변 온도가 명시된 시간–온도 표를 사용합니다. 발열제를 개봉하거나 임의 혼합하지 않습니다."},"vars":[{"n":"시간","u":"s","r":"0 이상"},{"n":"온도","u":"°C","r":"측정 조건"},{"n":"질량","u":"g","r":"양수"}],"tasks":["주변과 계를 구별해 온도 변화 비교하기","가정을 명시해 열 출입의 크기 추정하기","생활 속 흡수·방출 활용 사례와 환경·안전 고려 사항 토의하기"],"chart":"조건별 시간–온도 그래프","predict":"온도 변화량이 같으면 출입 에너지의 양도 항상 같을지 예상하세요.","checks":[{"t":"계와 주변의 에너지 출입 방향을 구별했는가?","h":"주변이 식는 것과 계가 에너지를 흡수하는 것을 연결합니다."},{"t":"질량·비열·열손실의 가정을 밝혔는가?","h":"온도 차만으로 열량을 확정하지 않습니다."}],"pitfalls":["온도와 에너지를 동일시함","열손실이 없다고 말없이 가정함"],"time":"1차시","textbook":"통합과학2 에너지 흡수·방출과 생활 활용에 연계한 활동."},{"id":"is2-0205","subj":"is2","code":"10통과2-02-05","title":"발전 자료로 에너지 전환과 발전소의 영향 비교하기","questions":["발전기에서는 어떤 운동 에너지가 전기 에너지로 전환될까?","화석 연료·핵에너지를 열원으로 쓰는 발전소의 영향은 어떻게 비교할까?"],"data":{"name":"발전원별 발전량·열원·환경 지표","org":"전력거래소 / 공개 발전 통계","url":"https://epsis.kpx.or.kr/","how":"같은 연도의 발전량과 열원별 지표를 수집하고 설비 용량·발전량·전 과정 영향의 정의를 구별합니다."},"vars":[{"n":"발전량","u":"MWh","r":"0 이상"},{"n":"설비 용량","u":"MW","r":"0 이상"},{"n":"환경 지표","u":"자료별 단위","r":"평가 경계 확인"}],"tasks":["터빈–발전기의 에너지 전환 과정 설명하기","화석 연료·핵에너지 발전의 열원과 공통 구조 비교하기","인간 생활·환경에 미치는 편익·위험을 조사·발표하기"],"chart":"발전원별 발전량과 영향 비교 표","predict":"발전량이 같은 발전원은 환경 영향도 같을지 예상하세요.","checks":[{"t":"발전량과 설비 용량을 구별했는가?","h":"MW와 MWh는 다릅니다."},{"t":"영향 지표의 전 과정 평가 범위를 맞추었는가?","h":"운영 중 배출과 전 과정 배출은 다릅니다."}],"pitfalls":["핵에너지가 발전기에서 직접 전기로 변한다고 설명함","한 지표만으로 모든 편익·위험을 단정함"],"time":"2차시","textbook":"통합과학2 발전과 인간 생활 · 에너지·환경과 연결한 활동."},{"id":"is2-0301","subj":"is2","code":"10통과2-03-01","title":"감염병 공개 집계 자료로 과학의 유용성과 필요성 논증하기","questions":["검사 수와 확진 수를 함께 보면 유행 해석이 어떻게 달라질까?","진단·추적 자료는 미래 사회 문제 해결에 어떻게 도움이 될까?"],"data":{"name":"비식별 감염병 검사·발생 집계 자료","org":"질병관리청 / WHO","url":"https://data.who.int/","how":"개인 이동·건강 정보는 사용하지 않습니다. 공개된 지역·기간별 집계와 검사·발생 정의 변경 이력을 기록합니다."},"vars":[{"n":"확진·검사 수","u":"건","r":"0 이상"},{"n":"양성률","u":"%","r":"0~100"},{"n":"기간","u":"주 또는 일","r":"동일 기준"}],"tasks":["집계 기준을 맞추어 검사·발생 추세 비교하기","진단·추적 기술이 제공하는 근거와 한계 설명하기","미래 사회 문제 해결에서 과학의 필요성을 근거로 논증하기"],"chart":"검사·확진·양성률의 분리 시계열","predict":"확진 건수 변화가 실제 감염 규모 변화와 항상 같을지 예상하세요.","checks":[{"t":"보고일과 발생일·집계 정의를 확인했는가?","h":"보고 지연과 기준 변경이 추세에 영향을 줍니다."},{"t":"공개 집계로 개인의 감염 여부를 추론하지 않았는가?","h":"집계 분석은 개인 진단이나 의료 조언이 아닙니다."}],"pitfalls":["검사 수 변화를 무시함","상관으로 특정 집단의 책임을 단정함"],"time":"1~2차시","textbook":"통합과학2 과학의 유용성과 미래 사회에 연계한 데이터 활동."},{"id":"is1-0101","subj":"is1","code":"10통과1-01-01","title":"천체의 거리와 관측 시간의 규모 비교하기","questions":["태양계와 가까운 별의 거리 규모는 얼마나 다를까?","빛이 도달하는 시간으로 천체까지의 거리를 어떻게 나타낼 수 있을까?"],"data":{"name":"태양계 천체 거리·레이더 거리 측정 사례와 별 시차 표","org":"NASA / ESA Gaia","url":"https://science.nasa.gov/solar-system/","how":"NASA 천체별 평균 거리와 레이더 거리 측정 사례, Gaia의 가까운 별 시차 표를 출처별로 구분해 CSV에 기록합니다. 직접 측정값과 평균·추정값을 구별합니다."},"vars":[{"n":"거리","u":"km, AU, pc","r":"대상별 확인"},{"n":"빛의 이동 시간","u":"s","r":"0 이상"},{"n":"연주시차","u":"mas","r":"양수인 유효 관측값"}],"tasks":["거리를 km와 AU로 환산하고 로그 축으로 비교하기","빛의 이동 시간을 계산하여 시간 규모 비교하기","레이더 왕복 시간과 연주시차 등 현대적 측정 방법의 원리·적용 규모 조사하기"],"chart":"천체별 거리 로그 막대그래프","predict":"행성과 별까지의 거리 규모 차이를 예상하세요.","checks":[{"t":"AU·pc·km 환산과 로그 축 표기가 정확한가?","h":"1 AU는 약 1.496×10⁸ km, 1 pc는 약 3.086×10¹³ km입니다."},{"t":"레이더 왕복 시간과 빛의 편도 시간을 구별했는가?","h":"왕복 시간으로 거리를 구할 때는 2로 나눕니다."}],"pitfalls":["mas를 arcsec로 착각함","평균 거리와 관측 순간의 거리를 혼동함"],"alignment":"시간·공간 규모의 자료 비교와 함께 현대적 길이·시간 측정 사례를 조사합니다. 단위 환산만으로 기준 전체를 달성했다고 보지 않습니다.","time":"1~2차시","textbook":"통합과학1 과학의 기초 · 시간과 공간의 규모에 연계한 재구성 활동."},{"id":"is1-0103","subj":"is1","code":"10통과1-01-03","title":"강수량 측정과 어림으로 측정 표준의 필요성 논증하기","questions":["눈대중으로 어림한 강수량과 우량계 측정값은 얼마나 다를까?","용기의 입구 넓이가 다르면 모은 물의 부피를 그대로 비교해도 될까?"],"data":{"name":"안전한 실내 모의 강수 실험 기록","org":"학생 직접 측정","url":"","how":"크기가 다른 용기에 물을 모으는 실내 모의 실험에서 어림값, 부피, 입구 넓이, 반복 측정값을 기록합니다. 실제 악천후에 야외 측정하지 않습니다."},"vars":[{"n":"모인 물의 부피","u":"cm³","r":"0 이상"},{"n":"입구 넓이","u":"cm²","r":"0 초과"},{"n":"환산 강수량","u":"mm","r":"0 이상"}],"tasks":["부피/넓이로 수심을 구해 mm로 환산하기","어림값과 측정값의 차이·반복 측정 분산 비교하기","공통 단위와 측정 절차가 필요한 이유를 관측 사례로 논증하기"],"chart":"어림값–측정값 비교 산점도","predict":"용기가 커지면 부피와 환산 강수량이 각각 어떻게 달라질지 예상하세요.","checks":[{"t":"cm를 mm로 바꾸는 환산을 적용했는가?","h":"1 cm는 10 mm입니다."},{"t":"측정값을 참값으로 단정하지 않았는가?","h":"용기 넓이와 부피 측정에도 불확실성이 있습니다."}],"pitfalls":["부피가 큰 것을 강수량이 많다고 해석함","어림값과 측정값의 차이를 모두 학생의 실수로 간주함"],"time":"1차시","textbook":"통합과학1 측정과 어림·측정 표준에 연계한 재구성 활동."},{"id":"is1-0201","subj":"is1","code":"10통과1-02-01","title":"별의 스펙트럼으로 구성 원소 추론하기","questions":["별의 흡수선은 어떤 원소의 실험실 파장과 일치할까?","우주 초기 형성 원소의 흔적을 스펙트럼에서 어떻게 확인할까?"],"data":{"name":"별 스펙트럼과 원자 선 파장 목록","org":"SDSS / NIST","url":"https://skyserver.sdss.org/","how":"관측 별의 파장–플럭스 표와 수소·헬륨 등의 원자 선 목록을 수집합니다. 관측 파장·정지 파장과 진공·공기 중 파장의 정의를 기록합니다."},"vars":[{"n":"파장","u":"nm 또는 Å","r":"선택한 관측 대역"},{"n":"상대 플럭스","u":"정규화 값","r":"자료 정의 확인"}],"tasks":["스펙트럼의 주요 흡수선 위치 찾기","원자 선 목록과 비교해 수소·헬륨 등 구성 물질 추론하기","우주 초기에 형성된 원소와 무거운 원소의 기원을 구별하기"],"chart":"파장–상대 플럭스 선그래프","predict":"수소의 가시광선 흡수선이 나타날 위치를 예상하세요.","checks":[{"t":"nm와 Å를 구별했는가?","h":"1 nm는 10 Å입니다."},{"t":"선 하나만으로 원소를 확정하지 않았는가?","h":"여러 선과 파장 이동을 함께 확인합니다."}],"pitfalls":["흡수선을 방출선으로 해석함","선 세기를 원소 함량으로 바로 해석함"],"time":"2차시","textbook":"통합과학1 원소의 생성 · 스펙트럼 자료 분석에 연계한 활동."},{"id":"is1-0202","subj":"is1","code":"10통과1-02-02","title":"우주·태양계·생명체의 원소 조성 비교하기","questions":["우주와 지구, 생명체의 주요 원소 비율은 어떻게 다를까?","생명체를 이루는 탄소와 산소의 기원은 우주의 역사와 어떻게 이어질까?"],"data":{"name":"우주·태양계·지구·인체의 원소 조성 공개 표","org":"NASA / 교사 선정 공개 조성 자료","url":"https://imagine.gsfc.nasa.gov/science/objects/elements1.html","how":"대상별 질량비 또는 원자 수 비를 출처와 함께 기록합니다. 서로 다른 비율 정의는 한 표에서 직접 비교하지 않습니다."},"vars":[{"n":"원소 비율","u":"% (질량비 또는 원자 수 비)","r":"0~100"},{"n":"대상","u":"범주","r":"우주·태양계·지구·생명체"}],"tasks":["같은 기준의 원소 조성 표 만들기","대상별 주요 원소 분포를 비교하기","빅뱅·별의 핵융합·원소 확산·태양계 형성의 흐름으로 조성 자료 해석하기"],"chart":"대상별 원소 비율 묶은 막대그래프","predict":"우주에서 가장 많은 원소와 생명체의 주요 원소를 예상하세요.","checks":[{"t":"질량비와 원자 수 비를 혼합하지 않았는가?","h":"두 비율은 원자량이 달라 직접 비교할 수 없습니다."},{"t":"모든 무거운 원소가 빅뱅 때 만들어졌다고 설명하지 않았는가?","h":"원소 생성 과정은 종류에 따라 다릅니다."}],"pitfalls":["대상별 표의 기준 차이를 무시함","조성 비율만으로 생성 경로가 입증되었다고 주장함"],"time":"1~2차시","textbook":"통합과학1 우주와 생명의 역사에 연계한 재구성 활동."},{"id":"is1-0205","subj":"is1","code":"10통과1-02-05","title":"규산염 광물의 기본 단위 결합과 조성 비교하기","questions":["규산염 광물의 결합 구조에 따라 산소와 규소의 비는 어떻게 달라질까?","기본 단위체의 반복 결합은 광물과 생체 고분자에서 어떻게 나타날까?"],"data":{"name":"광물 화학식·규산염 구조와 생체 고분자 기본 단위 비교 표","org":"RRUFF / 교사 제공 구조 모형","url":"https://rruff.info/","how":"감람석·휘석·각섬석·운모·석영의 화학식과 구조 유형을 기록하고, 단백질·핵산의 기본 단위와 결합 모형을 별도 비교합니다."},"vars":[{"n":"Si 수","u":"개 (화학식 기준)","r":"양수"},{"n":"O 수","u":"개 (화학식 기준)","r":"양수"},{"n":"결합 구조","u":"범주","r":"독립·사슬·판·망상"}],"tasks":["구조별 O/Si 비율 계산·비교하기","공유 산소 수와 비율의 관계를 모형으로 설명하기","규산염·단백질·핵산의 기본 단위체와 결합을 비교 설명하기"],"chart":"구조별 O/Si 비율 막대그래프","predict":"사면체가 산소를 더 많이 공유하면 O/Si 비율이 어떻게 될지 예상하세요.","checks":[{"t":"수산기 산소와 규산염 골격 산소를 구별했는가?","h":"각섬석·운모의 OH를 골격 산소와 단순 합산하지 않습니다."},{"t":"비율만으로 결합 구조를 확정하지 않았는가?","h":"화학식과 구조 모형을 함께 봅니다."}],"pitfalls":["모든 산소를 골격 산소로 계산함","기본 단위체의 결합을 단순한 물리적 혼합으로 설명함"],"time":"2차시","textbook":"통합과학1 지각과 생명체 구성 물질에 연계한 재구성 활동."},{"id":"is1-0303","subj":"is1","code":"10통과1-03-03","title":"낙하와 인공위성 운동 자료로 중력 작용 비교하기","questions":["공기 저항이 작은 낙하에서 시간과 이동 거리는 어떤 관계일까?","궤도 반지름이 커질수록 위성의 주기는 어떻게 달라질까?"],"data":{"name":"모형 낙하 영상 측정값과 공개 위성 궤도 자료","org":"학생 측정 / NASA","url":"https://science.nasa.gov/earth/","how":"안전한 낮은 높이의 낙하 영상을 측정하거나 교사 제공 자료를 사용합니다. 원궤도에 가까운 위성의 지구 중심 거리·주기를 출처와 함께 기록합니다."},"vars":[{"n":"시간","u":"s","r":"0 이상"},{"n":"낙하 거리","u":"m","r":"0 이상"},{"n":"궤도 반지름","u":"km","r":"지구 반지름 초과"},{"n":"주기","u":"s","r":"양수"}],"tasks":["낙하 거리와 시간 제곱의 관계 분석하기","원궤도 위성의 주기 제곱과 반지름 세제곱 비교하기","낙하와 공전에서 중력이 운동 방향·속도에 미치는 영향 설명하기"],"chart":"낙하 거리–시간², 주기²–반지름³ 산점도","predict":"지구에서 멀리 도는 위성의 공전 주기를 예상하세요.","checks":[{"t":"고도와 지구 중심 거리를 구별했는가?","h":"궤도 반지름은 지구 반지름과 고도의 합입니다."},{"t":"실제 측정값과 이상적 모형을 구별했는가?","h":"공기 저항과 영상 측정 오차를 기록합니다."}],"pitfalls":["고도를 궤도 반지름으로 사용함","관계식에 맞지 않는 자료를 임의로 삭제함"],"time":"2차시","textbook":"통합과학1 중력과 운동에 연계한 재구성 활동."},{"id":"is2-0201","subj":"is2","code":"10통과2-02-01","title":"연안 수온과 생물 출현 자료로 생물–환경 관계 탐구하기","questions":["연안 수온이 다른 시기에 관찰되는 생물은 어떻게 다를까?","생물 출현과 수온의 관계를 해석할 때 조사 노력은 어떤 영향을 줄까?"],"data":{"name":"연안 생물 관찰 기록과 해양 관측 수온","org":"OBIS / 국립수산과학원","url":"https://obis.org/","how":"조사 지역·기간·방법이 비교 가능한 출현 기록을 내려받고 같은 해역 관측 수온을 대응시킵니다. 관찰 건수와 개체 수를 구별합니다."},"vars":[{"n":"수온","u":"°C","r":"해역별 확인"},{"n":"출현 기록 수","u":"건","r":"0 이상"},{"n":"생물종","u":"범주","r":"동정 정보 확인"}],"tasks":["생물적·비생물적 생태계 요소 분류하기","기간별 수온과 출현 기록 비교하기","조사 편향과 다른 환경 요인을 고려해 상호 관계 설명하기"],"chart":"월별 수온과 종별 출현 기록 다중 패널","predict":"수온 변화에 따라 종의 출현이 달라질지 예상하세요.","checks":[{"t":"출현 기록이 없는 것을 생물이 없다는 뜻으로 해석하지 않았는가?","h":"관찰하지 않은 것과 부재는 다릅니다."},{"t":"공간·시간·조사 노력을 맞추었는가?","h":"관찰 빈도 차이는 환경 효과처럼 보일 수 있습니다."}],"pitfalls":["출현 건수를 개체 밀도로 해석함","수온과 생물 분포의 상관을 단독 원인으로 주장함"],"time":"2차시","textbook":"통합과학2 생물과 환경의 상호 관계에 연계한 활동."},{"id":"is2-0202","subj":"is2","code":"10통과2-02-02","title":"해양 환경 변화와 먹이 관계 자료 해석하기","questions":["수온·영양염 변화와 플랑크톤·어류 변화는 어떻게 연결될까?","관측 자료만으로 생태계 평형의 변화를 어디까지 설명할 수 있을까?"],"data":{"name":"같은 해역의 수온·클로로필·어류 조사 시계열","org":"NOAA 생태계 현황 자료","url":"https://www.integratedecosystemassessment.noaa.gov/","how":"한 해역의 조사 정의와 단위가 명시된 환경·생물 지표를 선정합니다. 클로로필을 생산량이나 개체 수 자체로 바꾸어 부르지 않습니다."},"vars":[{"n":"수온","u":"°C","r":"지역별 확인"},{"n":"클로로필","u":"mg/m³","r":"0 이상"},{"n":"어류 지표","u":"자료 정의에 따름","r":"조사 기준 확인"}],"tasks":["생산자·소비자의 먹이 관계와 생태 피라미드 구성하기","환경·생물 지표의 변화와 시간 지연 비교하기","환경 변화가 생태계에 미칠 영향을 모둠별 근거로 토의하기"],"chart":"단위를 분리한 지표별 시계열","predict":"생산자와 소비자 지표가 동시에 변할지 예상하세요.","checks":[{"t":"생물량·개체 수·생산량 피라미드를 구별했는가?","h":"해양에서는 순간 생물량 피라미드가 역전될 수 있습니다."},{"t":"상관만으로 먹이 관계를 확정하지 않았는가?","h":"기존 생태 지식과 조사 방법을 함께 확인합니다."}],"pitfalls":["단위가 다른 값을 같은 축에서 비교함","한 지표만으로 생태계 붕괴를 단정함"],"time":"2차시","textbook":"통합과학2 생태계 평형과 환경 변화에 연계한 재구성 활동."},{"id":"is2-0204","subj":"is2","code":"10통과2-02-04","title":"태양 복사와 지구의 에너지 전환 자료 비교하기","questions":["대기권 밖과 지표의 태양 복사 에너지는 얼마나 다를까?","태양 에너지는 지구에서 어떤 형태의 에너지로 전환될까?"],"data":{"name":"지표 일사량과 태양 상수·핵융합 질량 결손 자료","org":"NASA POWER / 교사 제공 핵융합 반응 자료","url":"https://power.larc.nasa.gov/data-access-viewer/","how":"지역과 기간을 정해 지표 일사량을 내려받고, 교사 제공 태양 복사·수소 핵융합 자료의 조건을 따로 기록합니다."},"vars":[{"n":"일사 에너지","u":"kWh/m²/day","r":"0 이상"},{"n":"질량 결손","u":"kg","r":"반응 정의에 따름"}],"tasks":["계절별 지표 일사량 비교하기","핵융합의 질량 결손으로 방출 에너지 계산하기","일부 에너지가 지구에 도달해 대기·물순환·광합성 등으로 전환되는 흐름 설명하기"],"chart":"월별 일사량 그래프와 에너지 흐름도","predict":"같은 지역의 계절별 일사량 차이를 예상하세요.","checks":[{"t":"에너지와 단위 시간당 에너지를 구별했는가?","h":"kWh/m²/day와 W/m²는 환산이 필요합니다."},{"t":"태양의 방출 에너지 전체가 지구에 도달한다고 설명하지 않았는가?","h":"지구가 받는 비율과 반사·흡수를 구별합니다."}],"pitfalls":["핵융합을 화학 연소로 설명함","질량 단위를 g 그대로 공식에 대입함"],"time":"2차시","textbook":"통합과학2 태양 에너지의 생성과 전환에 연계한 활동."},{"id":"is2-0206","subj":"is2","code":"10통과2-02-06","title":"지역 일사·풍속 자료로 신재생 에너지 활용 방안 탐색하기","questions":["우리 지역의 태양광·풍력 자원은 계절별로 어떻게 다를까?","에너지 효율과 환경 영향을 고려하면 어떤 활용 방안이 적절할까?"],"data":{"name":"일사량·풍속 자료와 설비 성능표","org":"기상청 / NASA POWER / 공개 설비 자료","url":"https://power.larc.nasa.gov/","how":"기간·높이·지역을 맞춘 일사량·풍속과 설비 정격·효율·출력 곡선을 기록합니다. 단순 추정 모형임을 표시합니다."},"vars":[{"n":"일사량","u":"kWh/m²/day","r":"0 이상"},{"n":"풍속","u":"m/s","r":"0 이상"},{"n":"에너지 효율","u":"%","r":"0~100"}],"tasks":["계절별 자원 변동 비교하기","입출력 에너지와 효율·손실 구분하기","가정을 명시해 발전량을 추정하고 지속가능한 활용 방안 제안하기"],"chart":"월별 자원·추정 발전량 비교","predict":"태양광과 풍력이 서로 부족한 계절을 보완할 수 있을지 예상하세요.","checks":[{"t":"정격 출력과 실제 발전량을 구별했는가?","h":"kW와 kWh는 다릅니다."},{"t":"평균 풍속의 세제곱으로 평균 풍력 에너지를 확정하지 않았는가?","h":"풍속 분포와 설비 출력 곡선이 필요합니다."}],"pitfalls":["기상 자원만으로 입지의 적합성을 확정함","효율과 이용률을 같은 뜻으로 사용함"],"time":"2차시","textbook":"통합과학2 신재생 에너지와 지속가능한 발전에 연계한 활동."},{"id":"is2-0303","subj":"is2","code":"10통과2-03-03","title":"기상 센서와 AI 예측의 유용성·한계 비교하기","questions":["저가 센서 관측과 기준 관측은 얼마나 다를까?","기상 예측 오차는 상황에 따라 어떻게 달라질까?"],"data":{"name":"기상 센서 또는 공개 예보–실황 대응 표","org":"학생 측정 / 기상청","url":"https://data.kma.go.kr/","how":"같은 시각·위치의 센서와 기준 관측 또는 사전 저장한 예보와 실황을 짝지어 기록합니다. 예보 발표 시각과 유효 시각을 구별합니다."},"vars":[{"n":"예측·센서 기온","u":"°C","r":"관측 조건별 확인"},{"n":"기준 기온","u":"°C","r":"같은 대상·시간"}],"tasks":["대응 자료의 편향과 평균 절대 오차 계산하기","조건별 오차를 비교하기","AI·사물인터넷의 인간 삶·환경 개선 사례와 미래의 유용성·한계 설명하기"],"chart":"예측–관측 산점도와 오차 시계열","predict":"모든 상황에서 같은 정확도를 보일지 예상하세요.","checks":[{"t":"예측 시각과 관측 시각을 정확히 맞추었는가?","h":"발표 시각과 유효 시각은 다릅니다."},{"t":"짧은 표본의 결과를 모든 AI 기술로 일반화하지 않았는가?","h":"사례의 대상과 조건을 제한합니다."}],"pitfalls":["사후 관측값을 예측값으로 사용함","기술의 편리함만 보고 한계를 생략함"],"time":"1~2차시","textbook":"통합과학2 과학기술과 미래 사회에 연계한 재구성 활동."},{"id":"is2-0304","subj":"is2","code":"10통과2-03-04","title":"기후 데이터 시각화의 선택과 과학 윤리 검토하기","questions":["같은 기온 자료라도 기간과 축 범위를 바꾸면 인상이 어떻게 달라질까?","과학 관련 사회적 쟁점을 토의할 때 자료를 정직하게 제시하려면 무엇이 필요할까?"],"data":{"name":"전 지구 기온 편차 공개 시계열","org":"NASA GISS","url":"https://data.giss.nasa.gov/gistemp/","how":"동일한 기온 자료로 전체 기간과 일부 기간 그래프를 만듭니다. 모든 그래프에 기간·기준 기간·축 범위를 명시합니다."},"vars":[{"n":"기온 편차","u":"°C","r":"기준 기간 확인"},{"n":"연도","u":"년","r":"자료 범위"}],"tasks":["기간·축 설정에 따른 시각적 차이 비교하기","과학기술 활용 관련 기후 쟁점의 주장과 근거 구별하기","선택적 자료 제시·출처·불확실성 공개의 윤리 원칙 논증하기"],"chart":"동일 자료·다른 기간과 축의 비교 그래프","predict":"짧은 기간만 선택하면 장기 추세가 다르게 보일지 예상하세요.","checks":[{"t":"같은 기준 기간의 편차 자료를 사용했는가?","h":"기준이 다르면 절편이 달라집니다."},{"t":"시각화 차이와 실제 추세 차이를 구별했는가?","h":"축과 기간을 공개하고 원자료를 함께 봅니다."}],"pitfalls":["축 절단을 무조건 조작으로 단정함","특정 기간만으로 장기 변화가 없다고 주장함"],"time":"2차시","textbook":"통합과학2 과학 관련 사회적 쟁점과 과학 윤리에 연계한 활동."},{"id":"es-0102","subj":"es","code":"12지구01-02","title":"수괴와 해양 순환 관측으로 기후 관련성 탐구하기","questions":["북대서양 수괴의 온도·염분·밀도는 깊이에 따라 어떻게 다를까?","해양 순환의 변화가 기후와 관련됨을 자료로 어디까지 추론할 수 있을까?"],"data":{"name":"해양 단면 수온·염분·밀도와 AMOC 수송 지표","org":"GO-SHIP / RAPID","url":"https://rapid.ac.uk/","how":"공개 해양 단면과 RAPID의 수송 지표를 각각 수집합니다. 측정 기간·깊이·위치와 지표 정의가 다름을 명시합니다."},"vars":[{"n":"수온","u":"°C","r":"해역별 확인"},{"n":"염분","u":"자료의 염분 척도","r":"척도 확인"},{"n":"수송량","u":"Sv","r":"부호 정의 확인"}],"tasks":["깊이별 수괴의 물성을 비교하기","밀도 차와 침강·표층 순환의 연결 설명하기","수송 지표의 변동과 기후 관련성을 표본 기간의 한계와 함께 추론하기"],"chart":"수온·염분 단면도와 수송 지표 시계열","predict":"차고 염분이 높은 해수가 어떤 깊이에서 나타날지 예상하세요.","checks":[{"t":"밀도 계산의 온도·염분·압력 정의를 확인했는가?","h":"현장 밀도와 기준 압력의 밀도는 다릅니다."},{"t":"짧은 관측 추세를 순환 붕괴로 단정하지 않았는가?","h":"자연 변동과 관측 기간을 함께 봅니다."}],"pitfalls":["표층 해류와 심층 수송을 같은 자료로 취급함","서로 다른 기간을 직접 대응시킴"],"time":"2차시","textbook":"지구과학 대기와 해양의 상호작용 · 해양 순환에 연계한 재구성 활동."},{"id":"es-0203","subj":"es","code":"12지구02-03","title":"화산암 조성으로 변동대의 마그마 생성 비교하기","questions":["해령과 섭입대 화산암의 실리카 함량은 어떻게 다를까?","조성 분포를 마그마 생성 조건과 어떻게 연결할 수 있을까?"],"data":{"name":"화산암 주원소 분석 자료","org":"GEOROC / PetDB","url":"https://georoc.eu/","how":"해령·섭입대의 위치와 분석 방법이 명시된 화산암 자료를 수집하고 변질 시료·결측값을 구별합니다."},"vars":[{"n":"SiO₂","u":"wt.%","r":"0~100"},{"n":"Na₂O+K₂O","u":"wt.%","r":"0~100"},{"n":"구조 환경","u":"범주","r":"해령·섭입대 등"}],"tasks":["구조 환경별 실리카 분포 비교하기","화산암 조성의 다양성을 자료로 설명하기","감압·물 첨가 등의 생성 과정과 조성 차이를 연결해 설명하기"],"chart":"구조 환경별 SiO₂ 상자그림과 조성 산점도","predict":"하나의 구조 환경에서 모든 암석의 조성이 같을지 예상하세요.","checks":[{"t":"주원소 분석의 총량과 결측을 확인했는가?","h":"정규화 여부와 분석 총량을 기록합니다."},{"t":"실리카만으로 생성 환경을 확정하지 않았는가?","h":"위치와 지질 맥락을 함께 봅니다."}],"pitfalls":["변질 시료를 무조건 신선한 마그마 조성으로 해석함","구조 환경과 암석 종류를 일대일로 단정함"],"time":"2차시","textbook":"지구과학 마그마와 화성암에 연계한 재구성 활동."},{"id":"es-0204","subj":"es","code":"12지구02-04","title":"변성 조건과 지질 구조 자료로 암석 순환 해석하기","questions":["접촉 변성과 광역 변성의 온도·압력 조건은 어떻게 다를까?","암석과 구조의 분포로 변동대의 역사를 어떻게 추론할 수 있을까?"],"data":{"name":"지질도·변성 광물과 압력–온도 범위 표","org":"한국지질자원연구원 / 교사 제공 조건 자료","url":"https://data.kigam.re.kr/","how":"지질도에서 변성암·관입암·단층·습곡의 위치를 읽어 표로 만들고, 공개 범위 자료 또는 교사 제공 P–T 모형을 출처·가정과 함께 기록합니다."},"vars":[{"n":"온도","u":"°C","r":"자료별 범위"},{"n":"압력","u":"GPa","r":"0 이상"},{"n":"암석·구조","u":"범주","r":"범례 확인"}],"tasks":["변성작용 종류별 P–T 범위 비교하기","변성암 분포와 관입·지각 변동 구조의 관계 설명하기","융해·변성·풍화·퇴적의 암석 순환 경로 구성하기"],"chart":"압력–온도 범위도와 지질 분포도","predict":"접촉 변성의 압력·온도 특성을 예상하세요.","checks":[{"t":"추정 범위를 개별 암석의 실측값으로 바꾸지 않았는가?","h":"모형·범위·측정값을 구별합니다."},{"t":"지질 구조의 선후 관계를 지질도 근거로 확인했는가?","h":"분포의 인접만으로 인과를 정하지 않습니다."}],"pitfalls":["압력 단위를 MPa와 GPa로 혼합함","암석 순환을 한 방향의 고정 순서로 설명함"],"time":"2차시","textbook":"지구과학 변성작용과 암석 순환에 연계한 재구성 활동."},{"id":"es-0205","subj":"es","code":"12지구02-05","title":"지질공원 지질·방문 자료로 지속가능한 활용 제안하기","questions":["우리 지역 지질공원의 지질 명소는 어떤 형성 과정을 보일까?","보전과 지역 활용을 함께 고려하면 어떤 개선 방안을 제안할 수 있을까?"],"data":{"name":"지질 명소·지질도·공개 방문 및 보전 자료","org":"국가지질공원 / 한국지질자원연구원","url":"https://www.koreageoparks.kr/","how":"한 지질공원의 명소별 암석·연대·구조와 공개된 방문·보전 지표를 기록합니다. 공개 수치가 없으면 관찰 범주 자료를 사용하며 값을 만들지 않습니다."},"vars":[{"n":"명소와 암석","u":"범주","r":"지질공원 자료"},{"n":"연대","u":"Ma","r":"출처 범위"},{"n":"방문·보전 지표","u":"명 또는 범주","r":"자료 정의 확인"}],"tasks":["명소별 지질 형성 과정을 연대·구조 근거로 추론하기","보전·접근성·지역 이용 지표 비교하기","지역사회 관점을 포함한 지속가능한 발전 방안 제안하기"],"chart":"명소 분포 지도와 지표 비교 표","predict":"방문객이 많은 명소와 보전 부담이 큰 명소가 같을지 예상하세요.","checks":[{"t":"방문 지표의 집계 범위와 중복을 확인했는가?","h":"공원 전체와 명소별 집계를 혼합하지 않습니다."},{"t":"형성 과정의 근거와 활용 제안을 구별했는가?","h":"정책 제안은 자료뿐 아니라 이해관계도 고려합니다."}],"pitfalls":["지질공원의 지정 연도를 암석 연대로 사용함","방문객 증가만을 지속가능성으로 판단함"],"time":"2~3차시","textbook":"지구과학 한반도 지질공원에 연계한 재구성 활동."},{"id":"es-0206","subj":"es","code":"12지구02-02","title":"지층·화석 산출 자료로 지질시대의 환경 변화 해석하기","questions":["지질시대의 기별로 화석군과 환경은 어떻게 달라질까?","한 지역의 지층과 화석 기록으로 과거 환경을 어디까지 해석할 수 있을까?"],"data":{"name":"기별 화석 산출과 지층·퇴적 환경 자료","org":"Paleobiology Database / 국제층서위원회","url":"https://paleobiodb.org/","how":"한 지역 또는 분류군의 화석 산출 자료를 내려받고 연대 범위를 최신 국제층서표의 기 구분과 대응시킵니다. 산출 건수와 실제 생물다양성을 구별합니다."},"vars":[{"n":"산출 연대","u":"Ma","r":"연대 범위"},{"n":"지질시대의 기","u":"범주","r":"국제층서표"},{"n":"화석군·퇴적 환경","u":"범주","r":"원자료 정의"}],"tasks":["지질시대를 기 수준으로 구분한 시간표 만들기","지층과 화석 산출을 같은 시간축에 대응시키기","화석군·퇴적 환경 변화로 과거 생물과 환경 해석하기"],"chart":"기별 화석군·환경 분포도","predict":"기 경계에서 관찰되는 화석군의 변화가 모두 대멸종인지 예상하세요.","checks":[{"t":"연대 범위가 기 경계를 걸치는 기록을 명시했는가?","h":"중간값 하나로 강제 배정하면 불확실성이 감춰집니다."},{"t":"화석 기록의 조사·보존 편향을 고려했는가?","h":"산출 기록이 적은 것은 생물이 적었다는 뜻만은 아닙니다."}],"pitfalls":["만 년과 Ma를 혼동함","빙하 코어의 짧은 기록만으로 지질시대 전체를 설명함"],"time":"2차시","textbook":"지구과학 지질시대와 화석·고환경에 연계한 재구성 활동."},{"id":"es-0301","subj":"es","code":"12지구03-01","title":"천체 위치 자료와 모형으로 식 현상·행성 겉보기 운동 설명하기","questions":["지구에서 본 행성 위치는 시간에 따라 어떻게 변할까?","일식·월식이 매달 일어나지 않는 이유는 위치 자료와 모형으로 어떻게 설명할까?"],"data":{"name":"행성·달 천체력과 식 현상 목록","org":"NASA JPL Horizons / NASA Eclipse","url":"https://ssd.jpl.nasa.gov/horizons/","how":"관측자 위치·좌표계·시각계를 고정하여 행성의 겉보기 위치를 수집하고, 별도 식 목록의 발생 시각·조건과 비교합니다."},"vars":[{"n":"황경 또는 적경","u":"° 또는 시","r":"좌표계 확인"},{"n":"날짜","u":"UTC","r":"선택 기간"},{"n":"이각·황위","u":"°","r":"정의 확인"}],"tasks":["좌표의 0°/360° 경계를 처리해 겉보기 궤적 그리기","순행·역행을 지구와 행성의 공전 모형으로 설명하기","달의 궤도 경사와 교점 모형으로 식 발생 조건 설명하기"],"chart":"날짜별 천구상 위치와 궤도 모형","predict":"외행성의 역행이 태양과 어느 위치 관계에서 나타날지 예상하세요.","checks":[{"t":"관측자·좌표계·UTC를 일관되게 사용했는가?","h":"지구 중심 위치와 지표 관측 위치는 다릅니다."},{"t":"적경의 시 단위를 각도로 바르게 바꾸었는가?","h":"1시는 15°입니다."}],"pitfalls":["좌표 경계를 실제 급격한 운동으로 해석함","삭·망이면 반드시 식이 일어난다고 설명함"],"time":"2차시","textbook":"지구과학 태양–지구–달 시스템과 행성 운동에 연계한 활동."},{"id":"es-0303","subj":"es","code":"12지구03-03","title":"질량별 별 진화 모형을 H-R도에서 비교하기","questions":["초기 질량이 다른 별의 진화 경로는 어떻게 다를까?","별 한 개의 진화 경로와 여러 별의 관측 분포는 어떻게 구별할까?"],"data":{"name":"질량별 항성 진화 궤적","org":"MIST 항성 진화 모형","url":"https://waps.cfa.harvard.edu/MIST/","how":"금속 함량·회전 조건을 같게 하고 초기 질량이 다른 모형의 나이·log Teff·log L을 내려받습니다. 이론 모형 자료임을 명시합니다."},"vars":[{"n":"초기 질량","u":"태양 질량","r":"선택 모형 범위"},{"n":"log Teff","u":"log10(K)","r":"모형 범위"},{"n":"log L","u":"log10(L/L☉)","r":"모형 범위"},{"n":"나이","u":"년","r":"0 이상"}],"tasks":["질량별 진화 궤적을 H-R도에 겹쳐 그리기","시간 방향과 주요 진화 단계 표시하기","질량에 따른 진화 시간과 경로 차이 해석하기"],"chart":"온도 축을 뒤집은 H-R 진화 궤적","predict":"질량이 큰 별의 주계열 수명이 더 길지 짧을지 예상하세요.","checks":[{"t":"log 값과 실제 물리량을 혼합하지 않았는가?","h":"온도는 10의 log Teff 제곱으로 복원합니다."},{"t":"시간 순서를 유지해 경로를 연결했는가?","h":"온도순으로 정렬하면 진화 경로가 바뀝니다."}],"pitfalls":["관측 별 분포를 한 별의 진화 경로로 연결함","모든 모형이 동일한 최종 단계까지 계산되었다고 가정함"],"time":"2차시","textbook":"지구과학 별의 진화와 H-R도에 연계한 재구성 활동."},{"id":"ess-0101","subj":"ess","code":"12지시01-01","title":"지구 초기 사건의 연대 자료로 권역 형성 과정 추론하기","questions":["대기·바다·생명체 형성의 증거는 어떤 시간 순서로 나타날까?","연대의 불확실성은 권역 형성 과정의 해석에 어떤 영향을 줄까?"],"data":{"name":"지구 형성·오래된 광물·생명 흔적의 연대 범위","org":"Smithsonian / 공개 지질 연구 자료","url":"https://naturalhistory.si.edu/education/teaching-resources/earth-science","how":"지구 형성, 오래된 지르콘, 바다와 생명 흔적에 관한 공개 자료에서 연대·오차·증거 유형을 출처와 함께 표로 기록합니다."},"vars":[{"n":"사건 연대","u":"Ga","r":"약 0~4.6"},{"n":"연대 불확실성","u":"Ga","r":"자료별 확인"},{"n":"증거 유형","u":"범주","r":"광물·퇴적물·생명 흔적"}],"tasks":["연대 범위를 포함한 지구 초기 사건 시간축 만들기","대기·원시 바다·생명체와 권역의 형성 과정 연결하기","직접 증거와 해석·가설의 차이 기록하기"],"chart":"불확실성 구간을 표시한 사건 시간축","predict":"현재 발견된 가장 오래된 증거의 연대가 실제 최초 형성 시각과 같을지 예상하세요.","checks":[{"t":"Ga와 Ma를 구별했는가?","h":"1 Ga는 1000 Ma입니다."},{"t":"가장 오래된 증거를 최초 탄생 시점으로 단정하지 않았는가?","h":"보존되지 않은 기록이 있을 수 있습니다."}],"pitfalls":["나이의 오차 범위를 생략함","모든 권역이 동시에 완성되었다고 해석함"],"time":"1~2차시","textbook":"지구시스템과학 지구와 권역의 형성에 연계한 재구성 활동."},{"id":"ess-0103","subj":"ess","code":"12지시01-03","title":"판 운동·해저 연령과 열점 자료로 판구조론 발달 해석하기","questions":["해령에서 멀어질수록 해저 암석 연령은 어떻게 변할까?","열점 화산열의 연령 배열과 판 운동은 어떤 관계일까?"],"data":{"name":"해저 연령 격자·GNSS 속도·열점 화산 연령","org":"NOAA / EarthScope","url":"https://www.ncei.noaa.gov/products/age-sea-floor","how":"해령을 가로지르는 단면과 열점 화산열의 연령·거리, 공개 판 속도를 기록합니다. 연령과 속도 자료의 좌표계를 명시합니다."},"vars":[{"n":"연령","u":"Ma","r":"0 이상"},{"n":"거리","u":"km","r":"기준점 명시"},{"n":"판 속도","u":"mm/yr","r":"방향·좌표계 확인"}],"tasks":["해령 양쪽의 거리–연령 관계 비교하기","열점 화산열의 이동 속도와 판 속도 비교하기","대륙 이동·해저 확장 증거의 발달사를 정리하고 상부 맨틀 운동과 플룸 운동 구별하기"],"chart":"거리–연령 산점도와 운동 벡터 지도","predict":"해령 양쪽의 암석 연령이 대칭인지 예상하세요.","checks":[{"t":"반확장 속도와 전체 확장 속도를 구별했는가?","h":"해령 한쪽만 계산한 속도는 반확장 속도입니다."},{"t":"열점이 완전히 고정되어 있다고 단정하지 않았는가?","h":"단순 모형의 가정을 밝혀야 합니다."}],"pitfalls":["판 속도 단위 환산을 틀림","열점과 모든 화산호를 같은 생성 과정으로 설명함"],"time":"2차시","textbook":"지구시스템과학 판구조론 발달과 플룸에 연계한 활동."},{"id":"ess-0104","subj":"ess","code":"12지시01-04","title":"화산 분출·암석 특성 자료로 암석 순환에서의 역할 해석하기","questions":["분출 방식과 화산암의 조성·조직은 어떻게 관련될까?","화산 활동은 암석 순환에서 어떤 경로를 담당할까?"],"data":{"name":"화산 분출 기록과 화산암 표본 특성","org":"Smithsonian Global Volcanism Program / GEOROC","url":"https://volcano.si.edu/","how":"화산별 분출 기록·암석 종류를 모으고 분석 조성·조직 관찰 표를 대응시킵니다. 시료 채취 위치와 분출 사건의 일치 여부를 확인합니다."},"vars":[{"n":"실리카 함량","u":"wt.%","r":"0~100"},{"n":"암석 조직","u":"범주","r":"입자·기공 관찰"},{"n":"분출 방식","u":"범주","r":"기록 정의"}],"tasks":["암석 조성·조직과 분출 방식 비교하기","냉각 조건과 암석 특성의 관계 추론하기","화산 활동이 지표 물질 공급과 암석 순환에서 하는 역할 설명하기"],"chart":"분출 유형별 조성 분포와 조직 비교 표","predict":"분출한 암석의 기공·결정 크기가 어떤 조건을 반영할지 예상하세요.","checks":[{"t":"화산별 대표 암석과 특정 분출 시료를 구별했는가?","h":"같은 화산도 시기마다 조성이 다를 수 있습니다."},{"t":"분출 지수만으로 화학 조성을 확정하지 않았는가?","h":"기체·점성·분출량 등도 영향을 줍니다."}],"pitfalls":["화산 분출을 암석 순환의 마지막 단계로 해석함","서로 다른 시료를 같은 분출 사건으로 묶음"],"time":"2차시","textbook":"지구시스템과학 화산 활동과 암석 순환에 연계한 활동."},{"id":"ess-0201","subj":"ess","code":"12지시02-01","title":"바람·해수면 높이 자료로 에크만 수송과 지형류 설명하기","questions":["바람 방향과 표층의 에크만 수송 방향은 어떻게 다를까?","해수면 높이 경사와 지형류 방향은 어떤 관계일까?"],"data":{"name":"해상 바람과 해수면 높이·지형류 격자 자료","org":"Copernicus Marine","url":"https://data.marine.copernicus.eu/","how":"중위도 해역과 같은 기간의 바람·해수면 높이·지형류 자료를 수집합니다. 서비스 계정 또는 다운로드 조건을 확인하고 적도 부근은 제외합니다."},"vars":[{"n":"바람","u":"m/s","r":"성분 정의 확인"},{"n":"해수면 높이","u":"m","r":"기준면 확인"},{"n":"지형류 속도","u":"m/s","r":"성분·반구 확인"}],"tasks":["바람과 반구에 따른 에크만 수송 방향 표시하기","수렴·발산과 해수면 경사 형성 연결하기","수압 경도력과 전향력의 균형으로 지형류 설명하기"],"chart":"해수면 높이 등치선과 바람·지형류 벡터","predict":"북반구의 에크만 수송이 바람의 어느 쪽인지 예상하세요.","checks":[{"t":"표층 에크만 유속과 깊이 적분 수송을 구별했는가?","h":"표층 유속의 각도와 수송의 약 90°는 다릅니다."},{"t":"반구와 높이 경사의 부호를 확인했는가?","h":"남북반구에서 전향력의 방향이 다릅니다."}],"pitfalls":["바람 방향을 불어오는 방향과 향하는 방향으로 혼동함","적도에서 지형류 식을 그대로 적용함"],"time":"2차시","textbook":"지구시스템과학 에크만 수송과 지형류에 연계한 재구성 활동."},{"id":"ess-0202","subj":"ess","code":"12지시02-02","title":"파랑 관측과 수심 모형으로 심해파·천해파 비교하기","questions":["주기가 다른 파도는 같은 수심에서 모두 심해파일까?","해안으로 이동하며 수심이 얕아질 때 파장과 속도는 어떻게 달라질까?"],"data":{"name":"해양 부이 파주기·파고와 수심 자료","org":"기상청 해양기상부이 / 교사 제공 분산관계 모형","url":"https://data.kma.go.kr/","how":"부이의 유의파고·주기·수심을 수집하고 교사 제공 선형 파동 모형으로 파장과 위상 속도를 계산합니다. 관측값과 모형값을 구별합니다."},"vars":[{"n":"주기","u":"s","r":"0 초과"},{"n":"수심","u":"m","r":"0 초과"},{"n":"파장","u":"m","r":"모형으로 계산"},{"n":"유의파고","u":"m","r":"0 이상"}],"tasks":["바람에 의한 해파 발생 조건 설명하기","수심/파장 비로 심해파·천해파 조건 구별하기","조건별 속도와 파장 변화를 모형으로 비교하기"],"chart":"수심별 파장·속도 그래프","predict":"심해파와 천해파의 구분이 수심 하나로 결정되는지 예상하세요.","checks":[{"t":"h/L 비로 적용 모형의 조건을 확인했는가?","h":"통상 h/L>1/2는 심해파, h/L\u003c1/20는 천해파 근사입니다."},{"t":"위상 속도와 물 입자 이동 속도를 구별했는가?","h":"파도의 진행이 물 전체의 같은 방향 이동은 아닙니다."}],"pitfalls":["모든 부이 자료를 무조건 심해파로 처리함","유의파고를 최대 파고로 사용함"],"time":"2차시","textbook":"지구시스템과학 해파에 연계한 재구성 활동."},{"id":"ess-0203","subj":"ess","code":"12지시02-03","title":"해일 관측 기록과 원인·피해 자료 비교하기","questions":["지진해일과 폭풍해일의 수위 변화는 어떻게 다를까?","같은 해일도 지역별 피해가 다른 이유를 어떤 자료로 설명할까?"],"data":{"name":"해일 사건 목록·조위 기록·재난 대응 사례","org":"NOAA NCEI / 국립해양조사원","url":"https://www.ncei.noaa.gov/products/natural-hazards/tsunamis-earthquakes-volcanoes","how":"원인이 알려진 사건을 골라 관측 수위·예측 조석·발생 시각·피해 자료를 기록합니다. 피해액은 통화·연도 기준을 확인합니다."},"vars":[{"n":"관측 수위","u":"cm 또는 m","r":"기준면 확인"},{"n":"예측 조위","u":"같은 수위 단위","r":"기준면 확인"},{"n":"피해 지표","u":"자료별 단위","r":"정의 확인"}],"tasks":["조석과 해일에 의한 수위 이상 구별하기","지진·기압·바람 등 해일 원인 비교하기","피해 사례의 지형·노출 조건을 분석해 공식 대피 지침에 맞는 대처 방안 제안하기"],"chart":"사건 전후 수위·조석·잔차 시계열","predict":"같은 해일의 관측 높이가 해안마다 같을지 예상하세요.","checks":[{"t":"관측 수위와 해일고를 같은 뜻으로 사용하지 않았는가?","h":"조석과 기준면을 구별합니다."},{"t":"실제 재난 판단을 학습용 분석에 맡기지 않았는가?","h":"대피·안전 행동은 공식 재난 안내를 따릅니다."}],"pitfalls":["수위 최고값 전부를 해일고로 해석함","피해액을 물가·노출 조건 없이 직접 비교함"],"time":"2차시","textbook":"지구시스템과학 해일과 대처 방안에 연계한 활동."},{"id":"ess-0301","subj":"ess","code":"12지시03-01","title":"기체 흡수 스펙트럼으로 지구 생명체 존재 조건 추론하기","questions":["수증기·이산화 탄소·오존은 어떤 파장의 빛을 흡수할까?","기체의 선택적 흡수는 지표 온도와 자외선 차단에 어떤 의미가 있을까?"],"data":{"name":"대기 기체별 흡수·투과 스펙트럼","org":"NASA / HITRAN 교육용 자료","url":"https://hitran.org/","how":"온도·압력·기체 농도·광경로가 명시된 교육용 스펙트럼을 사용합니다. 조건이 다른 흡수율의 크기는 직접 비교하지 않습니다."},"vars":[{"n":"파장","u":"μm 또는 nm","r":"자외선~적외선"},{"n":"흡수율·투과율","u":"0~1 또는 %","r":"정의별 범위"}],"tasks":["기체별 흡수 파장대 비교하기","태양 복사·지구 복사 대역과 선택적 흡수 연결하기","온실효과·자외선 차단·액체 물과 생명체 존재 조건 추론하기"],"chart":"기체별 흡수 스펙트럼 비교","predict":"모든 기체가 모든 파장을 똑같이 흡수할지 예상하세요.","checks":[{"t":"흡수율과 투과율의 방향을 구별했는가?","h":"투과율이 낮은 대역은 흡수가 클 수 있습니다."},{"t":"온실효과와 오존의 자외선 차단을 구별했는가?","h":"관련 기체와 주된 파장대가 다릅니다."}],"pitfalls":["파수와 파장을 같은 순서로 표시함","스펙트럼 하나만으로 지표 온도를 계산했다고 주장함"],"time":"2차시","textbook":"지구시스템과학 대기와 생명체 존재 조건에 연계한 활동."},{"id":"ess-0304","subj":"ess","code":"12지시03-04","title":"기압의 연직 분포로 정역학적 균형과 연직 운동 해석하기","questions":["높이에 따른 기압 감소율은 항상 같을까?","정역학적 균형에 가까운 대기에서도 왜 상승·하강이 생길까?"],"data":{"name":"라디오존데 기압·고도·기온 프로파일","org":"NOAA IGRA / 기상청","url":"https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive","how":"같은 관측소·시각의 기압·고도·기온을 수집하고 결측 부호와 고도 정의를 확인합니다."},"vars":[{"n":"기압","u":"hPa","r":"양수"},{"n":"고도","u":"m","r":"관측 정의 확인"},{"n":"기온","u":"K 또는 °C","r":"변환 필요"}],"tasks":["기압–고도 분포와 층별 감소율 비교하기","정역학 관계로 기압 경도력과 중력의 균형 해석하기","가열·부력·수렴 등의 연직 운동 원인을 추가 자료·개념으로 추론하기"],"chart":"기압–고도 프로파일과 층별 감소율","predict":"같은 높이 간격의 기압 차이가 상층과 하층에서 같을지 예상하세요.","checks":[{"t":"hPa를 Pa로 바꾸어 힘 관계를 계산했는가?","h":"1 hPa는 100 Pa입니다."},{"t":"정역학 균형을 연직 운동의 완전한 부재로 단정하지 않았는가?","h":"큰 힘의 근사 균형과 작은 연직 가속은 구별합니다."}],"pitfalls":["기압 감소를 선형으로 외삽함","연직 기압 분포 하나로 실제 상승 속도를 확정함"],"time":"2차시","textbook":"지구시스템과학 정역학적 균형에 연계한 재구성 활동."},{"id":"ess-0305","subj":"ess","code":"12지시03-05","title":"고도별 기압장과 바람으로 지균풍·경도풍·지상풍 비교하기","questions":["상층의 바람은 등고도선과 어떤 관계를 보일까?","곡률과 지면 마찰을 고려하면 풍향·풍속은 어떻게 달라질까?"],"data":{"name":"상층 지위고도·바람과 해면기압·지상풍","org":"기상청 / NOAA PSL 재분석","url":"https://psl.noaa.gov/data/","how":"같은 시각·중위도 해역의 상층 등압면 지위고도·바람과 지상 기압·바람을 수집합니다. 등압면과 등고도면을 구별합니다."},"vars":[{"n":"지위고도","u":"gpm","r":"등압면별 확인"},{"n":"해면기압","u":"hPa","r":"관측 범위"},{"n":"바람 성분","u":"m/s","r":"동서·남북 성분"}],"tasks":["등고도선과 상층 바람의 방향 비교하기","직선·곡선 흐름의 힘 균형으로 지균풍·경도풍 구별하기","지면 마찰을 고려해 지상풍의 등압선 횡단 설명하기"],"chart":"기압·지위고도 등치선과 바람 벡터 지도","predict":"지상풍이 상층 바람처럼 등압선과 나란할지 예상하세요.","checks":[{"t":"기상 풍향과 벡터가 향하는 방향을 구별했는가?","h":"기상 풍향은 불어오는 방향입니다."},{"t":"반구·마찰·곡률의 적용 조건을 밝혔는가?","h":"모형의 힘 균형은 조건에 따라 달라집니다."}],"pitfalls":["상층 등압면의 등고도선을 지상 등압선으로 부름","적도 부근에 지균풍 근사를 적용함"],"time":"2차시","textbook":"지구시스템과학 대기에 작용하는 힘과 바람에 연계한 활동."},{"id":"ess-0306","subj":"ess","code":"12지시03-06","title":"상층 편서풍 파동과 지상 기압계 발달 비교하기","questions":["상층 기압골·기압능이 이동할 때 지상 기압계는 어떻게 변할까?","한 사례로 편서풍 파동의 역할을 어디까지 평가할 수 있을까?"],"data":{"name":"연속 상층 일기도·지위고도와 지상 일기도","org":"기상청 / NOAA PSL","url":"https://www.weather.go.kr/","how":"중위도 저기압 발달 사례를 골라 6~12시간 간격의 상층 500 hPa와 지상 일기도를 같은 UTC로 정리합니다. 필요하면 발산·와도 자료를 추가합니다."},"vars":[{"n":"500 hPa 지위고도","u":"gpm","r":"자료별 확인"},{"n":"해면기압","u":"hPa","r":"자료별 확인"},{"n":"시각","u":"UTC","r":"같은 간격"}],"tasks":["기압골·기압능의 파장·이동을 추적하기","상층 파동과 지상 고·저기압 발달의 시간·위치 관계 비교하기","상층 발산·수렴 등의 개념으로 편서풍 파동의 역할과 사례 한계 평가하기"],"chart":"시각별 상층·지상 일기도 비교 패널","predict":"상층 기압골과 지상 저기압 중심이 항상 수직으로 겹칠지 예상하세요.","checks":[{"t":"상층·지상 자료의 시각과 지도 투영을 맞추었는가?","h":"UTC와 KST는 9시간 차이입니다."},{"t":"공간상 인접만으로 인과를 확정하지 않았는가?","h":"연속 시각과 발산·수렴 근거를 함께 봅니다."}],"pitfalls":["한 장의 일기도만으로 발달 과정을 결론냄","상층 기압골 위치를 지상 저기압 중심과 동일시함"],"time":"2차시","textbook":"지구시스템과학 행성파와 지상 기압계 발달에 연계한 활동."}],"standards":{"10통과1-01-01":"자연을 시간과 공간에서 기술할 수 있음을 알고, 길이와 시간 측정의 현대적 방법과 다양한 규모의 측정 사례를 조사할 수 있다.","10통과1-01-02":"과학 탐구에서 중요한 기본량의 의미를 알고, 자연 현상을 기술하는 데 단위가 가지는 의미와 적용사례를 설명할 수 있다.","10통과1-01-03":"과학 탐구에서 측정과 어림의 의미를 알고, 일상생활의 여러 가지 상황에서 측정 표준의 유용성과 필요성을 논증할 수 있다.","10통과1-01-04":"자연에서 일어나는 다양한 변화를 측정⋅분석하여 정보를 산출함을 알고, 이러한 정보를 디지털로 변환하는 기술을 정보 통신에 활용하여 현대 문명에 미친 영향을 인식한다.","10통과1-02-01":"천체에서 방출되는 빛의 스펙트럼을 분석하여 우주 초기에 형성된 원소와 천체의 구성 물질을 추론할 수 있다.","10통과1-02-02":"우주 초기의 원소들로부터 태양계의 재료이면서 생명체를 구성하는 원소들이 형성되는 과정을 통해 지구와 생명의 역사가 우주 역사의 일부분임을 해석할 수 있다.","10통과1-02-03":"세상을 구성하는 원소들의 성질이 주기성을 나타내는 현상을 통해 자연의 규칙성을 도출하고, 지구와 생명체를 구성하는 주요 원소들이 결합을 형성하는 이유를 해석할 수 있다.","10통과1-02-04":"인류의 생존에 필수적인 물, 산소, 소금 등이 만들어지는 결합의 차이를 이해하고 각 물질의 성질과 관련지어 설명할 수 있다.","10통과1-02-05":"지각과 생명체를 구성하는 물질들이 기본 단위체의 결합을 통해서 형성된다는 것을 규산염 광물, 단백질과 핵산의 예를 통해 설명할 수 있다.","10통과1-02-06":"지구를 구성하는 물질을 전기적 성질에 따라 구분할 수 있고, 물질의 전기적 성질을 응용하여 일상생활과 첨단기술에서 다양한 소재로 활용됨을 인식한다.","10통과1-03-01":"지구시스템은 태양계라는 시스템의 구성요소임을 알고, 지구시스템을 구성하는 권역들 간의 물질 순환과 에너지 흐름의 결과로 나타나는 현상을 논증할 수 있다.","10통과1-03-02":"지권의 변화를 판구조론 관점에서 해석하고, 에너지 흐름의 결과로 발생하는 지권의 변화가 지구시스템에 미치는 영향을 추론할 수 있다.","10통과1-03-03":"중력의 작용으로 인한 지구 표면과 지구 주위의 다양한 운동을 설명할 수 있다.","10통과1-03-04":"상호작용이 없을 때 물체가 가속되지 않음을 알고, 충격량과 운동량의 관계를 충돌 관련 안전장치와 스포츠에 적용할 수 있다.","10통과1-03-05":"생명 시스템을 유지하기 위해서 다양한 화학 반응과 물질 출입이 필요함을 이해하고, 일상생활에서 활용되는 화학 반응 사례를 조사하여 발표할 수 있다.","10통과1-03-06":"생명 시스템의 유지에 필요한 세포 내 정보의 흐름을 유전자로부터 단백질이 만들어지는 과정을 중심으로 설명할 수 있다.","10통과2-01-01":"지질시대를 통해 지구 환경이 끊임없이 변화해 왔으며 이러한 환경 변화가 생물다양성에 미치는 영향을 추론할 수 있다.","10통과2-01-02":"변이의 발생과 자연선택 과정을 통해 생물의 진화가 일어나고, 진화의 과정을 통해 생물다양성이 형성되었음을 추론할 수 있다.","10통과2-01-03":"자연과 인류의 역사에 큰 변화를 가져온 광합성, 화석 연료 사용, 철의 제련 등에서 공통점을 찾아 산화와 환원을 이해하고, 생활 주변의 다양한 변화를 산화와 환원의 특징과 규칙성으로 분석할 수 있다.","10통과2-01-04":"대표적인 산⋅염기 물질의 특징을 알고, 산과 염기를 혼합할 때 나타나는 중화 반응을 생활 속에서 이용할 수 있다.","10통과2-01-05":"생활 주변에서 에너지를 흡수하거나 방출하는 현상을 찾아 에너지의 흡수 방출이 우리 생활에 어떻게 이용되는지 토의할 수 있다.","10통과2-02-01":"생태계 구성요소를 이해하고 생물과 환경 사이의 상호 관계를 설명할 수 있다.","10통과2-02-02":"먹이 관계와 생태 피라미드를 중심으로 생태계 평형이 유지되는 과정을 이해하고, 환경의 변화가 생태계에 미칠 수 있는 영향에 대해 협력적으로 소통할 수 있다.","10통과2-02-03":"온실효과 강화로 인한 지구온난화의 메커니즘을 이해하고, 엘니뇨, 사막화 등과 같은 현상이 지구 환경과 인간 생활에 미치는 영향과 대처 방안을 분석할 수 있다.","10통과2-02-04":"태양에서 수소 핵융합 반응을 통해 질량 일부가 에너지로 바뀌고, 그중 일부가 지구에서 에너지 흐름을 일으키며 다양한 에너지로 전환되는 과정을 추론할 수 있다.","10통과2-02-05":"발전기에서 운동 에너지가 전기 에너지로 전환되는 과정을 이해하고, 열원으로서 화석 연료, 핵에너지를 이용하는 발전소가 인간 생활에 미치는 영향을 조사⋅발표할 수 있다.","10통과2-02-06":"에너지 효율의 의미와 중요성을 이해하고, 지속가능한 발전과 지구 환경 문제 해결에 신재생 에너지 기술을 활용하는 방안을 탐색할 수 있다.","10통과2-03-01":"감염병의 진단, 추적 등을 사례로 과학의 유용성을 설명하고, 미래 사회 문제 해결에서 과학의 필요성에 대해 논증할 수 있다.","10통과2-03-02":"빅데이터를 과학기술사회에서 사용하고 있는 사례를 조사하고, 빅데이터 활용의 장점과 문제점을 추론할 수 있다.","10통과2-03-03":"인공지능 로봇, 사물인터넷 등과 같이 과학기술의 발전을 인간 삶과 환경 개선에 활용하는 사례를 찾고, 이러한 과학기술의 발전이 미래 사회에 미치는 유용성과 한계를 예측할 수 있다.","10통과2-03-04":"과학기술의 발전 과정에서 발생할 수 있는 과학 관련 사회적 쟁점(SSI)과 과학기술 이용에서 과학 윤리의 중요성에 대해 논증할 수 있다.","12지구01-01":"해수의 물리적, 화학적 성질을 이해하고, 실측 자료를 활용하여 해수의 온도, 염분, 밀도, 용존 산소량 등의 분포를 분석⋅해석할 수 있다.","12지구01-02":"심층 순환의 발생 원리와 분포를 알고, 표층 순환 및 기후변화의 관련성을 추론할 수 있다.","12지구01-03":"중위도 저기압과 고기압이 통과할 때 날씨의 변화를 일기도, 위상 영상, 레이더 영상을 종합하여 예측할 수 있다.","12지구01-04":"태풍의 발생, 이동, 소멸 과정 및 태풍 영향권에서 날씨를 예측하고, 뇌우, 집중호우, 폭설, 강풍, 황사 등 주요 악기상의 생성 메커니즘과 대처 방안을 제시할 수 있다.","12지구01-05":"대기와 해양의 상호작용의 사례로서 해수의 용승과 침강, 엘니뇨-남방진동(ENSO)의 현상의 진행 과정 및 관련 현상을 설명할 수 있다.","12지구01-06":"기후변화의 원인을 자연적 요인과 인위적 요인으로 구분하여 설명하고, 인간 활동에 의한 기후변화 문제를 과학적으로 해결하는 방법을 탐색할 수 있다.","12지구02-01":"지층 형성의 선후 관계를 결정짓는 법칙들을 활용하여 상대 연령을 비교하고, 방사성 동위 원소를 이용한 광물의 절대 연령 자료로 암석의 절대 연령을 구할 수 있다.","12지구02-02":"지질시대를 기(紀) 수준에서 구분하고, 지층과 화석을 통해 지질시대의 생물과 환경 변화를 해석할 수 있다.","12지구02-03":"변동대에서 마그마가 생성되고, 그 조성에 따라 다양한 화성암이 생성됨을 설명할 수 있다.","12지구02-04":"변성작용의 종류와 지각 변동에 따른 구조를 변동대와 관련지어 설명하고, 지구시스템에서 암석이 순환함을 추론할 수 있다.","12지구02-05":"우리나라의 대표적인 지질공원의 지질학적 형성 과정을 추론하고, 지역사회와 함께하는 지질공원의 지속가능한 발전방안을 제안할 수 있다.","12지구03-01":"태양-지구-달 시스템에서의 식 현상을 이해하고 모형을 이용하여 태양계 행성의 겉보기 운동을 설명할 수 있다.","12지구03-02":"별의 분광형 결정 및 별의 분류 과정을 이해하고, 흑체복사 법칙을 이용하여 별의 물리량을 추론할 수 있다.","12지구03-03":"다양한 질량을 가진 별의 진화 과정을 H-R도에 나타내고 해석할 수 있다.","12지구03-04":"허블의 은하 분류 체계에 따른 은하의 특징을 비교하고 외부은하의 자료를 이용하여 특이 은하의 관측적 특징을 추론할 수 있다.","12지구03-05":"허블-르메트르 법칙으로 우주의 팽창을 이해하고 우주의 진화에 대한 다양한 설명 체계의 의의를 현대 우주론의 관점에서 비교할 수 있다.","12지시01-01":"지구의 탄생 이후 지구 대기, 원시 바다, 생명체 탄생 등의 과정을 통한 지구시스템 각 권역의 형성 과정을 추론할 수 있다.","12지시01-02":"지구시스템이 진화해온 역사에서 물, 탄소, 산소의 순환 과정을 통해 지권, 수권, 기권이 변화해 왔음을 추적할 수 있다.","12지시01-03":"판구조론의 발달사와 관련지어 판을 움직이는 맨틀의 상부 운동과 플룸에 의한 구조 운동을 구분할 수 있다.","12지시01-04":"암석의 순환 과정에서 화산 활동의 역할과 화산 활동으로 생성되는 암석의 특성을 추론할 수 있다.","12지시01-05":"지진파의 종류와 특성을 이해하고, 지진파를 이용하여 지구 내부구조를 알아내는 과정을 탐구할 수 있다.","12지시02-01":"에크만 수송과 관련지어 지형류의 발생 원리를 설명할 수 있다.","12지시02-02":"해파의 발생 과정을 이해하고, 천해파와 심해파의 차이점을 비교⋅설명할 수 있다.","12지시02-03":"해일이 발생하는 여러 가지 원인을 이해하고, 피해 사례와 대처 방안을 제안할 수 있다.","12지시02-04":"조석의 발생 과정을 이해하고 자료 해석을 통해 각 지역에서의 조석 양상을 설명할 수 있다.","12지시03-01":"대기를 구성하는 기체들이 선택적 흡수체임을 이해하고, 온실효과 및 태양 자외선 차단 효과, 물의 존재 등으로 지구 생명체 존재 조건을 추론할 수 있다.","12지시03-02":"지표와 대기의 열 출입과 관련된 물리 과정 및 전 지구 평균 열수지를 해석할 수 있다.","12지시03-03":"기온의 연직 분포와 대기의 안정도와의 관계를 이해하고, 단열변화를 통해 안개나 구름이 생성되는 과정 및 강수 과정을 분석할 수 있다.","12지시03-04":"기압의 연직 분포로 정역학적 균형을 이해하고, 대기 중 연직 운동의 발생 원인을 추론할 수 있다.","12지시03-05":"지균풍, 경도풍, 지상풍의 발생 원리와 관련된 힘의 작용을 설명할 수 있다.","12지시03-06":"행성파의 발달 과정을 이해하고, 지상 고⋅저기압 발달에서 편서풍 파동의 역할을 평가할 수 있다."},"levels":{"12지구01-01":{"act":["인공위성 및 ARGO 자료로 해수의 성질 비교하기"],"A":"해수의 물리적, 화학적 성질에 영향을 미치는 요인과 그 특징을 설명하고, T-S 다이어그램을 이용하여 밀도를 구하며, 인공위성 및 ARGO의 디지털 실측 자료를 수온, 염분, 밀도, 용존 산소량 분포를 나타내는 그래프로 변환하고 변환한 그래프를 해석하여 해수의 성질을 비교할 수 있다.","B":"해수의 물리적, 화학적 성질에 영향을 미치는 요인과 그 특징을 설명하고, T-S 다이어그램을 이용하여 밀도를 구하며, 인공위성 및 ARGO의 디지털 실측 자료를 수온, 염분, 밀도, 용존 산소량 분포를 나타내는 그래프로 변환할 수 있다.","C":"해수의 물리적, 화학적 성질에 영향을 미치는 요인과 그 특징을 설명하고, T-S 다이어그램을 이용하여 밀도를 구하며, 해수의 온도, 염분 분포 그래프를 해석할 수 있다.","D":"해수의 물리적, 화학적 성질에 영향을 미치는 요인을 제시하고, T-S 다이어그램을 이용하여 밀도를 구할 수 있다.","E":"해수의 밀도가 주로 수온과 염분의 영향을 받음을 말할 수 있다."},"12지구01-02":{"act":[],"A":"심층 순환의 발생 원리 및 심층 순환을 이루는 대표적인 수괴의 분포와 이동을 밀도 차와 관련지어 설명하고, 심층 순환과 표층 순환이 연결됨을 이해하여 해양 순환의 변화 양상과 기후변화의 관련성을 추론할 수 있다.","B":"심층 순환의 발생 원리 및 심층 순환을 이루는 대표적인 수괴의 분포와 이동을 밀도 차와 관련지어 설명하고, 심층 순환과 표층 순환이 연결되어 해수가 순환함을 말할 수 있다.","C":"심층 순환의 발생 원리와 대표적인 침강 해역에서의 해수의 물리적 특성을 설명하고, 심층 순환과 표층 순환이 연결되어 해수가 순환함을 말할 수 있다.","D":"심층 순환이 밀도 차에 의해 발생함과 심층 순환과 표층 순환이 연결되어 해수가 순환하고 있음을 말할 수 있다.","E":"심층 순환이 밀도 차에 의해 발생함을 말할 수 있다."},"12지구01-03":{"act":["일기도와 위성 및 레이더 영상 등을 이용하여 기압계와 연관된 과거 날씨 분석하기"],"A":"중위도 저기압을 종관 규모와 중규모의 저기압으로 구분하여 설명하고, 중위도 저기압과 고기압이 통과할 때 기상 요소의 변화를 우리나라 주변의 일기도, 위성 영상, 레이더 영상을 종합적으로 해석하여 예측하며, 날씨를 예측할 수 있는 과학의 유용성을 인식한다.","B":"중위도 저기압을 종관 규모와 중규모의 저기압으로 구분하여 설명하고, 중위도 저기압과 고기압이 통과할 때 기상 요소의 변화를 일기도, 위성 영상, 레이더 영상을 종합적으로 해석하여 설명할 수 있다.","C":"중위도 저기압을 종관 규모와 중규모의 저기압으로 구분하고, 중위도 저기압과 고기압이 통과할 때 기상 요소의 변화를 일기도에서 설명할 수 있다.","D":"우리나라 주변의 일기도에서 중위도 저기압과 고기압을 찾고, 주변 날씨를 말할 수 있다.","E":"우리나라 주변의 일기도에서 중위도 저기압을 찾고, 주변 날씨를 말할 수 있다."},"12지구01-04":{"act":[],"A":"태풍의 발생, 이동, 소멸 과정을 설명하고 태풍 영향권에서의 날씨 변화를 예측하며, 주요 악기상의 특징, 피해 사례, 생성 메커니즘에 대한 이해를 바탕으로 악기상의 피해를 최소화하기 위한 과학적 대처 방안을 제시할 수 있다.","B":"태풍의 발생 조건을 제시하고 태풍 영향권에서의 날씨 변화를 예측하며, 주요 악기상의 특징과 피해 사례에 대한 이해를 바탕으로 악기상의 피해를 최소화하기 위한 사회적 관리의 중요성을 인식한다.","C":"태풍 영향권에서의 날씨 변화를 예측하고, 주요 악기상의 특징과 피해 사례에 대한 이해를 바탕으로 악기상의 피해를 최소화하기 위한 사회적 관리의 중요성을 인식한다.","D":"태풍 영향권에서의 날씨 변화를 예측하고, 주요 악기상을 구분하며, 악기상으로 인한 피해의 심각성을 인식한다.","E":"우리나라에 나타나는 주요 악기상의 종류를 제시하고, 악기상으로 인한 피해의 심각성을 인식한다."},"12지구01-05":{"act":[],"A":"해수의 용승과 침강, 엘니뇨-남방진동(ENSO)의 발생 및 진행 과정과 이와 관련되어 나타나는 현상을 대기와 해양의 상호작용의 관점에서 설명하고, 전 지구 규모의 빅데이터를 활용하여 엘니뇨-남방진동(ENSO)이 기후 시스템의 주기적인 변동성과 우리 생활에 미치는 영향을 조사하고, 이 과정에서 빅데이터를 활용한 과학 연구의 유용성을 인식한다.","B":"해수의 용승과 침강, 엘니뇨-남방진동(ENSO)의 발생 및 진행 과정과 이와 관련되어 나타나는 현상을 대기와 해양의 상호작용의 관점에서 설명하고, 전 지구 규모의 빅데이터를 활용하여 엘니뇨-남방진동(ENSO)이 우리 생활에 미치는 영향을 조사하고, 이 과정에서 빅데이터를 활용한 과학 연구의 유용성을 인식한다.","C":"대기와 해양의 상호작용의 관점에서 해수의 용승과 침강, 엘니뇨와 라니냐가 발생했을 때 나타나는 날씨 변화를 설명하고, 전 지구 규모의 빅데이터를 활용하여 엘니뇨와 라니냐가 우리 생활에 미치는 영향을 조사하고, 이 과정에서 빅데이터를 활용한 과학 연구의 유용성을 인식한다.","D":"대기와 해양의 상호작용으로 해수의 용승과 침강이 나타남을 알고, 용승과 침강 지역의 날씨를 추론하며, 전 지구 규모의 빅데이터를 활용하여 엘니뇨와 라니냐가 우리 생활에 미치는 영향을 조사할 수 있다는 사실에 호기심을 가진다.","E":"대기와 해양의 상호작용으로 해수의 용승과 침강이 나타남을 알고, 엘니뇨와 라니냐가 우리 생활에 영향을 미친다는 사실에 호기심을 가진다."},"12지구01-06":{"act":["기후변화의 원인을 설명하는 다양한 가설 추론하기"],"A":"기후변화의 원인을 설명하는 다양한 가설을 추론하고, 기후변화의 원인을 자연적 요인과 인위적 요인으로 구분하여 설명하며, 인간 활동에 의한 기후변화 문제를 과학적으로 해결하는 방안을 제시할 수 있다.","B":"기후변화의 원인을 자연적 요인과 인위적 요인으로 구분하여 설명하고, 인간 활동에 의한 기후변화 문제를 과학적으로 해결하는 방안을 제시할 수 있다.","C":"기후변화의 인위적 요인을 설명하고, 인간 활동에 의한 기후변화 문제를 해결하기 위한 과학기술의 역할을 인식한다.","D":"기후변화의 원인을 자연적 요인과 인위적 요인으로 구분하고, 기후변화 문제의 심각성을 인식한다.","E":"기후변화의 원인이 자연적 요인과 인위적 요인으로 구분됨을 알고, 기후변화 문제의 심각성을 인식한다."},"12지구02-01":{"act":["지질단면도에서 층서 대비하기"],"A":"동일과정의 원리를 바탕으로 지사학의 법칙들을 활용하여 지질단면도에서 지층의 상대 연령을 비교하고 층서를 대비하여 지층에 기록된 지구의 역사를 설명하고, 광물에 포함된 방사성 동위 원소를 이용하여 암석의 절대 연령을 구할 수 있다.","B":"동일과정의 원리를 이해하고, 지사학의 법칙들을 활용하여 지질단면도에서 지층의 상대 연령을 비교하고 층서를 대비하며, 광물에 포함된 방사성 동위 원소를 이용하여 암석의 절대 연령을 구할 수 있다.","C":"지사학의 법칙들을 활용하여 지질단면도에서 지층의 상대 연령을 비교하고, 암석의 절대 연령을 구하기 위해 방사성 동위 원소가 이용됨을 말할 수 있다.","D":"지사학의 법칙들을 활용하여 지질단면도에서 지층의 상대 연령을 비교하고, 이를 지층의 절대 연령과 구분할 수 있다.","E":"지층의 나이를 결정하는 상대 연령과 절대 연령을 구분할 수 있다."},"12지구02-02":{"act":["고기후 연구 방법 비교ㆍ평가하기","한반도에서 산출되는 화석 분포 지도 그리기"],"A":"표준 화석을 통해 지질시대를 기 수준에서 구분하고, 지층의 퇴적 구조, 화석, 고기후 연구 방법에 대한 이해를 바탕으로 지질시대의 생물과 환경 변화를 해석하며, 한반도의 화석 분포를 지도에 표현하는 탐구를 통해 한반도의 지질학적 가치를 인식한다.","B":"표준 화석을 통해 지질시대를 기 수준에서 구분하고, 지층의 퇴적 구조와 화석을 통해 지질시대의 생물과 환경 변화를 해석하며, 한반도의 화석 분포를 지도에 표현하는 탐구를 통해 한반도의 지질학적 가치를 인식한다.","C":"지질시대를 대 수준에서 구분하고, 지층의 퇴적 구조와 화석을 통해 지질시대의 생물과 환경 변화를 해석하며, 한반도의 화석 분포를 지도에 표현하는 탐구를 통해 우리 주변에 분포하는 다양한 화석에 흥미를 가진다.","D":"지층의 퇴적 구조와 화석을 통해 지질시대의 생물과 환경이 변화했음을 말하고, 한반도의 화석 분포를 지도에 표현하는 탐구를 통해 우리 주변에 분포하는 다양한 화석에 흥미를 가진다.","E":"지층과 화석을 통해 지질시대의 생물과 환경이 변화했음을 알고, 안내된 절차에 따라 한반도의 화석 분포를 지도에 표현할 수 있다."},"12지구02-03":{"act":[],"A":"변동대에서 마그마가 생성되는 과정과 마그마의 조성에 따라 다양한 화성암이 생성됨을 이해하고, 화성암에 나타나는 다양한 지질 구조의 형성 과정을 설명하며, 이를 한반도에 나타나는 대표적인 화성암 지형과 관련지을 수 있다.","B":"변동대에서 마그마가 생성되는 과정과 마그마의 조성에 따라 다양한 화성암이 생성됨을 이해하고, 화성암에 나타나는 다양한 지질 구조의 형성 과정을 설명할 수 있다.","C":"변동대에서 마그마의 조성에 따라 다양한 화성암이 생성됨을 알고, 화성암에 나타나는 다양한 지질 구조를 구분할 수 있다.","D":"변동대에서 다양한 화성암이 생성됨을 알고, 화성암에 나타나는 다양한 지질 구조를 제시할 수 있다.","E":"변동대에서 다양한 화성암이 생성됨을 말할 수 있다."},"12지구02-04":{"act":[],"A":"변성작용의 종류와 지각 변동에 따라 나타나는 지질 구조의 생성 과정과 특징을 변동대와 관련지어 설명하고, 지구시스템에서 다양한 사례를 통해 암석이 순환함을 추론할 수 있다.","B":"변동대에서 나타나는 변성작용의 종류를 구분하고, 지각 변동에 따라 나타나는 지질 구조의 생성 과정을 변동대와 관련지으며, 지구시스템에서 암석이 순환함을 설명할 수 있다.","C":"변동대에서 나타나는 변성작용의 종류를 나열하고, 지각 변동에 따라 나타나는 지질 구조를 구분하며, 암석이 순환함을 말할 수 있다.","D":"변동대에서 변성작용이 일어남을 알고, 습곡과 단층을 구분하며, 암석이 순환함을 말할 수 있다.","E":"변동대에서 변성작용이 일어남과 암석이 순환함을 말할 수 있다."},"12지구02-05":{"act":["한반도 지질 명소(국가지질공원)에서 관찰 가능한 암석과 지질 구조 탐구하기"],"A":"우리나라의 대표적인 지질공원에서 관찰 가능한 암석과 지질 구조의 특징을 탐구하여 지질학적 형성 과정을 종합적으로 추론하고, 이 과정에서 지질공원의 경이로움을 인식하여 지질공원이 지역사회와 함께 지속가능하게 발전하기 위한 방안을 제안할 수 있다.","B":"우리나라의 대표적인 지질공원에서 관찰 가능한 암석과 지질 구조의 특징을 탐구하여 지질학적 형성 과정을 추론하고, 이 과정에서 지질공원의 경이로움을 인식하여 지질공원이 지역사회와 함께 지속가능하게 발전하기 위한 방안을 제안할 수 있다.","C":"우리나라의 대표적인 지질공원에서 관찰 가능한 암석과 지질 구조의 특징을 설명하고, 지질공원의 소중함을 인식한다.","D":"우리나라의 대표적인 지질공원에 나타나는 지질 구조를 구분하고, 지질공원의 소중함을 인식한다.","E":"지질공원에 지질 구조가 나타남을 알고, 지질공원에 관심을 가진다."},"12지구03-01":{"act":["천체 관측 프로그램으로 행성의 운동과 식 현상 시뮬레이션하기"],"A":"태양계 모형을 이용하여 내행성과 외행성의 겉보기 운동을 설명하고, 태양-지구-달 시스템에서의 행성의 겉보기 운동과 식 현상에 대한 이해를 바탕으로 행성의 운동 및 다양한 일식과 월식을 천체 관측 프로그램으로 시뮬레이션하며, 다양한 천문 현상의 경이로움을 인식한다.","B":"태양계 모형을 이용하여 내행성과 외행성의 겉보기 운동을 설명하고, 태양-지구-달 시스템에서의 행성의 겉보기 운동과 식 현상에 대한 이해를 바탕으로 행성의 운동 및 일식과 월식을 천체 관측 프로그램으로 시뮬레이션하며, 다양한 천문 현상의 경이로움을 인식한다.","C":"태양계 모형을 바탕으로 내행성과 외행성의 겉보기 운동이 다르게 나타남을 알고, 일식과 월식을 구분하며, 천체 관측 프로그램에서 식 현상을 시뮬레이션하고, 다양한 천문 현상에 관심을 가진다.","D":"일식과 월식을 구분하고, 천체 관측 프로그램에서 시뮬레이션된 행성의 운동과 식 현상을 관측하며, 다양한 천문 현상에 관심을 가진다.","E":"천체 관측 프로그램에서 시뮬레이션된 식 현상을 관측하고, 식 현상에 관심을 가진다."},"12지구03-02":{"act":["별의 분광형과 광도 자료를 분석하여 H-R도 작성하기"],"A":"스펙트럼 분석을 통한 별의 분광형 결정 및 별의 분류 과정을 설명하고, 별의 분광형과 광도 자료로 H-R도를 작성하여 별을 분류하며, 질량이 서로 다른 주계열성의 진화 과정에서의 물리량 변화를 흑체복사 법칙을 이용하여 해석할 수 있다.","B":"스펙트럼 분석을 통한 별의 분광형 결정 및 별의 분류 과정을 설명하고, 별의 분광형과 광도 자료로 H-R도를 작성하여 별을 분류하며, 질량이 서로 다른 주계열성의 진화 과정에서의 물리량 변화를 해석할 수 있다.","C":"스펙트럼 분석을 통해 별의 표면 온도를 추정하고, 별의 분광형과 광도 자료를 H-R도에 나타내어 물리량을 설명할 수 있다.","D":"별의 표면 온도에 따라 스펙트럼이 다양하게 나타남을 알고, 별의 분광형과 광도 자료를 H-R도에 나타낼 수 있다.","E":"별의 표면 온도에 따라 스펙트럼이 다양하게 나타남을 말할 수 있다."},"12지구03-03":{"act":[],"A":"다양한 질량을 가진 별의 진화 과정을 H-R도에 나타내고, 각각의 진화 과정에서 핵융합에 의한 에너지 생성과 내부구조의 차이를 설명하며, 별들의 진화 과정을 통해 인간을 이루는 원소의 근원을 인식하여 자연과 과학에 대한 감수성을 가진다.","B":"다양한 질량을 가진 별의 진화 과정을 H-R도에서 구별하고, 태양과 비슷한 질량을 가진 별의 진화 과정에서 핵융합에 의한 에너지 생성과 내부구조를 설명하며, 별들의 진화 과정을 통해 인간을 이루는 원소의 근원을 인식하여 자연과 과학에 대한 감수성을 가진다.","C":"다양한 질량을 가진 별의 진화 과정을 H-R도에서 구별하고, 태양과 비슷한 질량을 가진 별의 진화 과정을 설명하며, 별들의 진화 과정을 통해 인간을 이루는 원소의 근원을 인식하고 자연과 과학에 대한 감수성을 가진다.","D":"별의 진화 과정이 질량에 따라 다름을 알고, 태양과 비슷한 질량을 가진 별의 진화 과정을 H-R도에 나타내며, 별의 진화에 관심을 가진다.","E":"별의 진화 과정이 질량에 따라 다름을 알고, 별의 진화에 관심을 가진다."},"12지구03-04":{"act":["빅데이터와 인공지능을 이용하여 은하 분류하기"],"A":"빅데이터와 인공지능을 이용하여 허블의 은하 분류 체계에 따라 은하를 분류하고, 은하의 유형과 특징을 비교하며, 다양한 파장으로 관측한 외부은하의 자료를 이용하여 특이 은하의 관측적 특징을 추론할 수 있다.","B":"인공지능을 이용하여 허블의 은하 분류 체계에 따라 은하를 분류하고, 은하의 유형과 특징을 비교하며, 다양한 파장으로 관측한 외부은하의 자료를 이용하여 특이 은하를 구분할 수 있다.","C":"인공지능을 이용하여 허블의 은하 분류 체계에 따라 은하를 분류하고, 다양한 파장으로 관측한 외부은하의 자료를 통해 특이 은하가 존재함을 파악할 수 있다.","D":"인공지능을 이용하여 허블의 은하 분류 체계에 따라 은하를 분류할 수 있다.","E":"허블의 은하 분류 체계가 형태에 따른 분류임을 말할 수 있다."},"12지구03-05":{"act":[],"A":"허블-르메트르 법칙으로 우주의 팽창을 설명하고, 관측적 증거를 바탕으로 현대 우주론이 정립되기까지의 과정을 추론하고, 우주의 진화에 대한 다양한 설명 체계의 의의를 정적 우주, 팽창 우주, 급팽창, 가속 팽창의 개념을 활용하여 설명하며, 우주론과 관련된 과학 지식이 누적적, 점진적으로 변화하여 발전함을 설명할 수 있다.","B":"허블-르메트르 법칙으로 우주의 팽창을 설명하고, 관측적 증거를 바탕으로 현대 우주론이 정립되기까지의 과정을 추론하여 우주의 진화에 대한 다양한 설명 체계를 비교할 수 있다.","C":"허블-르메트르 법칙으로 우주의 팽창을 설명하고, 관측적 증거를 바탕으로 현대 우주론이 정립되기까지의 과정을 설명할 수 있다.","D":"우주 팽창의 증거로 허블-르메트르 법칙을 제시하고, 우주의 진화에 대한 다양한 설명 체계를 나열할 수 있다.","E":"우주 팽창의 증거로 허블-르메트르 법칙을 제시할 수 있다."},"12지시01-01":{"act":["지구가 역동적 행성으로 진화한 이유를 다른 고체 행성의 진화 과정과 비교하기"],"A":"태양계의 형성 과정을 물리적 과정을 포함하여 설명하고, 지구의 탄생 이후 지구 대기, 원시 바다, 생명체 탄생 등의 과정을 통해 지구시스템의 각 권역이 형성되는 과정을 추론하며, 지구가 역동적 행성으로 진화한 이유를 다른 고체 행성의 진화 과정과 비교하여 설명할 수 있다.","B":"태양계의 형성 과정을 순서대로 배열하고, 지구의 탄생 이후 지구 대기, 원시 바다, 생명체 탄생 등의 과정을 통해 지구시스템의 각 권역이 형성되는 과정을 추론하며, 지구와 다른 고체 행성의 진화 과정을 비교할 수 있다.","C":"태양계가 성운으로부터 형성되었음을 알고, 지구의 탄생 이후 지구 대기, 원시 바다, 생명체 탄생 등의 과정을 통해 지구시스템의 각 권역이 형성되는 과정을 설명할 수 있다.","D":"지구의 탄생 이후 지구시스템의 각 권역이 형성되었음을 알고, 지구의 진화 과정에서 지구 대기, 원시 바다, 생명체 탄생의 순서를 배열할 수 있다.","E":"지구의 탄생 이후 지구시스템의 각 권역이 형성되었음을 말할 수 있다."},"12지시01-02":{"act":[],"A":"지구시스템이 진화해 온 역사에서 지권, 수권, 기권이 변화해 왔음을, 물의 순환은 풍화·침식·퇴적 작용과 지형 형성, 탄소의 순환은 얼음덩어리 지구와 석회암의 퇴적, 산소의 순환은 남세균과 호상철광층 형성의 예를 통해 추적하고, 생명과 행성이 상호작용하며 공진화한 지구 환경과 생명의 소중함과 경이로움을 인식한다.","B":"지구시스템이 진화해 온 역사에서 지권, 수권, 기권이 변화해 왔음을 물의 순환과 지형 형성, 탄소의 순환과 석회암의 퇴적, 산소의 순환과 호상철광층 형성의 예로 설명하고, 생명과 행성이 상호작용하며 공진화한 지구 환경과 생명의 소중함과 경이로움을 인식한다.","C":"지구시스템에서 나타나는 물, 탄소, 산소 순환의 예로 물에 의한 지형 형성, 석회암의 퇴적, 호상철광층의 형성을 제시하고, 물질 순환을 통해 변화하는 지구 환경 및 이와 함께 진화해 온 생명의 소중함을 인식한다.","D":"지구시스템에서 나타나는 물, 탄소, 산소 순환 과정을 구분하고, 물질 순환을 통해 변화하는 지구 환경의 역동성에 관심을 가진다.","E":"지구시스템은 물질 순환을 통해 변화해 왔음을 말하고, 지구 환경의 변화에 관심을 가진다."},"12지시01-03":{"act":["관측 기기의 발달과 관련지어 판구조론 정립의 역사 추적하기"],"A":"관측 기기의 발달과 관련지어 판구조론 정립 역사를 추적하고, 판을 움직이는 맨틀의 상부 운동과 플룸에 의한 구조 운동을 구분하며, 빅데이터와 시뮬레이션 등을 통한 지구시스템 차원의 지질 현상 연구의 중요성을 인식한다.","B":"판구조론 정립 과정을 순서대로 배열하고, 판을 움직이는 맨틀의 상부 운동과 플룸에 의한 구조 운동을 구분하며, 빅데이터와 시뮬레이션 등을 통한 지구시스템 차원에서의 지질 현상 연구의 중요성을 인식한다.","C":"판을 움직이는 맨틀의 상부 운동과 플룸에 의한 구조 운동을 구분하고, 지구시스템 차원에서의 지질 현상 연구의 중요성을 인식한다.","D":"판의 운동과 플룸 운동과 다양한 지질 현상을 관련짓고, 지질 현상 연구의 중요성을 인식한다.","E":"판의 운동과 플룸 운동에 의해 지질 현상이 나타남을 말할 수 있다."},"12지시01-04":{"act":["편광현미경으로 화산암과 심성암의 조직 비교ㆍ관찰하기"],"A":"암석의 순환 과정에서 화산 활동의 역할을 설명하고, 화산암과 심성암에서 나타나는 조직을 편광현미경으로 비교ㆍ관찰하여 암석의 특성을 추론하며, 마그마의 특성에 따라 화산체의 형태가 순상화산과 성층화산으로 구분됨과 화산에서 분출하는 물질의 차이를 설명할 수 있다.","B":"화산암과 심성암에서 나타나는 조직을 편광현미경으로 비교ㆍ관찰하여 암석의 특성을 추론하고, 마그마의 특성에 따라 화산체의 형태가 순상화산과 성층화산으로 구분됨과 화산에서 분출하는 물질의 차이를 설명할 수 있다.","C":"편광현미경으로 관찰한 화산암과 심성암에서 나타나는 조직을 비교하고, 마그마의 특성에 따라 화산체의 형태가 순상화산과 성층화산으로 구분됨을 설명할 수 있다.","D":"편광현미경으로 관찰한 화산암과 심성암의 조직을 구분하고, 화산체의 형태를 순상화산과 성층화산으로 구분할 수 있다.","E":"안내된 절차에 따라 편광현미경으로 화산암과 심성암의 조직을 관찰한다."},"12지시01-05":{"act":["한반도 지진의 분포 특성과 지진 발생 가능성 예측하기","지진파 자료를 활용하여 지각의 두께 구하기"],"A":"지진파의 종류와 특성에 대한 이해를 바탕으로 지진파를 이용하여 지구 내부구조를 알아내는 과정을 설명하고, 지진파 자료를 활용하여 지각의 두께를 구하며, 지진 분포 자료를 통해 한반도 지진 발생 가능성을 예측하고, 이 과정에서 지진 연구의 유용성을 인식한다.","B":"지진파의 종류와 특성에 대한 이해를 바탕으로 지진파를 이용하여 지구 내부구조를 알아내는 과정을 설명하고, 지진 분포 자료를 통해 한반도 지진 발생 가능성을 예측하고, 이 과정에서 지진 연구의 유용성을 인식한다.","C":"지진파를 이용하여 지구 내부구조를 알아낼 수 있음을 알고, 지진파의 종류와 특성을 구분하며, 한반도 지진 분포 자료에서 분포 특성을 파악할 수 있다.","D":"지진파를 이용하여 지구 내부구조를 알아낼 수 있음을 알고, 한반도 지진 분포 자료에서 분포 특성을 파악할 수 있다.","E":"지진파를 이용하여 지구 내부구조를 알아낼 수 있음을 말할 수 있다."},"12지시02-01":{"act":[],"A":"지형류가 흐르는 방향과 발생 원리를 에크만 수송과 관련지어 설명하고, 지형류에서 수압 경도력, 전향력 등 해수를 움직이는 힘과 정역학 평형을 정량적으로 설명할 수 있다.","B":"지형류가 흐르는 방향과 발생 원리를 에크만 수송과 관련지어 설명하고, 지형류에서 수압 경도력, 전향력 등 해수를 움직이는 힘을 정량적으로 설명할 수 있다.","C":"에크만 수송의 방향과 이로 인해 흐르는 지형류의 방향을 제시하고, 수압 경도력과 전향력에 의해 지형류가 형성됨을 설명할 수 있다.","D":"바람에 의해 에크만 수송이 일어나고 이로 인해 지형류가 형성됨을 말할 수 있다.","E":"바람에 의해 에크만 수송이 일어남을 말할 수 있다."},"12지시02-02":{"act":["해파 발생 및 전파 실험하기"],"A":"해파는 해수면의 주기적인 상하 운동으로 에너지를 전파하는 현상임을 알고, 파의 모양에 따라 해파를 풍랑과 너울로 구분하며, 천해파, 전이파, 심해파의 차이점을 비교하여 설명하고, 파장과 수심의 관계를 고려하여 천해파와 심해파를 발생시키는 실험을 설계하고 수행할 수 있다.","B":"해파는 해수면의 주기적인 상하 운동으로 에너지를 전파하는 현상임을 알고, 파의 모양에 따라 해파를 풍랑과 너울로 구분하며, 파장과 수심의 관계에 따라 해파를 천해파, 전이파, 심해파로 분류하고, 천해파와 심해파를 발생시키는 실험을 수행할 수 있다.","C":"해파는 해수면의 주기적인 상하 운동으로 에너지를 전파하는 현상임을 알고, 해파의 발생 및 전파 실험에서 파의 모양을 관찰하여 풍랑, 너울과 관련지으며, 파장과 수심의 관계에 따라 해파를 천해파와 심해파로 분류할 수 있다.","D":"해파는 해수면의 주기적인 상하 운동임을 알고, 해파의 발생 및 전파 실험에서 파의 모양을 관찰하며, 파장과 수심의 관계에 따라 해파를 천해파와 심해파로 분류할 수 있다.","E":"해파는 해수면의 주기적인 상하 운동임을 알고, 해파의 발생 및 전파 실험에서 파의 모양을 관찰할 수 있다."},"12지시02-03":{"act":[],"A":"해일을 발생 원인에 따라 폭풍 해일과 지진 해일로 구분하여 설명하고, 해일 발생 당시의 기압, 만조 시기, 해안 및 해저 지형에 따른 피해 사례를 조사하여 발표하며, 해일 피해에 대한 과학적 대처 방안을 제안할 수 있다.","B":"해일을 발생 원인에 따라 폭풍 해일과 지진 해일로 구분하여 설명하고, 해일의 피해가 달라질 수 있는 원인으로 기압, 만조 시기, 해안 및 해저 지형을 제시하며, 해일의 피해 사례와 대처 방안을 조사하여 발표할 수 있다.","C":"해일을 발생 원인에 따라 폭풍 해일과 지진 해일로 구분하고, 해일의 피해 사례와 대처 방안을 조사하여 발표할 수 있다.","D":"해일로 인한 피해 사례로부터 재해ㆍ재난 관리의 중요성을 인식하고, 해일 대처 방안을 제시할 수 있다.","E":"해일로 인한 피해 사례로부터 재해ㆍ재난 관리의 중요성을 인식한다."},"12지시02-04":{"act":["실시간 자료를 이용한 조석 현상의 패턴 추론하기"],"A":"기조력으로 조석이 발생하는 과정을 이해하고, 달에 의한 기조력과 태양에 의한 기조력의 크기를 비교·설명하며, 전 지구 규모의 빅데이터와 시뮬레이션을 통해 각 지역에서의 조석 양상의 차이점과 조석 현상의 패턴을 추론할 수 있다.","B":"기조력으로 조석이 발생하는 과정을 이해하고, 달에 의한 기조력과 태양에 의한 기조력의 크기를 비교·설명하며, 전 지구 규모의 빅데이터와 시뮬레이션을 통해 각 지역에서의 조석 양상을 설명할 수 있다.","C":"기조력으로 조석이 발생하는 과정을 이해하고, 달에 의한 기조력이 태양에 의한 기조력보다 크다는 것을 제시하며, 전 지구 규모의 빅데이터와 시뮬레이션을 통해 각 지역에서의 조석 양상이 다름을 파악할 수 있다.","D":"기조력으로 조석이 발생함을 알고, 해수면 높이 변화 자료에서 조석 주기와 조차를 구할 수 있다.","E":"기조력으로 조석이 발생함을 말할 수 있다."},"12지시03-01":{"act":[],"A":"지구 대기를 구성하는 기체들이 태양 복사 에너지와 지구 복사 에너지를 파장에 따라 선택적으로 흡수하는 과정을 설명하고, 온실효과, 태양 자외선 차단 효과, 물의 존재 등을 근거로 지구 생명체 존재 조건을 추론하며, 이 과정에서 생명가능지대에 위치한 지구의 경이로움을 인식한다.","B":"지구 복사 에너지와 태양 복사 에너지 파장별 에너지 분포 차이와 대기를 구성하는 기체들이 선택적 흡수체임을 알고, 온실효과, 태양 자외선 차단 효과, 물의 존재 등을 근거로 생명체가 발생하고 존재할 수 있는 환경으로서 지구의 경이로움을 인식한다.","C":"대기를 구성하는 기체들이 파장에 따라 복사 에너지 흡수율이 다름을 알고, 지구 생명체 존재 조건으로 온실효과, 태양 자외선 차단 효과, 물의 존재 등을 제시하며, 생명체가 존재할 수 있는 지구 환경의 경이로움을 인식한다.","D":"지구 생명체 존재 조건으로 지구 대기의 온실효과, 태양 자외선 차단 효과, 물의 존재 등을 제시하고, 생명체가 존재할 수 있는 지구 환경의 경이로움을 인식한다.","E":"지구에 물이 존재함으로써 지구 생명체가 존재할 수 있음을 말하고, 생명체가 존재하는 지구의 경이로움을 인식한다."},"12지시03-02":{"act":[],"A":"지표와 대기의 열 출입을 물리 과정을 바탕으로 설명하고, 전 지구의 평균 열수지를 해석하여 복사 평형 상태를 이룸과 잠열의 효과가 가장 큼을 파악하며, 시뮬레이션 등의 활동을 통해 지구 열수지와 지구온난화의 관련성을 추론할 수 있다.","B":"지표와 대기의 열 출입과 관련된 물리 과정을 설명하고, 전 지구의 평균 열수지를 해석하여 복사 평형 상태를 이룸과 잠열의 효과가 가장 큼을 파악하며, 시뮬레이션 등의 활동을 통해 지구온난화로 인해 지구 열수지가 변화할 수 있음을 추론할 수 있다.","C":"지표와 대기의 열 출입과 관련된 물리 과정을 구분하고, 전 지구의 평균 열수지를 해석하여 복사 평형 상태를 이룸을 파악할 수 있다.","D":"지표와 대기에서 출입하는 열의 총량을 비교하여 전 지구의 평균 열수지가 복사 평형 상태임을 파악할 수 있다.","E":"전 지구의 평균 열수지가 복사 평형 상태임을 말할 수 있다."},"12지시03-03":{"act":["단열선도를 이용하여 대기 안정도 해석하기"],"A":"단열선도를 이용하여 대기 안정도를 해석하고 상승 응결 고도를 찾으며, 단열변화를 통해 여러 유형의 안개나 구름이 생성되는 과정을 분석하고, 빙정설과 병합설을 설명할 수 있다.","B":"단열선도를 이용하여 대기의 안정도를 해석하고 상승 응결 고도를 찾으며, 단열변화를 통해 생성될 수 있는 구름의 유형을 추론할 수 있다.","C":"단열변화에서 기온과 습도의 변화를 이해하고, 단열선도를 이용하여 대기의 안정도를 해석하고 상승 응결 고도를 찾을 수 있다.","D":"단열변화에서 기온과 습도의 변화를 이해하고, 기온의 연직 분포와 단열 감률을 비교하여 대기의 안정도를 판단할 수 있다.","E":"기온 감률과 단열 감률을 비교하여 대기의 안정도를 판단할 수 있다."},"12지시03-04":{"act":["회전원판을 이용한 전향 효과 실험하기"],"A":"기압의 연직 분포로 정역학 평형 상태를 설명하고, 대기의 운동에 영향을 미치는 여러 가지 힘의 방향을 찾고 크기를 구하며, 변인을 고려하여 회전원판을 이용한 전향 효과 실험을 설계·수행하고, 대기의 연직 운동을 발생시키는 원인을 추론할 수 있다.","B":"기압의 연직 분포로 정역학 평형 상태를 설명하고, 대기의 운동에 영향을 미치는 여러 가지 힘의 방향을 찾고 크기를 구하며, 변인을 고려하여 회전원판을 이용한 전향 효과 실험을 설계·수행할 수 있다.","C":"기압의 연직 분포로 정역학 평형 상태를 설명하고, 대기의 운동에 영향을 미치는 여러 가지 힘의 방향을 찾으며, 회전원판을 이용한 전향 효과 실험을 안내된 절차에 따라 수행할 수 있다.","D":"대기는 정역학 평형 상태임을 알고, 대기의 운동에 영향을 미치는 힘의 명칭을 제시하며, 회전원판을 이용한 전향 효과 실험을 안내된 절차에 따라 수행할 수 있다.","E":"대기는 정역학 평형 상태임을 알고, 회전원판을 이용한 전향 효과 실험에 참여하여 결과를 기록할 수 있다."},"12지시03-05":{"act":[],"A":"지균풍, 경도풍, 지상풍의 발생 원리와 관련된 힘의 작용을 힘의 평형과 관련지어 설명하고, 상층 및 지상 일기도에서 각 바람의 풍향과 풍속을 추론할 수 있다.","B":"지균풍, 경도풍, 지상풍의 발생 원리와 관련된 힘의 작용을 힘의 평형과 관련지어 설명할 수 있다.","C":"지균풍, 경도풍, 지상풍을 상층 또는 지상에서 부는 바람으로 구분하고, 지상풍 중 등압선이 직선일 때 작용하는 힘의 종류를 관련지을 수 있다.","D":"상층과 지상에서 부는 바람의 차이점을 마찰력의 작용 여부로 설명하고, 지균풍, 경도풍, 지상풍을 상층 또는 지상에서 부는 바람으로 구분할 수 있다.","E":"지상과 상층에 부는 바람의 종류가 마찰력의 작용 여부에 따라 다름을 말할 수 있다."},"12지시03-06":{"act":["편서풍 파동 및 제트류와 관련지어 상층 일기도 해석하기","행성파 시뮬레이션 실험하기"],"A":"대기 대순환과 태양 상수를 이해하고, 행성파 시뮬레이션을 통해 행성파의 발달 과정 및 영향을 설명하며, 상층 일기도를 편서풍 파동과 제트류와 관련지어 해석하고 지상 고ㆍ저기압 발달에서 편서풍 파동의 역할을 시스템적으로 평가할 수 있다.","B":"대기 대순환과 태양 상수를 이해하고, 행성파 시뮬레이션을 통해 행성파의 발달 과정 및 영향을 설명하며, 지상 고ㆍ저기압 발달에서 편서풍 파동의 역할을 설명할 수 있다.","C":"대기 대순환과 태양 상수를 이해하고, 행성파의 발달 과정을 순서대로 배열하며, 편서풍 파동과 지상 고ㆍ저기압 발달의 관련성에 대하여 설명할 수 있다.","D":"행성파의 발달 과정을 순서대로 배열하고, 편서풍 파동이 지상의 고ㆍ저기압 발달과 관련되어 있음을 말할 수 있다.","E":"편서풍 파동이 지상의 고ㆍ저기압의 발달에 영향을 미침을 말할 수 있다."}}}</script>
+<script>
+(async () => {
+"use strict";
+const modules = Object.create(null);
+modules["./constants.js"] = ( () => {
+const SUBJ = {
+  is1: "통합과학1",
+  is2: "통합과학2",
+  es: "지구과학",
+  ess: "지구시스템과학",
+};
+
+const SUBJ_ORDER = ["is1", "is2", "es", "ess"];
+
+const UNITS = {
+  is1: [["01", "과학의 기초"], ["02", "물질과 규칙성"], ["03", "시스템과 상호작용"]],
+  is2: [["01", "변화와 다양성"], ["02", "환경과 에너지"], ["03", "과학과 미래 사회"]],
+  es: [["01", "대기와 해양의 상호작용"], ["02", "지구의 역사와 한반도의 암석"], ["03", "태양계 천체와 별과 우주의 진화"]],
+  ess: [["01", "지구 탄생과 생동하는 지구"], ["02", "해수의 운동"], ["03", "강수 과정과 대기의 운동"]],
+};
+
+const PREFIX = {
+  is1: "10통과1-",
+  is2: "10통과2-",
+  es: "12지구",
+  ess: "12지시",
+};
+
+const VERSIONS = {
+  A: { name: "강한 비계", desc: "완전한 역할·수정 템플릿, 질문 4개, 상세 데이터 안내와 검증 설명, 구조화된 성찰을 제공합니다." },
+  B: { name: "중간 비계", desc: "역할 핵심 빈칸, 질문 2개, 핵심 데이터 필드·예측 표·질문 유형 카드, 축약 수정 틀을 제공합니다." },
+  C: { name: "약한 비계", desc: "역할·질문·프롬프트의 기준과 최소 안내만 제공합니다. 데이터 맥락과 예측, 검증 목록은 직접 구성합니다." },
+};
+
+const SCAFFOLDS = [
+  { section: "§0 역할 선언", principle: "역할 부여", A: "완전한 템플릿", B: "핵심 빈칸 템플릿", C: "역할 선언 기준만 제시" },
+  { section: "§1 탐구 문제 설정", principle: "영역 맥락 비계", A: "4개 선택지 + 자유 문제", B: "2개 선택지 + 자유 문제", C: "자유 문제 + 질문 기준" },
+  { section: "§2 데이터 맥락 기술", principle: "영역 맥락 비계", A: "모든 필드와 설명", B: "핵심 필드", C: "자가 완성 체크리스트" },
+  { section: "§2.5 예측 표현", principle: "영역 맥락 비계", A: "예측 표 + 근거 작성 틀", B: "예측 표", C: "자유 형식 예측" },
+  { section: "§3 프롬프트 작성", principle: "영역 맥락 비계", A: "Level 1 빈칸 채우기", B: "Level 2 질문 유형 카드", C: "Level 3 평가 기준" },
+  { section: "§4 결과 확인 및 검증", principle: "비판적 검증", A: "모든 항목 + 상세 설명", B: "주요 항목 + 간단한 설명", C: "자가 체크리스트 구성" },
+  { section: "§5 수정 및 반복", principle: "점진적 비계 철거", A: "완전한 수정 템플릿", B: "축약된 수정 템플릿", C: "템플릿 없이 안내" },
+  { section: "§6 성찰", principle: "맥락 점검", A: "체크리스트 + 개방형 성찰", B: "개방형 성찰", C: "최소 안내" },
+];
+
+const SECTIONS = [
+  { n: "§0", t: "역할 선언", key: "s0" },
+  { n: "§1", t: "탐구 문제", key: "s1" },
+  { n: "§2", t: "데이터 맥락", key: "s2" },
+  { n: "§2.5", t: "나의 예측", key: "s25" },
+  { n: "§3", t: "프롬프트", key: "s3" },
+  { n: "§4", t: "결과 검증", key: "s4" },
+  { n: "§5", t: "수정·반복", key: "s5" },
+  { n: "§6", t: "성찰", key: "s6" },
+  { n: "정리", t: "워크시트 정리", key: "sum" },
+];
+
+const COMMON_CHECKS = [
+  { t: "AI가 사용한 자료가 내가 기술한 출처·기간·지역과 같은가?", h: "AI가 다른 기간이나 예시 자료를 지어내 쓰지 않았는지 확인하세요." },
+  { t: "그래프의 축 이름과 단위가 모두 표시되어 있는가?", h: "단위가 없으면 값의 크기를 판단할 수 없습니다." },
+  { t: "값의 범위가 지구과학적으로 가능한 범위 안에 있는가?", h: "§2의 변수 표에 적은 일반적 범위와 비교하세요." },
+  { t: "결측값·이상값을 어떻게 처리했는지 AI가 밝혔는가?", h: "말없이 지우거나 0으로 채웠다면 결과가 달라질 수 있습니다." },
+  { t: "그래프가 자료의 모양을 왜곡하지 않는가? (보조 축, 깊이 축 방향, 축 자르기)", h: "보조 축의 단위·범위와 축 자르기를 확인하세요. 깊이 자료라면 깊어질수록 아래로 향하는지 살펴 자료 해석이 왜곡되지 않았는지 확인합니다." },
+  { t: "결과가 §2.5의 나의 예측과 같은가, 다르다면 그 이유를 설명할 수 있는가?", h: "예측과 다르다고 틀린 것은 아닙니다. 어느 쪽이 맞는지 근거를 찾으세요." },
+];
+
+const Q_TYPES = [
+  { k: "trend", b: "변화 추세", s: "시간에 따라 ○○은 어떻게 변했을까?" },
+  { k: "compare", b: "비교", s: "○○와 △△에서 □□은 어떻게 다를까?" },
+  { k: "relation", b: "관계", s: "○○이 커질수록 △△은 어떻게 될까?" },
+  { k: "distribution", b: "분포", s: "○○은 어디에(언제) 많이 나타날까?" },
+  { k: "estimate", b: "값 구하기", s: "자료로 ○○의 값을 구하면 얼마일까?" },
+];
+
+const P_CARDS = [
+  { k: "role", b: "역할", s: "AI에게 어떤 도우미가 되어 달라고 할지" },
+  { k: "data", b: "데이터 맥락", s: "출처, 기간, 지역, 변수와 단위" },
+  { k: "question", b: "탐구 질문", s: "무엇을 알고 싶은지" },
+  { k: "task", b: "작업", s: "계산·정리·그래프 등 할 일" },
+  { k: "output", b: "출력 형식", s: "그래프 종류, 축, 표 형태" },
+  { k: "verify", b: "검증 요청", s: "결측 처리 설명, 값 범위 요약 등" },
+];
+
+const CONSTRAINTS = [
+  { k: "units", t: "모든 축과 표에 단위를 표시해 줘." },
+  { k: "missing", t: "결측값이나 이상값이 있으면 몇 개인지 알려 주고, 어떻게 처리했는지 먼저 설명해 줘." },
+  { k: "range", t: "그래프를 그리기 전에 각 변수의 최솟값, 최댓값, 개수를 표로 먼저 보여 줘." },
+  { k: "assume", t: "내 자료에 없는 값을 지어내지 말고, 가정한 것이 있으면 따로 알려 줘." },
+  { k: "comment", t: "코드에는 한국어 주석을 달아 줘." },
+];
+
+const TRENDS = ["증가", "감소", "주기적 반복", "거의 변화 없음", "양의 관계", "음의 관계", "무리를 이룸", "기타"];
+
+const STARTERS = [
+  "앞의 그래프에서 ___의 단위가 빠져 있어. ___ 단위를 표시해 줘.",
+  "___의 값이 ___로 나왔는데, 실제로는 ___ 범위여야 해. 자료를 다시 확인해 줘.",
+  "결측값을 어떻게 처리했는지 설명해 주고, ___ 방법으로 다시 계산해 줘.",
+  "___ 축 방향이 거꾸로야. ___가 ___쪽에 오도록 다시 그려 줘.",
+  "내 예측은 ___였는데 결과는 ___야. 이 차이가 자료 때문인지 계산 때문인지 확인해 줘.",
+];
+
+function questionChoices(activity) {
+  return [...activity.questions,
+    `이 자료로 '${activity.tasks[0].replace(/하기$/, "")}'를 수행하면 어떤 결과가 나오며, 성취기준의 과학 개념으로 어떻게 설명할 수 있을까?`,
+    `자료의 대상이나 분석 조건을 달리했을 때 '${activity.title}'의 결론은 유지될까?`,
+  ].slice(0, 4);
+}
+
+return { SUBJ, SUBJ_ORDER, UNITS, PREFIX, VERSIONS, SCAFFOLDS, SECTIONS, COMMON_CHECKS, Q_TYPES, P_CARDS, CONSTRAINTS, TRENDS, STARTERS, questionChoices };
+})();
+modules["./config.js"] = ( () => {
+const CONFIG = {
+  appVersion: "v2.0 (교사 검토용 · KACE 표 3 반영)",
+  surveyUrl: "https://docs.google.com/forms/d/1cAaXN4FFOtjZRjISRyqiLJI8LoqTj6gZScxL4xpaH_4/viewform",
+  researcher: "성균관대학교 교육대학원 인공지능융합교육전공 박연경",
+  contact: "",
+};
+
+return { CONFIG };
+})();
+modules["./teacher.js"] = ( () => {
+const { PREFIX, SCAFFOLDS, SUBJ, SUBJ_ORDER, UNITS, VERSIONS } = modules["./constants.js"];
+const { CONFIG } = modules["./config.js"];
+
+const escapeHtml = value => String(value == null ? "" : value).replace(/[&<>"']/g, character => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+}[character]));
+
+function classCode(id, version) {
+  return `${id.replace("-", "").toUpperCase()}-${version}`;
+}
+
+function activityByCode(activities, code, id) {
+  return activities.find(activity => activity.code === code && activity.id === id)
+    || activities.find(activity => activity.code === code);
+}
+
+function levelTable(levels, code) {
+  const level = levels[code];
+  if (!level) return "";
+
+  return `
+    <div class="field">
+      <span class="label">성취수준 (A~E)</span>
+      <div class="tbl-wrap">
+        <table class="levels"><tbody>
+          ${["A", "B", "C", "D", "E"].map(letter => `
+            <tr><td>${letter}</td><td>${escapeHtml(level[letter])}</td></tr>
+          `).join("")}
+        </tbody></table>
+      </div>
+    </div>`;
+}
+
+function activityDetails(data, code, state) {
+  const activity = activityByCode(data.activities, code, state.teacherActivity);
+  const level = data.levels[code];
+  let html = `
+    <div class="panel stack">
+      <span class="label">${SUBJ[state.subj]} · [${escapeHtml(code)}]</span>
+      <p class="std-quote">${escapeHtml(data.standards[code])}</p>
+      <p class="small muted">교육부 고시 제2022-33호 [별책 9] 과학과 교육과정 · <a href="https://www.moe.go.kr/boardCnts/viewRenew.do?boardID=141&amp;boardSeq=93458&amp;m=0404" target="_blank" rel="noopener noreferrer">교육부 원문 확인</a></p>
+      ${code === "12지구01-03" ? '<p class="note">고시 원문의 “위상 영상” 표기를 보존했습니다. 이 활동에서는 관련 탐구 활동과 성취수준에 따라 위성 영상을 사용합니다.</p>' : ""}`;
+
+  if (level?.act?.length) {
+    html += `
+      <div class="field">
+        <span class="label">성취수준 문서의 탐구 활동</span>
+        <ul class="plain">${level.act.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+      </div>`;
+  }
+
+  if (!activity) {
+    html += `
+      <p class="note">이 성취기준은 현재 지구과학 중심 활동 범위 밖입니다. 데이터 탐구가 불가능하다는 뜻은 아닙니다. 성취기준과 성취수준을 참고해 다른 과학 영역의 활동으로 구성할 수 있습니다.</p>
+      ${levelTable(data.levels, code)}
+    </div>`;
+    return html;
+  }
+
+  html += `</div>
+    <div class="panel stack">
+      <div>
+        <span class="label">데이터 탐구 활동 · ${escapeHtml(activity.time)}</span>
+        <h2 class="activity-title">${escapeHtml(activity.title)}</h2>
+      </div>
+      <dl class="kv">
+        <dt>교육과정 연계 범위</dt>
+        <dd>${escapeHtml(activity.alignment || "아래 작업을 통해 성취기준의 자료 분석·해석 요소를 탐구합니다. 데이터 분석만으로 성취기준 전체를 달성했다고 판정하지 않고, 관련 개념 설명과 근거에 기반한 결론을 함께 확인합니다.")}</dd>
+        <dt>탐구 질문 예</dt>
+        <dd><ul class="plain">${activity.questions.map(question => `<li>${escapeHtml(question)}</li>`).join("")}</ul></dd>
+        <dt>데이터</dt>
+        <dd>
+          ${escapeHtml(activity.data.name)} · ${escapeHtml(activity.data.org)}
+          ${activity.data.url ? `<br><a href="${escapeHtml(activity.data.url)}" target="_blank" rel="noopener">${escapeHtml(activity.data.url)}</a>` : ""}
+          <div class="small muted data-how">${escapeHtml(activity.data.how)}</div>
+        </dd>
+        <dt>변수와 단위</dt>
+        <dd><div class="chips">${activity.vars.map(variable => `
+          <span class="chip">${escapeHtml(variable.n)} <span class="mono muted">${escapeHtml(variable.u)}</span></span>
+        `).join("")}</div></dd>
+        <dt>교과서 연계</dt>
+        <dd>${activity.textbook ? escapeHtml(activity.textbook) : '<span class="muted">교과서 연계 정보가 없습니다.</span>'}</dd>
+        <dt>권장 그래프</dt>
+        <dd>${escapeHtml(activity.chart)}</dd>
+        <dt>분석·검증 시 주의점</dt>
+        <dd><ul class="plain">${activity.pitfalls.map(pitfall => `<li>${escapeHtml(pitfall)}</li>`).join("")}</ul></dd>
+        ${activity.tip ? `<dt>수업 팁</dt><dd>${escapeHtml(activity.tip)}</dd>` : ""}
+      </dl>
+    </div>
+    <div class="panel stack">
+      <div>
+        <span class="label">비계 수준 고르기</span>
+        <p class="small muted panel-description">세 버전은 같은 성취기준과 활동을 사용하고 지원의 양만 다릅니다. 비계 버전 A·B·C는 성취수준 A~E와 다른 구분입니다.</p>
+      </div>
+      <div class="ver-grid" role="group" aria-label="비계 버전">
+        ${Object.entries(VERSIONS).map(([version, details]) => `
+          <button type="button" class="ver" data-ver="${version}" aria-pressed="${version === state.version}">
+            <b>${version}</b> <strong>${details.name}</strong>
+            <div class="small muted version-description">${details.desc}</div>
+          </button>
+        `).join("")}
+      </div>
+      <div class="code-box">
+        <span class="label">수업 코드</span>
+        <span class="mono code-value">${classCode(activity.id, state.version)}</span>
+        <button class="btn sm" type="button" data-copy-code>코드 복사</button>
+        <button class="btn sm primary" type="button" data-preview>학생 화면으로 열기</button>
+      </div>
+      <p class="small muted">학생은 학생 화면에서 이 코드를 입력합니다. 이 페이지 주소 끝에 <span class="mono">#${activity.id.replace("-", "")}${state.version.toLowerCase()}</span>를 붙인 링크를 나눠 주면 코드 입력 없이 바로 열립니다.</p>
+    </div>`;
+
+  if (level) {
+    html += `
+      <div class="panel">
+        ${levelTable(data.levels, code)}
+        <p class="small muted level-description">성취수준은 교육과정 평가 참고 자료이며 비계 버전과 대응하지 않습니다. 세 버전 모두 같은 성취기준을 목표로 합니다.</p>
+      </div>`;
+  }
+  return html;
+}
+
+function copyCode(button, code) {
+  const originalText = button.textContent;
+  const copied = () => {
+    button.textContent = "복사됨";
+    window.setTimeout(() => { button.textContent = originalText; }, 1600);
+  };
+  const fallback = () => {
+    const input = document.createElement("textarea");
+    input.value = code;
+    input.setAttribute("readonly", "");
+    input.className = "copy-input";
+    document.body.appendChild(input);
+    input.select();
+    const succeeded = document.execCommand("copy");
+    input.remove();
+    if (succeeded) copied();
+    else button.textContent = "직접 선택해 복사하세요";
+  };
+
+  if (!navigator.clipboard?.writeText) {
+    fallback();
+    return;
+  }
+  navigator.clipboard.writeText(code).then(copied, fallback);
+}
+
+function renderTeacher(app, data, state, actions) {
+  const subject = state.subj;
+  const standards = Object.keys(data.standards).filter(code => code.startsWith(PREFIX[subject]));
+  if (!state.sel || !state.sel.startsWith(PREFIX[subject])) {
+    const firstActivity = data.activities.find(activity => activity.subj === subject);
+    state.sel = firstActivity ? firstActivity.code : standards[0];
+  }
+
+  const activityCount = data.activities.filter(activity => activity.subj === subject).length;
+  let navigation = `
+    <div class="tabs" role="group" aria-label="과목">
+      ${SUBJ_ORDER.map(key => `
+        <button class="tab" type="button" data-subj="${key}" aria-pressed="${key === subject}">${SUBJ[key]}</button>
+      `).join("")}
+    </div>
+    <p class="small muted">성취기준 ${standards.length}개 · 데이터 탐구 활동 ${activityCount}개</p>`;
+
+  UNITS[subject].forEach(([unit, name]) => {
+    const unitStandards = standards.filter(code => code.slice(PREFIX[subject].length, PREFIX[subject].length + 2) === unit);
+    navigation += `
+      <div class="unit">
+        <h3>(${Number(unit)}) ${escapeHtml(name)}</h3>
+        ${unitStandards.map(code => {
+          const activities = data.activities.filter(activity => activity.code === code);
+          const activity = activities[0];
+          return `
+            <button type="button" class="std ${activity ? "" : "none"}" data-code="${escapeHtml(code)}" aria-current="${code === state.sel}">
+              <span class="code">[${escapeHtml(code)}]</span>
+              <span class="act">${activity ? `${escapeHtml(activity.title)}${activities.length > 1 ? ` 외 ${activities.length - 1}개` : ""}` : "지구과학 중심 활동 범위 밖"}</span>
+            </button>`;
+        }).join("")}
+      </div>`;
+  });
+
+  const introDismissed = actions.readStorage("evc:teacher-intro-dismissed");
+  const selectedActivity = activityByCode(data.activities, state.sel, state.teacherActivity);
+  const review = actions.readStorage("evc:teacher-review:v2") || {};
+  app.innerHTML = `
+    ${introDismissed ? "" : `
+      <aside class="intro-note" id="teacherIntro" aria-label="연구용 프로그램 안내">
+        <div>
+          <strong>연구용 프로그램 안내</strong>
+          <p>이 프로그램은 연구를 위한 검토용입니다. 입력 내용은 이 브라우저에만 저장되며 연구자에게 전송되지 않습니다.</p>
+          <p>검토 순서: 성취기준·활동 확인 → 아래 표에서 같은 단계의 A·B·C 비교 → 검증 분기·수정 반복 확인 → 외부 설문 응답</p>
+        </div>
+        <button class="btn sm" type="button" id="dismissIntro" aria-label="안내 닫기">닫기</button>
+      </aside>`}
+    <section class="panel stack review-panel" aria-labelledby="reviewTitle">
+      <h1 id="reviewTitle">교사 검토 안내 · 논문의 8개 단계로 비교하기</h1>
+      <p>활동은 논문의 대표 사례로 제한하지 않습니다. 통합과학1·2, 지구과학, 지구시스템과학의 전체 성취기준 ${Object.keys(data.standards).length}개에 데이터 탐구 ${data.activities.length}개를 연결했습니다. 지구과학 외 통합과학 영역도 포함하며, 공개 관측·실험·문헌 표·교사 제공 모형 자료를 구분합니다. A·B·C는 KACE 투고본 표 3의 비계 구조를 따릅니다.</p>
+      <p class="small">설문 평정 대상은 §0·§1·§2·§2.5·§3·§4·§5·§6의 <b>8개 단계</b>입니다. ‘정리’는 내보내기 기능이며 아홉 번째 평정 항목이 아닙니다. 관련성 4점(1 전혀 타당하지 않음 ~ 4 매우 타당함)과 내용 타당도·실무 적합도·명확성·실용성 의견을 외부 설문에서 작성합니다.</p>
+      <p class="small muted">아래 체크는 개인 검토 메모이며 설문 응답이 아닙니다. 연구자에게 전송되지 않습니다. 학생 화면에서는 상단 ‘교사’를 눌러 돌아올 수 있습니다.</p>
+      <div class="tbl-wrap"><table class="review-table">
+        <caption>현재 활동: ${selectedActivity ? escapeHtml(selectedActivity.title) : "아래에서 활동 선택"} · 비계 버전별 단계 비교</caption>
+        <thead><tr><th>단계 / 설계원리</th>${Object.entries(VERSIONS).map(([v, d]) => `<th>${v} · ${d.name}</th>`).join("")}<th>검토 메모</th></tr></thead>
+        <tbody>${SCAFFOLDS.map((row, index) => `<tr>
+          <th>${row.section}<br><span class="small muted">${row.principle}</span></th>
+          ${["A", "B", "C"].map(v => `<td>${row[v]}<br><button class="btn sm" type="button" data-review-open="${index}|${v}" ${selectedActivity ? "" : "disabled"}>${v} 단계 열기</button></td>`).join("")}
+          <td><label class="check"><input type="checkbox" data-reviewed="${index}" ${review[index] ? "checked" : ""}>확인</label></td>
+        </tr>`).join("")}</tbody>
+      </table></div>
+      <p class="note">검증 흐름: §4에서 결과와 예측을 비교하고 모든 검증 판정을 기록해야 합니다. 문제·모름·예측 불일치가 있으면 §5 → §3 → §4로 재검증합니다. 예측과 다르다는 이유만으로 AI 결과가 틀렸다고 단정하지 않습니다. 모두 확인되고 예측과 일치하면 §6으로 이동합니다.</p>
+      <p class="small muted">외부 설문의 동의 안내와 문항을 확인한 후 자발적으로 참여하세요. 웹앱의 기록은 설문으로 자동 전달되지 않습니다. AI 오류 실험 결과는 이 검토 화면에 제시하지 않습니다.</p>
+      ${CONFIG.surveyUrl ? `<a class="btn primary" href="${escapeHtml(CONFIG.surveyUrl)}" target="_blank" rel="noopener noreferrer">검토 후 설문 참여하기 ↗</a>` : '<p class="note">설문 링크가 아직 설정되지 않았습니다.</p>'}
+    </section>
+    <div class="teacher">
+      <nav aria-label="성취기준 목록">${navigation}</nav>
+      <section id="tdetail" class="teacher-detail">
+        ${selectedActivity ? `<div class="panel field"><label for="activitySelect">이 성취기준의 데이터 탐구 활동</label><select id="activitySelect">${data.activities.filter(a => a.code === state.sel).map(a => `<option value="${a.id}" ${a.id === selectedActivity.id ? "selected" : ""}>${escapeHtml(a.title)}</option>`).join("")}</select></div>` : ""}
+        ${activityDetails(data, state.sel, state)}
+      </section>
+    </div>
+    ${actions.footer()}`;
+
+  const renderAgain = () => renderTeacher(app, data, state, actions);
+  app.querySelectorAll("[data-reviewed]").forEach(input => input.addEventListener("change", () => {
+    review[input.dataset.reviewed] = input.checked;
+    actions.writeStorage("evc:teacher-review:v2", review);
+  }));
+  app.querySelectorAll("[data-review-open]").forEach(button => button.addEventListener("click", () => {
+    const [step, version] = button.dataset.reviewOpen.split("|");
+    state.act = selectedActivity.id;
+    state.version = version;
+    actions.setMode("student", Number(step));
+  }));
+  app.querySelector("#activitySelect")?.addEventListener("change", event => {
+    state.teacherActivity = event.target.value;
+    actions.saveLastView();
+    renderAgain();
+  });
+  app.querySelector("#dismissIntro")?.addEventListener("click", () => {
+    actions.writeStorage("evc:teacher-intro-dismissed", true);
+    document.getElementById("teacherIntro")?.remove();
+  });
+  app.querySelectorAll("[data-subj]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.subj = button.dataset.subj;
+      state.sel = null;
+      state.teacherActivity = null;
+      actions.saveLastView();
+      renderAgain();
+    });
+  });
+  app.querySelectorAll("[data-code]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.sel = button.dataset.code;
+      state.teacherActivity = null;
+      actions.saveLastView();
+      renderAgain();
+      if (window.innerWidth < 820) {
+        document.getElementById("tdetail").scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+  function bindDetailActions() {
+    const detail = document.getElementById("tdetail");
+    const activity = activityByCode(data.activities, state.sel, state.teacherActivity);
+    detail.querySelector("[data-copy-code]")?.addEventListener("click", event => {
+      copyCode(event.currentTarget, classCode(activity.id, state.version));
+    });
+    detail.querySelector("[data-preview]")?.addEventListener("click", () => {
+      state.act = activity.id;
+      state.step = 0;
+      actions.saveLastView();
+      actions.setMode("student", 0);
+    });
+    detail.querySelectorAll("[data-ver]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.version = button.dataset.ver;
+        actions.saveLastView();
+        renderAgain();
+      });
+    });
+  }
+
+  bindDetailActions();
+}
+
+return { renderTeacher };
+})();
+modules["./student.js"] = ( () => {
+const {
+  COMMON_CHECKS,
+  CONSTRAINTS,
+  P_CARDS,
+  Q_TYPES,
+  SECTIONS,
+  STARTERS,
+  SUBJ,
+  SUBJ_ORDER,
+  TRENDS,
+  VERSIONS,
+  questionChoices,
+} = modules["./constants.js"];
+
+const escapeHtml = value => String(value == null ? "" : value).replace(/[&<>"']/g, character => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+}[character]));
+
+function parseCode(input, activities) {
+  const normalized = String(input || "").trim().toLowerCase().replace(/^#/, "").replace(/[\s_]/g, "");
+  const match = normalized.match(/^(is1|is2|ess|es)-?(\d{4})-?([abc])$/);
+  if (!match) return null;
+  const id = `${match[1]}-${match[2]}`;
+  return activities.some(activity => activity.id === id)
+    ? { id, version: match[3].toUpperCase() }
+    : null;
+}
+
+function hasPrediction(version, answers) {
+  const has = key => String(answers[key] || "").trim();
+  return version === "C" ? Boolean(has("prediction_free"))
+    : Boolean(has("trend") && has("p_shape") && (version !== "A" || has("why")));
+}
+
+function verificationStatus(version, answers, checks) {
+  const has = key => String(answers[key] || "").trim();
+  if (!["A", "B", "C"].includes(version)) return "incomplete";
+  if (!hasPrediction(version, answers)) return "incomplete";
+  if (!has("ai_result") || !["match", "differ"].includes(answers.prediction_match)) return "incomplete";
+  if (version === "C" && [0, 1, 2].some(i => !has(`cc_${i}`))) return "incomplete";
+  if (!checks.length || checks.some(item => !["ok", "bad", "unk"].includes(answers[`chk_${item.id}`])
+    || !has(`chkn_${item.id}`))) return "incomplete";
+  return answers.prediction_match === "differ" || checks.some(item => answers[`chk_${item.id}`] !== "ok")
+    ? "revise" : "pass";
+}
+
+function classCode(id, version) {
+  return `${id.replace("-", "").toUpperCase()}-${version}`;
+}
+
+function answerKey(state) {
+  return `evc:${state.act}:${state.version}`;
+}
+
+function answer(state, key) {
+  return state.ans[key] == null ? "" : state.ans[key];
+}
+
+function isChecked(state, key) {
+  return Boolean(state.ans[key]);
+}
+
+function copyText(text, button) {
+  const originalText = button.textContent;
+  const copied = () => {
+    button.textContent = "복사됨";
+    window.setTimeout(() => { button.textContent = originalText; }, 1600);
+  };
+  const fallback = () => {
+    const input = document.createElement("textarea");
+    input.value = text;
+    input.setAttribute("readonly", "");
+    input.className = "copy-input";
+    document.body.appendChild(input);
+    input.select();
+    let succeeded = false;
+    try {
+      succeeded = document.execCommand("copy");
+    } catch {
+      succeeded = false;
+    } finally {
+      input.remove();
+    }
+    if (succeeded) copied();
+    else button.textContent = "직접 선택해 복사하세요";
+  };
+
+  if (!navigator.clipboard?.writeText) {
+    fallback();
+    return;
+  }
+  navigator.clipboard.writeText(text).then(copied, fallback);
+}
+
+function renderStudent(app, data, state, actions) {
+  let currentAnswerKey = null;
+  let saveTimer = null;
+  actions.registerFlush?.(flushSave);
+
+  function loadCurrentAnswer() {
+    if (!state.act) return;
+    const key = answerKey(state);
+    if (currentAnswerKey === key) return;
+    currentAnswerKey = key;
+    state.ans = actions.readStorage(key) || {};
+    state.step = Number.isInteger(state.ans._step) ? state.ans._step : 0;
+    if (Number.isInteger(state.previewStep)) {
+      state.step = state.previewStep;
+      state.ans._step = state.step;
+      state.previewStep = null;
+    }
+  }
+
+  function save() {
+    window.clearTimeout(saveTimer);
+    const key = state.act ? answerKey(state) : null;
+    const answers = state.ans;
+    saveTimer = window.setTimeout(() => {
+      if (key) actions.writeStorage(key, answers);
+      actions.saveLastView();
+    }, 250);
+  }
+
+  function flushSave() {
+    window.clearTimeout(saveTimer);
+    if (state.act) actions.writeStorage(answerKey(state), state.ans);
+    actions.saveLastView();
+  }
+
+  function setAnswer(key, value) {
+    if (["ai_result", "prediction_match"].includes(key) && hasPrediction(state.version, state.ans) && !state.ans._predictionAtVerification) {
+      state.ans._predictionAtVerification = state.version === "C" ? answer(state, "prediction_free")
+        : `${answer(state, "trend")} / ${answer(state, "p_shape")} / ${answer(state, "why")}`;
+    }
+    if (/^cc_\d$/.test(key) && state.ans[key] !== value) {
+      const id = key.replace("cc_", "cc");
+      delete state.ans[`chk_${id}`];
+      delete state.ans[`chkn_${id}`];
+    }
+    state.ans[key] = value;
+    save();
+    refreshRail();
+    liveHooks.forEach(hook => hook(key));
+  }
+
+  function openActivity(id, version) {
+    flushSave();
+    state.act = id;
+    state.version = version;
+    currentAnswerKey = null;
+    loadCurrentAnswer();
+    save();
+  }
+
+  function renderStart() {
+    app.innerHTML = `
+      <div class="start stack">
+        <div class="panel stack">
+          <h1>수업 코드를 입력하세요</h1>
+          <p class="lead">선생님이 알려 준 코드(예: <span class="mono">ES0105-A</span>)를 입력하면 워크시트가 열립니다. 쓴 내용은 이 브라우저에 자동으로 저장됩니다.</p>
+          <form class="join" id="joinForm">
+            <input id="joinIn" aria-label="수업 코드" type="text" autocomplete="off" placeholder="ES0105-A" value="">
+            <button class="btn primary" type="submit">시작하기</button>
+          </form>
+          <p class="err" id="joinErr" role="alert" hidden></p>
+        </div>
+        <div class="panel">
+          <h2>또는 활동을 직접 고르기</h2>
+          <p class="small muted panel-description">직접 고르면 강한 비계(A) 버전으로 시작합니다.</p>
+          ${SUBJ_ORDER.map(subject => `
+            <div class="subject-picks">
+              <span class="label">${SUBJ[subject]}</span>
+              <div class="pick">
+                ${data.activities.filter(activity => activity.subj === subject).map(activity => `
+                  <button type="button" data-open="${activity.id}">
+                    <span class="code">[${escapeHtml(activity.code)}]</span><br>${escapeHtml(activity.title)}
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+      ${footer()}`;
+
+    document.getElementById("joinForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const parsed = parseCode(document.getElementById("joinIn").value, data.activities);
+      if (!parsed) {
+        const error = document.getElementById("joinErr");
+        error.textContent = "코드를 찾을 수 없습니다. 영문 과목 기호, 숫자 네 자리, 버전(A·B·C)을 확인하세요. 예: ES0105-A";
+        error.hidden = false;
+        return;
+      }
+      openActivity(parsed.id, parsed.version);
+      renderWork();
+    });
+
+    app.querySelectorAll("[data-open]").forEach(button => {
+      button.addEventListener("click", () => {
+        openActivity(button.dataset.open, "A");
+        renderWork();
+      });
+    });
+  }
+
+  function renderWork() {
+    loadCurrentAnswer();
+    state.step = Math.max(0, Math.min(SECTIONS.length - 1, Number(state.step) || 0));
+    const activity = data.activities.find(item => item.id === state.act);
+    if (!activity) {
+      state.act = null;
+      renderStart();
+      return;
+    }
+
+    const rail = `
+      <aside class="rail">
+        <ol>
+          ${SECTIONS.map((section, index) => `
+            <li>
+              <button type="button" data-step="${index}" ${index === state.step ? 'aria-current="step"' : ""}>
+                <span class="n">${section.n}</span>
+                <span class="t">${section.t}</span>
+                <span class="dot ${isDone(section.key) ? "done" : ""}"></span>
+              </button>
+            </li>
+          `).join("")}
+        </ol>
+        <div class="meta">
+          <span class="vbadge"><b>${state.version}</b>${VERSIONS[state.version].name}</span>
+          <span>수업 코드 <span class="mono">${classCode(activity.id, state.version)}</span></span>
+          <button class="btn sm ghost" type="button" id="leave">다른 활동 고르기</button>
+        </div>
+      </aside>`;
+    const header = `
+      <div class="sheet-head stack">
+        <span class="code">[${escapeHtml(activity.code)}] · ${SUBJ[activity.subj]}</span>
+        <span class="vbadge"><b>${state.version}</b>${VERSIONS[state.version].name} · 비계 버전</span>
+        <h1>${escapeHtml(activity.title)}</h1>
+        <p class="small muted">${escapeHtml(data.standards[activity.code])}</p>
+        ${activity.code === "12지구01-03" ? '<p class="small muted">“위상 영상”은 고시 원문 표기입니다. 탐구에는 관련 성취수준에 따라 위성 영상을 사용합니다.</p>' : ""}
+      </div>`;
+
+    app.innerHTML = `
+      <div class="work">
+        ${rail}
+        <div class="sheet">
+          ${header}
+          <div id="sec"></div>
+          <p class="err" id="navError" role="alert" hidden></p>
+          <div class="navrow">
+            <button class="btn" type="button" id="prev">이전 단계</button>
+            <button class="btn primary" type="button" id="next">다음 단계</button>
+          </div>
+        </div>
+      </div>
+      ${footer()}`;
+
+    app.querySelectorAll("[data-step]").forEach(button => {
+      button.addEventListener("click", () => go(Number(button.dataset.step)));
+    });
+    document.getElementById("prev").addEventListener("click", () => go(state.step - 1));
+    document.getElementById("next").addEventListener("click", () => {
+      if (state.step === 5) {
+        const status = verificationStatus(state.version, state.ans, checkList());
+        if (status === "incomplete") {
+          showNavigationError("§2.5의 예측(A는 근거 포함), AI 결과, 예측과의 비교, 모든 검증 항목의 판정과 근거를 기록하세요. C 버전은 자신의 기준 3개도 필요합니다.");
+          return;
+        }
+        go(status === "pass" ? 7 : 6);
+      } else if (state.step === 6) {
+        rerunRevision();
+      } else go(state.step + 1);
+    });
+    document.getElementById("leave").addEventListener("click", () => {
+      flushSave();
+      state.act = null;
+      currentAnswerKey = null;
+      save();
+      renderStart();
+    });
+    document.getElementById("prev").disabled = state.step === 0;
+    document.getElementById("next").hidden = state.step === SECTIONS.length - 1;
+    if (state.step === 5) document.getElementById("next").textContent = "검증 결과에 따라 이동";
+    if (state.step === 6) document.getElementById("next").textContent = "수정 프롬프트로 §3 재실행";
+    renderSection();
+  }
+
+  function showNavigationError(message) {
+    const error = document.getElementById("navError");
+    error.textContent = message;
+    error.hidden = false;
+  }
+
+  function rerunRevision() {
+    const index = Math.max(1, Number(answer(state, "rounds_n")) || 1) - 1;
+    if (!String(answer(state, `r${index}_problem`)).trim() || !String(answer(state, `r${index}_prompt`)).trim()) {
+      showNavigationError("마지막 회차의 발견한 문제와 수정 프롬프트를 기록한 뒤 재실행하세요.");
+      return;
+    }
+    const history = state.ans._verificationHistory || [];
+    history.push({ prompt: promptText(), prediction: answer(state, "_predictionAtVerification"),
+      result: answer(state, "ai_result"), comparison: answer(state, "prediction_match"),
+      revisionReason: answer(state, `r${index}_problem`), revisionPrompt: answer(state, `r${index}_prompt`),
+      checks: checkList().map(item => ({ criterion: item.t, judgment: answer(state, `chk_${item.id}`), evidence: answer(state, `chkn_${item.id}`) })) });
+    state.ans._verificationHistory = history;
+    state.ans[state.version === "A" ? "prompt_final" : "prompt_free"] = answer(state, `r${index}_prompt`);
+    Object.keys(state.ans).filter(key => /^chk_|^chkn_/.test(key)).forEach(key => { delete state.ans[key]; });
+    delete state.ans.ai_result;
+    delete state.ans.prediction_match;
+    delete state.ans._predictionAtVerification;
+    go(4);
+  }
+
+  function go(index) {
+    if (index < 0 || index >= SECTIONS.length) return;
+    if (index === 7 && verificationStatus(state.version, state.ans, checkList()) !== "pass") {
+      showNavigationError("§4의 모든 검증에 근거를 기록하세요. 문제·모름·예측 불일치가 남으면 §5에서 수정·재검증한 뒤 성찰로 이동합니다. 미완성 기록도 ‘정리’에서 저장할 수 있습니다.");
+      return;
+    }
+    state.step = index;
+    state.ans._step = index;
+    save();
+    renderWork();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function refreshRail() {
+    app.querySelectorAll(".rail [data-step]").forEach((button, index) => {
+      const dot = button.querySelector(".dot");
+      if (dot) dot.classList.toggle("done", isDone(SECTIONS[index].key));
+    });
+  }
+
+  function isDone(key) {
+    const has = field => String(answer(state, field)).trim() !== "";
+    switch (key) {
+      case "s0": return has("pre_trust") && (state.version === "A"
+        ? isChecked(state, "decl1") && isChecked(state, "decl2") && isChecked(state, "decl3")
+        : state.version === "B" ? has("role_self") && has("role_ai") && has("role_check") : has("decl_own"));
+      case "s1": return has("question");
+      case "s2": return state.version === "C" ? has("context_free") : has("source") && has("period") && has("place");
+      case "s25": return hasPrediction(state.version, state.ans);
+      case "s3": return has("prompt_final") || has("prompt_free");
+      case "s4": return verificationStatus(state.version, state.ans, checkList()) !== "incomplete";
+      case "s5": return has("r0_problem") && has("r0_prompt");
+      case "s6": return has("post_trust") && (state.version === "C" ? has("reflection_free") : has("conclusion"));
+      default: return false;
+    }
+  }
+
+  function sectionWrap(sectionIndex, lead, body) {
+    const section = SECTIONS[sectionIndex];
+    return `
+      <section class="sec" aria-labelledby="secTitle">
+        <div class="stack section-intro">
+          <div class="sec-title"><span class="n">${section.n}</span><h2 id="secTitle">${section.t}</h2></div>
+          ${lead ? `<p class="lead">${lead}</p>` : ""}
+        </div>
+        ${body}
+      </section>`;
+  }
+
+  function textareaField(key, label, hint, placeholder, rows) {
+    return `
+      <div class="field">
+        <label for="f_${key}">${label}</label>
+        ${hint ? `<span class="hint">${hint}</span>` : ""}
+        <textarea id="f_${key}" data-k="${key}" rows="${rows || 3}" placeholder="${escapeHtml(placeholder || "")}"></textarea>
+      </div>`;
+  }
+
+  function inputField(key, label, placeholder, hint) {
+    return `
+      <div class="field">
+        <label for="f_${key}">${label}</label>
+        ${hint ? `<span class="hint">${hint}</span>` : ""}
+        <input type="text" id="f_${key}" data-k="${key}" placeholder="${escapeHtml(placeholder || "")}">
+      </div>`;
+  }
+
+  function scaleField(key, label, low, high) {
+    return `
+      <div class="field">
+        <span class="flabel">${label}</span>
+        <div class="scale" role="group" aria-label="${escapeHtml(label)}">
+          ${[1, 2, 3, 4, 5].map(value => `<button type="button" data-pick="${key}|${value}">${value}</button>`).join("")}
+        </div>
+        <div class="scale-legend"><span>1 ${low}</span><span>5 ${high}</span></div>
+      </div>`;
+  }
+
+  function bindFields(root) {
+    root.querySelectorAll("[data-k]").forEach(element => {
+      const key = element.dataset.k;
+      if (element.type === "checkbox") {
+        element.checked = Boolean(state.ans[key]);
+        element.addEventListener("change", () => setAnswer(key, element.checked));
+      } else {
+        element.value = answer(state, key);
+        element.addEventListener("input", () => setAnswer(key, element.value));
+      }
+    });
+    root.querySelectorAll("[data-pick]").forEach(button => {
+      const [key, value] = button.dataset.pick.split("|");
+      button.setAttribute("aria-pressed", String(answer(state, key)) === value);
+      button.addEventListener("click", () => {
+        state.ans[key] = String(answer(state, key)) === value ? "" : value;
+        root.querySelectorAll(`[data-pick^="${key}|"]`).forEach(option => {
+          option.setAttribute("aria-pressed", String(answer(state, key)) === option.dataset.pick.split("|")[1]);
+        });
+        setAnswer(key, state.ans[key]);
+      });
+    });
+  }
+
+  let liveHooks = [];
+
+  function checkList() {
+    const activity = data.activities.find(item => item.id === state.act);
+    const checks = state.version === "C" ? [] : COMMON_CHECKS.map((item, index) => ({ id: `c${index}`, t: item.t, h: item.h, kind: "공통" }));
+    activity.checks.forEach((item, index) => {
+      if (state.version === "A" || (state.version === "B" && index < 2)) checks.push({ id: `a${index}`, t: item.t, h: item.h, kind: "이 활동" });
+    });
+    if (state.version === "C") {
+      [0, 1, 2].forEach(index => {
+        const text = String(answer(state, `cc_${index}`)).trim();
+        if (text) checks.push({ id: `cc${index}`, t: text, h: "", kind: "나의 기준" });
+      });
+    }
+    return checks;
+  }
+
+  function verificationRow(item) {
+    const selected = answer(state, `chk_${item.id}`);
+    return `
+      <div class="vrow ${selected}" data-row="${item.id}">
+        <div class="vrow-top">
+          <p><span class="label">${item.kind}</span><br>${escapeHtml(item.t)}</p>
+          <div class="tri" role="group" aria-label="판정">
+            ${[["ok", "맞음"], ["bad", "문제 있음"], ["unk", "모르겠음"]].map(([value, label]) => `
+              <button type="button" data-v="${value}" data-chk="${item.id}" aria-pressed="${selected === value}">${label}</button>
+            `).join("")}
+          </div>
+        </div>
+        ${state.version !== "C" && item.h ? `<p class="vhint">${escapeHtml(state.version === "A" ? item.h : item.h.split(/[。.!?]/)[0])}</p>` : ""}
+        <input type="text" data-k="chkn_${item.id}" placeholder="근거나 메모" aria-label="메모">
+      </div>`;
+  }
+
+  function assemblePrompt() {
+    const activity = data.activities.find(item => item.id === state.act);
+    const variables = activity.vars
+      .filter((variable, index) => answer(state, `var_${index}`))
+      .map(variable => `- ${variable.n} (단위: ${variable.u})`);
+    const tasks = activity.tasks.filter((task, index) => answer(state, `task_${index}`));
+    if (answer(state, "task_own")) tasks.push(answer(state, "task_own"));
+    const constraints = CONSTRAINTS.filter(item => answer(state, `con_${item.k}`)).map(item => item.t);
+    const lines = [
+      "너는 고등학생의 지구과학 데이터 탐구를 돕는 파이썬 데이터 분석 조수야. 결론은 내가 내릴 거니까, 너는 분석과 그래프를 정확하게 만들어 줘.",
+      "",
+      "[탐구 질문]",
+      answer(state, "question") || "(§1에서 탐구 질문을 쓰세요)",
+      "",
+      `[교육과정 성취기준: ${activity.code}]`,
+      data.standards[activity.code],
+      "이 기준과 연결해 분석하되, 자료로 확인하지 못한 개념이나 인과관계는 단정하지 마.",
+      "",
+      "[데이터]",
+      `- 출처: ${answer(state, "source") || `${activity.data.org} ${activity.data.name}`}`,
+      `- 기간: ${answer(state, "period") || "(§2에서 기간을 쓰세요)"}`,
+      `- 지역·대상: ${answer(state, "place") || "(§2에서 지역을 쓰세요)"}`,
+    ];
+    if (variables.length) {
+      lines.push("- 사용할 변수:");
+      variables.forEach(variable => lines.push(`  ${variable}`));
+    }
+    if (answer(state, "data_note")) lines.push(`- 참고: ${answer(state, "data_note")}`);
+    lines.push("- 첨부한 파일을 사용해. 파일에 없는 값은 지어내지 마.", "");
+    lines.push("[할 일]");
+    (tasks.length ? tasks : ["(위에서 작업을 고르세요)"]).forEach((task, index) => lines.push(`${index + 1}. ${task}`));
+    lines.push(`그래프: ${answer(state, "chart") || activity.chart}`);
+    if (constraints.length) {
+      lines.push("", "[조건]");
+      constraints.forEach(constraint => lines.push(`- ${constraint}`));
+    }
+    return lines.join("\n");
+  }
+
+  function promptText() {
+    return state.version === "A"
+      ? (answer(state, "prompt_final") || assemblePrompt())
+      : answer(state, "prompt_free");
+  }
+
+  function downloadSummary() {
+    const date = new Date();
+    const dateText = [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+    ].join("-");
+    const filename = `워크시트_${classCode(state.act, state.version)}_${dateText}.txt`;
+    const blob = new Blob([`\uFEFF${summaryText()}`], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function summaryText() {
+    const activity = data.activities.find(item => item.id === state.act);
+    const lines = [];
+    const addLine = (label, value) => {
+      if (String(value || "").trim()) lines.push(`${label}: ${value}`);
+    };
+    lines.push(`[지구과학 데이터 탐구 프롬프트 워크시트] ${activity.title}`);
+    lines.push(`성취기준 [${activity.code}] ${data.standards[activity.code]}`);
+    lines.push(`수업 코드 ${classCode(activity.id, state.version)} (${VERSIONS[state.version].name})`);
+    addLine("이름", answer(state, "name"));
+    addLine("AI 도구", answer(state, "tool"));
+    lines.push(`검증 상태: ${verificationStatus(state.version, state.ans, checkList()) === "pass" ? "모든 판정·근거 기록 및 예측 일치 (정확성의 자동 보증 아님)" : "미완료 또는 재검토 필요"}`);
+    lines.push("", "§0 역할 선언");
+    addLine("역할 선언", [
+      isChecked(state, "decl1") && "탐구자 선언",
+      isChecked(state, "decl2") && "결과는 가설",
+      isChecked(state, "decl3") && "정직한 기록",
+    ].filter(Boolean).join(", "));
+    addLine("나만의 약속", answer(state, "decl_own"));
+    addLine("사전 AI 신뢰도(1~5)", answer(state, "pre_trust"));
+    lines.push("", "§1 탐구 문제");
+    addLine("탐구 질문", answer(state, "question"));
+    addLine("질문 유형", (Q_TYPES.find(item => item.k === answer(state, "qtype")) || {}).b);
+    addLine("고른 이유", answer(state, "q_why"));
+    lines.push("", "§2 데이터 맥락");
+    addLine("출처", answer(state, "source") || `${activity.data.org} ${activity.data.name}`);
+    addLine("기간", answer(state, "period"));
+    addLine("지역·대상", answer(state, "place"));
+    if (state.version === "A") {
+      const variables = activity.vars
+        .filter((variable, index) => answer(state, `var_${index}`))
+        .map(variable => `${variable.n}(${variable.u})`);
+      addLine("변수", variables.join(", "));
+    } else if (state.version === "B") {
+      activity.vars.forEach((variable, index) => {
+        const unit = answer(state, `vu_${index}`);
+        const range = answer(state, `vr_${index}`);
+        if (unit || range) lines.push(`${variable.n}: 단위 ${unit} / 범위 ${range}`);
+      });
+    } else {
+      addLine("변수", answer(state, "vars_free"));
+    }
+    addLine("자료 메모", answer(state, "data_note"));
+    lines.push("", "§2.5 나의 예측");
+    addLine("경향", answer(state, "trend"));
+    addLine("범위", (answer(state, "p_min") || answer(state, "p_max"))
+      ? `${answer(state, "p_min")} ~ ${answer(state, "p_max")} ${answer(state, "p_unit")}`
+      : "");
+    addLine("그래프 모양", answer(state, "p_shape"));
+    addLine("이유", answer(state, "why"));
+    lines.push("", "§3 프롬프트", promptText() || "(없음)");
+    if (state.version === "C") addLine("자기 평가(1~5)", answer(state, "p_self"));
+    lines.push("", "§4 결과 검증");
+    addLine("예측과 결과 비교", answer(state, "prediction_match") === "match" ? "일치" : answer(state, "prediction_match") === "differ" ? "불일치" : "");
+    addLine("AI 결과", answer(state, "ai_result"));
+    const labels = { ok: "맞음", bad: "문제 있음", unk: "모르겠음" };
+    checkList().forEach(item => {
+      const checked = answer(state, `chk_${item.id}`);
+      const note = answer(state, `chkn_${item.id}`);
+      if (checked || note) lines.push(`- [${labels[checked] || "미확인"}] ${item.t}${note ? ` / ${note}` : ""}`);
+    });
+    lines.push("", "§5 수정·반복");
+    const roundCount = Math.max(1, Number(answer(state, "rounds_n")) || 1);
+    for (let index = 0; index < roundCount; index++) {
+      const problem = answer(state, `r${index}_problem`);
+      const prompt = answer(state, `r${index}_prompt`);
+      const change = answer(state, `r${index}_change`);
+      if (problem || prompt || change) {
+        lines.push(`${index + 1}회차`);
+        addLine("  문제", problem);
+        addLine("  수정 프롬프트", prompt);
+        addLine("  변화", change);
+      }
+    }
+    lines.push("", "§6 성찰");
+    addLine("사후 AI 신뢰도(1~5)", answer(state, "post_trust"));
+    addLine("결론", answer(state, "conclusion"));
+    addLine("AI가 한 일과 내가 판단한 일", answer(state, "who"));
+    addLine("찾은 오류", answer(state, "errors"));
+    addLine("동의하지 않는 부분", answer(state, "disagree"));
+    addLine("다음에 바꿀 점", answer(state, "next"));
+    addLine("성취수준 자기 점검", answer(state, "self_level"));
+    addLine("역할 선언", state.version === "B" ? `나: ${answer(state, "role_self")} / AI: ${answer(state, "role_ai")} / 검증: ${answer(state, "role_check")}` : answer(state, "decl_own"));
+    addLine("자유 데이터 맥락", answer(state, "context_free"));
+    addLine("자유 예측", answer(state, "prediction_free"));
+    addLine("자유 성찰", answer(state, "reflection_free"));
+    ["source", "concept", "evidence", "limits"].forEach(key => addLine(`성찰 점검 ${key}`, answer(state, `reflect_${key}`) ? "확인" : ""));
+    if (state.ans._verificationHistory?.length) {
+      lines.push("", "재실행 전 검증 이력", JSON.stringify(state.ans._verificationHistory, null, 2));
+    }
+    return lines.join("\n");
+  }
+
+  function renderSection() {
+    liveHooks = [];
+    const container = document.getElementById("sec");
+    const sectionKey = SECTIONS[state.step].key;
+    const activity = data.activities.find(item => item.id === state.act);
+    let html = "";
+
+    if (sectionKey === "s0") {
+      html = sectionWrap(0, "AI는 탐구를 돕는 도구이고, 결론을 내리는 사람은 나입니다. 시작하기 전에 역할을 분명히 해 두세요.", `
+        <div class="row">
+          ${inputField("name", "이름 또는 별칭 (선택)", "교사 검토는 익명 별칭 사용", "설문과 별도인 로컬 기록입니다. 개인정보·민감 정보는 입력하지 마세요.")}
+          <div class="field">
+            <label for="f_tool">사용할 AI 도구</label>
+            <select id="f_tool" data-k="tool">
+              <option value="">고르세요</option><option>ChatGPT</option><option>Claude</option><option>Gemini</option><option>Copilot</option><option>기타</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <span class="flabel">역할 선언 · ${VERSIONS[state.version].name}</span>
+          ${state.version === "A" ? `
+          <label class="check"><input type="checkbox" data-k="decl1"> 나는 탐구 질문과 결론을 스스로 정하는 탐구자이다.</label>
+          <label class="check"><input type="checkbox" data-k="decl2"> AI가 만든 그래프와 계산은 내가 검증하기 전까지 '가설'로 본다.</label>
+          <label class="check"><input type="checkbox" data-k="decl3"> 내가 사용한 데이터의 출처와 AI 사용 과정을 정직하게 기록한다.</label>
+          ` : state.version === "B" ? `
+          <p>나는 ___을 결정하고, AI는 ___을 돕는다. AI 결과는 ___으로 확인한다.</p>
+          ${inputField("role_self", "내가 결정할 것", "")}
+          ${inputField("role_ai", "AI가 도울 것", "")}
+          ${inputField("role_check", "결과를 검증할 방법", "")}
+          ` : `
+          <p class="note">역할 선언 기준: 탐구의 주체, AI의 역할과 한계, 결과를 검증할 책임, 출처·사용 기록의 정직성이 드러나야 합니다.</p>
+          ${textareaField("decl_own", "나의 역할 선언", "", "", 3)}`}
+        </div>
+        ${scaleField("pre_trust", "AI가 만든 그래프나 계산 결과를 그대로 믿어도 된다고 생각하나요?", "전혀 아니다", "매우 그렇다")}
+        <p class="small muted">비계 버전 A·B·C는 지원의 양입니다. 교육과정의 성취수준 A~E나 학생의 등급을 뜻하지 않습니다.</p>`);
+    } else if (sectionKey === "s1") {
+      let body = "";
+      if (state.version === "A") {
+        body = `
+          <div class="field">
+            <span class="flabel">빈칸을 채워 답할 수 있는 탐구 질문을 만드세요</span>
+            <p class="small muted">대상·지역, 기간 또는 비교 조건, 변수와 단위, 자료로 확인할 비교·변화·관계·계산을 구체적으로 적으세요. 마지막 칸은 ‘계절별 차이’, ‘두 변수의 관계’, ‘평균값’처럼 명사형으로 쓰세요. 예시를 고른 뒤 실제 자료에 맞게 고쳐도 됩니다.</p>
+            <div class="fill">
+              <input type="text" data-k="q_place" placeholder="지역·대상" aria-label="지역 또는 대상">
+              <span>의</span>
+              <input type="text" data-k="q_period" placeholder="기간·비교 조건" aria-label="기간 또는 비교 조건">
+              <span>자료를 이용해</span>
+              <input type="text" data-k="q_var" placeholder="변수와 단위" aria-label="확인할 변수와 단위">
+              <span>의</span>
+              <input type="text" data-k="q_how" placeholder="계절별 차이·두 변수의 관계·평균값" aria-label="자료로 확인할 비교, 변화, 관계 또는 계산 결과">
+              <span>를 확인할 수 있을까?</span>
+            </div>
+          </div>
+          <div class="field"><span class="flabel">예시 질문 (눌러서 가져오기)</span><div class="starters">
+            ${questionChoices(activity).map((question, index) => `<button type="button" data-ex="${index}">${escapeHtml(question)}</button>`).join("")}
+          </div></div>
+          ${textareaField("question", "나의 탐구 질문", "자동 완성 뒤 대상·조건·변수(단위)·알고 싶은 결과가 분명한지 확인해 다듬으세요.", "", 2)}`;
+      } else if (state.version === "B") {
+        body = `
+          <div class="field"><span class="flabel">질문 선택지 (또는 자유롭게 작성)</span><div class="starters">
+            ${questionChoices(activity).slice(0, 2).map((question, index) => `<button type="button" data-ex="${index}">${escapeHtml(question)}</button>`).join("")}
+          </div></div>
+          ${textareaField("question", "나의 탐구 질문", "선택지를 다듬거나 새로운 질문을 직접 쓰세요.", "", 2)}`;
+      } else {
+        body = `
+          ${textareaField("question", "나의 탐구 질문", "", "", 2)}
+          <div class="note"><b>좋은 탐구 질문의 기준</b><ul class="plain">
+            <li>내가 구할 수 있는 데이터로 답할 수 있다.</li>
+            <li>변수, 기간, 지역(대상)이 드러난다.</li>
+            <li>답을 찾으면 해당 성취기준의 과학 개념을 설명하는 데 도움이 된다.</li>
+          </ul></div>`;
+      }
+      body += textareaField("q_why", "이 질문을 고른 이유", "어떤 과학 개념과 연결되나요?", "", 2);
+      html = sectionWrap(1, "데이터로 답할 수 있는 질문을 정합니다.", body);
+    } else if (sectionKey === "s2") {
+      const dataset = activity.data;
+      let variables;
+      if (state.version === "A") {
+        variables = `
+          <div class="tbl-wrap"><table class="vars">
+            <thead><tr><th>사용</th><th>변수</th><th>단위</th><th>일반적 범위</th></tr></thead>
+            <tbody>${activity.vars.map((variable, index) => `
+              <tr><td><input type="checkbox" data-k="var_${index}" aria-label="${escapeHtml(variable.n)} 사용"></td>
+                <td>${escapeHtml(variable.n)}</td><td class="u">${escapeHtml(variable.u)}</td><td class="u">${escapeHtml(variable.r)}</td></tr>
+            `).join("")}</tbody>
+          </table></div>`;
+      } else if (state.version === "B") {
+        variables = `
+          <div class="tbl-wrap"><table class="vars">
+            <thead><tr><th>변수</th><th>단위 (직접 확인)</th><th>예상 범위 (직접 조사)</th></tr></thead>
+            <tbody>${activity.vars.map((variable, index) => `
+              <tr><td>${escapeHtml(variable.n)}</td>
+                <td><input type="text" data-k="vu_${index}" aria-label="${escapeHtml(variable.n)} 단위"></td>
+                <td><input type="text" data-k="vr_${index}" aria-label="${escapeHtml(variable.n)} 범위"></td></tr>
+            `).join("")}</tbody>
+          </table></div>
+          <span class="hint">단위와 범위는 원자료의 설명(메타데이터)이나 교과서에서 확인하세요.</span>`;
+      } else {
+        variables = "";
+      }
+      html = sectionWrap(2, "AI는 내가 알려 준 만큼만 자료를 이해합니다. 자료의 출처, 범위, 단위를 정확히 적으세요.", `
+        <div class="datacard">
+          <span class="label">이 활동의 데이터</span><b>${escapeHtml(dataset.name)}</b>
+          <span class="small">${escapeHtml(dataset.org)}${dataset.url ? ` · <a href="${escapeHtml(dataset.url)}" target="_blank" rel="noopener">${escapeHtml(dataset.url)}</a>` : ""}</span>
+          ${state.version === "A" ? `<span class="small muted">${escapeHtml(dataset.how)}</span>` : ""}
+        </div>
+        ${state.version === "C" ? `
+        <div class="note"><b>데이터 맥락 자가 완성 체크리스트</b>
+          ${["출처·파일과 접근 경로", "기간과 지역·대상", "변수·단위·관측 간격", "값 범위와 결측·이상값", "측정 조건과 자료의 한계"].map((item, index) => `<label class="check"><input type="checkbox" data-k="context_check_${index}">${item}</label>`).join("")}
+        </div>
+        ${textareaField("context_free", "데이터 맥락 기술", "위 기준을 스스로 확인하며 자유롭게 작성하세요.", "", 8)}
+        ` : `
+        <div class="row">
+          ${inputField("source", "출처", `${dataset.org} ${dataset.name}`)}
+          ${inputField("period", "기간", "예: 2015년 1월 ~ 2024년 12월")}
+          ${inputField("place", "지역·관측소·대상", "예: 서울(108), 동해 105선")}
+        </div>
+        <div class="field"><span class="flabel">변수와 단위</span>${variables}</div>
+        ${state.version === "A" ? textareaField("data_note", "자료를 열어 보고 알게 된 점", "결측(빈칸, -999 등), 특이한 값, 열 이름 등을 적으세요.", "예: 2019년 3월 자료가 비어 있다.", 3) : ""}`}`);
+    } else if (sectionKey === "s25") {
+      html = sectionWrap(3, "AI 결과를 보기 전에 나의 예측을 적어 둡니다. 예측은 AI 결과를 비판적으로 볼 기준점이 됩니다.", `
+        ${state.version === "C" ? textareaField("prediction_free", "나의 예측", "결과를 보기 전에 예상과 과학적 근거를 자유롭게 기록하세요.", "", 7) : `
+        ${state.version === "A" ? `<div class="note">${escapeHtml(activity.predict)}</div>` : ""}
+        <div class="field"><span class="flabel">예상하는 경향</span><div class="starters" role="group" aria-label="예상 경향">
+          ${TRENDS.map(trend => `<button type="button" data-pick="trend|${trend}">${trend}</button>`).join("")}
+        </div></div>
+        <div class="tbl-wrap"><table class="vars"><caption>예측 표 (수치 예상이 가능한 경우 범위도 기록)</caption><tbody><tr>
+          <td>${inputField("p_min", "예상 최솟값", "")}</td>
+          <td>${inputField("p_max", "예상 최댓값", "")}</td>
+          <td>${inputField("p_unit", "단위", "")}</td>
+        </tr></tbody></table></div>
+        ${textareaField("p_shape", "그래프 모양 설명", "", "", 2)}
+        ${state.version === "A" ? textareaField("why", "예측의 과학적 근거", "배운 개념을 근거로 빈칸을 완성하세요.", "___ 개념에 따르면 ___ 때문에 ___할 것으로 예상한다.", 3) : ""}`}`);
+    } else if (sectionKey === "s3") {
+      let body;
+      if (state.version === "A") {
+        body = `
+          <div class="field">
+            <span class="flabel">AI에게 시킬 작업 (여러 개 선택)</span>
+            ${activity.tasks.map((task, index) => `<label class="check"><input type="checkbox" data-k="task_${index}"> ${escapeHtml(task)}</label>`).join("")}
+            ${inputField("task_own", "직접 추가할 작업", "")}
+          </div>
+          ${inputField("chart", "원하는 그래프", activity.chart)}
+          <div class="field"><span class="flabel">조건과 검증 요청</span>
+            ${CONSTRAINTS.map(item => `<label class="check"><input type="checkbox" data-k="con_${item.k}"> ${escapeHtml(item.t)}</label>`).join("")}
+          </div>
+          <div class="field">
+            <span class="flabel">완성된 프롬프트</span>
+            <span class="hint">§1, §2에 쓴 내용과 위에서 고른 항목으로 자동 조립됩니다. 복사한 뒤 AI 도구에 데이터 파일과 함께 붙여 넣으세요.</span>
+            <div class="prompt-out" id="pOut"></div>
+          </div>
+          <div class="copyrow">
+            <button class="btn primary" type="button" id="pCopy">프롬프트 복사</button>
+            <button class="btn" type="button" id="pEdit">이 프롬프트로 직접 고치기</button>
+          </div>
+          ${textareaField("prompt_final", "AI에 실제로 보낸 프롬프트", "직접 고친 경우 여기에 최종본이 남습니다.", "", 6)}`;
+      } else if (state.version === "B") {
+        body = `
+          <div class="field"><span class="flabel">질문 유형 카드</span><div class="cards">
+            ${Q_TYPES.map(item => `<button type="button" class="card" data-pick="qtype|${item.k}"><b>${item.b}</b><span>${item.s}</span></button>`).join("")}
+          </div></div>
+          <div class="field">
+            <span class="flabel">프롬프트 요소 카드</span>
+            <span class="hint">좋은 프롬프트에 들어갈 요소입니다. 내 프롬프트에 넣은 요소를 체크하세요.</span>
+            <div class="cards">${P_CARDS.map(item => `
+              <label class="card card-label"><input type="checkbox" data-k="pc_${item.k}">
+                <span><b>${item.b}</b><span>${item.s}</span></span>
+              </label>
+            `).join("")}</div>
+          </div>
+          ${textareaField("prompt_free", "나의 프롬프트", "§1의 질문과 §2의 데이터 맥락을 바탕으로 직접 쓰세요.", "", 9)}
+          <div class="copyrow"><button class="btn primary" type="button" id="pCopy">프롬프트 복사</button><span class="small muted" id="pMiss"></span></div>`;
+      } else {
+        body = `
+          ${textareaField("prompt_free", "나의 프롬프트", "", "", 10)}
+          <div class="note"><b>프롬프트 평가 기준</b><ul class="plain">
+            <li>AI가 내 자료가 무엇인지(출처, 기간, 변수, 단위) 알 수 있다.</li>
+            <li>무엇을 계산하고 어떤 그래프를 그릴지 구체적이다.</li>
+            <li>AI가 결측 처리나 가정을 숨기지 못하도록 설명을 요구한다.</li>
+            <li>결과를 내가 검증할 수 있는 형태(요약 표, 값 범위)로 받는다.</li>
+          </ul></div>
+          ${scaleField("p_self", "내 프롬프트는 위 기준을 얼마나 만족하나요?", "거의 못 함", "모두 만족")}
+          <div class="copyrow"><button class="btn primary" type="button" id="pCopy">프롬프트 복사</button></div>`;
+      }
+      html = sectionWrap(4, "AI에게 보낼 프롬프트를 만듭니다. 데이터 파일(CSV 등)은 AI 도구에 함께 첨부하세요.", body);
+    } else if (sectionKey === "s4") {
+      const checks = checkList();
+      let body = `
+        <div class="predict-recap">
+          <b>나의 예측</b> · ${escapeHtml(state.version === "C" ? answer(state, "prediction_free") || "(아직 없음)" : answer(state, "trend") || "(아직 없음)")}
+          ${answer(state, "p_min") || answer(state, "p_max") ? ` · 범위 ${escapeHtml(answer(state, "p_min"))} ~ ${escapeHtml(answer(state, "p_max"))} ${escapeHtml(answer(state, "p_unit"))}` : ""}
+          <br><span class="small muted">${escapeHtml(answer(state, "p_shape"))}</span>
+        </div>
+        ${textareaField("ai_result", "AI가 만든 결과 기록", "그래프의 모양, 핵심 수치, AI의 설명을 옮겨 적으세요. 그래프 이미지는 따로 저장해 두세요.", "", 4)}
+        <div class="field"><span class="flabel">예측–결과 비교</span>
+          <div class="cards">
+            <button type="button" class="card" data-pick="prediction_match|match">예측과 일치</button>
+            <button type="button" class="card" data-pick="prediction_match|differ">예측과 불일치</button>
+          </div>
+          <p class="hint">일치는 정확성의 증명이 아니며 불일치는 오류의 증거가 아닙니다. 원자료·계산·개념을 확인하고, 불일치하면 §5에서 예측 또는 분석을 재검토하세요.</p>
+        </div>`;
+      if (state.version === "C") {
+        body += `
+          <div class="field">
+            <span class="flabel">나만의 검증 기준 세우기</span>
+            <span class="hint">이 자료에서 '틀린 결과'를 알아챌 수 있는 기준을 세 가지 이상 스스로 정하세요.</span>
+            ${[0, 1, 2].map(index => `<input type="text" data-k="cc_${index}" placeholder="검증 기준 ${index + 1}" aria-label="검증 기준 ${index + 1}">`).join("")}
+          </div>`;
+      }
+      body += `<div class="field"><span class="flabel">검증 체크</span><div class="tally" id="tally"></div></div>
+        <div class="stack" id="vlist">${checks.map(verificationRow).join("")}</div>`;
+      html = sectionWrap(5, "AI 결과를 하나씩 확인합니다. 하나라도 '문제 있음'이면 §5에서 고쳐 다시 요청합니다.", body);
+    } else if (sectionKey === "s5") {
+      const roundCount = Math.max(1, Number(answer(state, "rounds_n")) || 1);
+      const problems = checkList().filter(item => answer(state, `chk_${item.id}`) === "bad");
+      let body = problems.length
+        ? `<div class="note"><b>§4에서 '문제 있음'으로 표시한 항목</b><ul class="plain">
+            ${problems.map(item => `<li>${escapeHtml(item.t)}${answer(state, `chkn_${item.id}`) ? ` — <span class="muted">${escapeHtml(answer(state, `chkn_${item.id}`))}</span>` : ""}</li>`).join("")}
+          </ul></div>`
+        : '<p class="note">§4에서 \'문제 있음\'으로 표시한 항목이 없습니다. 그래도 더 알고 싶은 점이나 개선할 점이 있으면 기록하세요.</p>';
+      for (let index = 0; index < roundCount; index++) {
+        body += `
+          <div class="round">
+            <h3><span class="mono">${index + 1}회차</span> 수정</h3>
+            ${textareaField(`r${index}_problem`, state.version === "C" ? "수정·재검토 기록" : "발견한 문제와 근거", state.version === "A" ? "무엇이 왜 문제인지, 원자료·계산·예측 중 어느 것을 재검토했는지 쓰세요." : "", "", state.version === "C" ? 5 : 2)}
+            ${state.version === "A" ? `
+              <div class="field"><span class="flabel">수정 프롬프트 문장 틀 (눌러서 넣기)</span><div class="starters">
+                ${STARTERS.map((starter, starterIndex) => `<button type="button" data-starter="${index}|${starterIndex}">${escapeHtml(starter)}</button>`).join("")}
+              </div></div>` : state.version === "B" ? '<p class="note">문제 → 수정 요청 → 재실행 결과를 연결해 기록하세요.</p>' : ""}
+            ${textareaField(`r${index}_prompt`, "수정해서 보낸 프롬프트", "", "", 3)}
+            ${state.version !== "C" ? textareaField(`r${index}_change`, "재실행 후 결과 변화", state.version === "A" ? "재실행과 재검증 후 돌아와 해결 여부와 새 문제를 기록하세요." : "", "", 2) : ""}
+          </div>`;
+      }
+      body += '<div><button class="btn" type="button" id="addRound">수정 회차 추가</button></div>';
+      html = sectionWrap(6, "근거를 검토해 프롬프트를 수정하고 §3에서 재실행한 뒤 §4에서 다시 검증합니다. 예측이 잘못되었다면 이유를 기록하고 §2.5에서 수정하세요. 일치를 만들기 위해 관측값을 바꾸면 안 됩니다. 재실행 전 예측·결과·판정은 정리에 이력으로 남습니다.", body);
+    } else if (sectionKey === "s6") {
+      const level = data.levels[activity.code];
+      let body = state.version === "C" ? `
+        ${scaleField("post_trust", "탐구 후 AI 결과를 그대로 믿어도 된다고 생각하나요?", "전혀 아니다", "매우 그렇다")}
+        <p class="small muted" id="trustCmp"></p>
+        ${textareaField("reflection_free", "나의 성찰", "탐구 결론과 근거, 나와 AI의 역할, 검증 경험을 되돌아보세요.", "", 9)}
+      ` : `
+        ${state.version === "A" ? `<div class="field"><span class="flabel">성찰 체크리스트</span>
+          ${[["source", "자료와 AI 사용 과정을 정직하게 기록했다."], ["concept", "성취기준의 과학 개념으로 결과를 설명했다."], ["evidence", "검증한 수치를 근거로 결론을 냈다."], ["limits", "불확실성과 탐구의 한계를 구분했다."]].map(([key, text]) => `<label class="check"><input type="checkbox" data-k="reflect_${key}">${text}</label>`).join("")}
+        </div>` : ""}
+        ${scaleField("post_trust", "탐구를 마친 지금, AI 결과를 그대로 믿어도 된다고 생각하나요?", "전혀 아니다", "매우 그렇다")}
+        <p class="small muted" id="trustCmp"></p>
+        ${textareaField("conclusion", "탐구 질문에 대한 나의 결론", "§1의 질문에 답하고, 근거가 된 수치를 함께 쓰세요.", "", 4)}
+        ${textareaField("who", "AI가 한 일과 내가 판단한 일", "AI는 무엇을 했고, 무엇을 결정한 것은 나였나요?", "", 3)}
+        ${textareaField("errors", "AI 결과에서 찾은 오류와 찾아낸 방법", "어떤 단서로 오류를 알아챘나요? 오류가 없었다면 어떻게 확인했나요?", "", 3)}
+        ${textareaField("disagree", "AI 설명 중 동의하지 않거나 더 확인이 필요한 부분", "", "", 2)}
+        ${textareaField("next", "다음에 AI로 데이터를 탐구할 때 바꿀 점", "", "", 2)}`;
+      if (level && state.version !== "C") {
+        body += `
+          <div class="field">
+            <span class="flabel">성취수준 자기 점검</span>
+            <span class="hint">이번 탐구로 도달했다고 생각하는 수준을 고르세요.</span>
+            <div class="stack level-options">
+              ${["A", "B", "C", "D", "E"].map(letter => `
+                <button type="button" class="card" data-pick="self_level|${letter}">
+                  <b class="mono">${letter}</b><span>${escapeHtml(level[letter])}</span>
+                </button>`).join("")}
+            </div>
+          </div>`;
+      }
+      html = sectionWrap(7, "탐구 과정을 되돌아봅니다. 특히 AI를 얼마나, 어떻게 믿었는지 점검하세요.", body);
+    } else if (sectionKey === "sum") {
+      html = sectionWrap(8, "모든 단계의 기록을 한 번에 모았습니다. 복사해서 한글, 구글 클래스룸, 학습지 제출란에 붙여 넣으세요.", `
+        <div class="copyrow">
+          <button class="btn primary" type="button" id="sumCopy">전체 기록 복사</button>
+          <button class="btn" type="button" id="sumDownload">텍스트 파일로 저장</button>
+          <button class="btn" type="button" id="sumPrint">인쇄하기</button>
+          <span class="small muted">미완성 기록도 저장할 수 있습니다. 검증 완료를 뜻하지 않습니다. 이 기록은 연구자에게 자동 전송되지 않습니다.</span>
+        </div>
+        <div class="summary-out" id="sumOut"></div>
+        <details class="details">
+          <summary>이 활동의 기록 지우기</summary>
+          <p class="small muted">이 브라우저에 저장된 이 활동(버전 ${state.version})의 기록을 모두 지웁니다. 되돌릴 수 없습니다.</p>
+          <button class="btn sm" type="button" id="wipe">기록 지우기</button>
+        </details>`);
+    }
+
+    container.innerHTML = html;
+    bindFields(container);
+    wireSection(sectionKey);
+  }
+
+  function wireSection(sectionKey) {
+    const container = document.getElementById("sec");
+    if (sectionKey === "s1" && state.version === "A") {
+      const buildQuestion = () => {
+        const parts = ["q_place", "q_period", "q_var", "q_how"].map(key => answer(state, key).trim());
+        if (parts.some(Boolean)) {
+          const variable = parts[2] || "○○";
+          const question = `${parts[0] || "○○"}의 ${parts[1] || "○○"} 자료를 이용해 ${variable}의 ${parts[3] || "변화 양상이나 비교 결과"}를 확인할 수 있을까?`;
+          state.ans.question = question;
+          document.getElementById("f_question").value = question;
+        }
+      };
+      liveHooks.push(key => {
+        if (/^q_(place|period|var|how)$/.test(key)) {
+          buildQuestion();
+          save();
+          refreshRail();
+        }
+      });
+    }
+    if (sectionKey === "s1" && state.version !== "C") {
+      container.querySelectorAll("[data-ex]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.ans.question = questionChoices(data.activities.find(item => item.id === state.act))[Number(button.dataset.ex)];
+          document.getElementById("f_question").value = state.ans.question;
+          setAnswer("question", state.ans.question);
+        });
+      });
+    }
+
+    if (sectionKey === "s25") {
+      container.querySelectorAll('[data-pick^="trend|"]').forEach(button => {
+        button.setAttribute("aria-pressed", answer(state, "trend") === button.dataset.pick.split("|")[1]);
+      });
+    }
+
+    if (sectionKey === "s3") {
+      const output = document.getElementById("pOut");
+      if (output) {
+        const update = () => { output.textContent = assemblePrompt(); };
+        update();
+        liveHooks.push(update);
+        document.getElementById("pEdit").addEventListener("click", () => {
+          state.ans.prompt_final = assemblePrompt();
+          const field = document.getElementById("f_prompt_final");
+          field.value = state.ans.prompt_final;
+          field.focus();
+          setAnswer("prompt_final", state.ans.prompt_final);
+        });
+      }
+      const missing = document.getElementById("pMiss");
+      if (missing) {
+        const update = () => {
+          const names = P_CARDS.filter(item => !answer(state, `pc_${item.k}`)).map(item => item.b);
+          missing.textContent = names.length ? `아직 체크하지 않은 요소: ${names.join(", ")}` : "여섯 요소를 모두 넣었습니다.";
+        };
+        update();
+        liveHooks.push(update);
+      }
+      const copyButton = document.getElementById("pCopy");
+      copyButton.addEventListener("click", () => {
+        const text = promptText();
+        if (!text.trim()) {
+          copyButton.textContent = "프롬프트가 비어 있습니다";
+          window.setTimeout(() => { copyButton.textContent = "프롬프트 복사"; }, 1600);
+          return;
+        }
+        if (state.version === "A" && !answer(state, "prompt_final")) {
+          state.ans.prompt_final = text;
+          const field = document.getElementById("f_prompt_final");
+          if (field) field.value = text;
+          setAnswer("prompt_final", text);
+        }
+        copyText(text, copyButton);
+      });
+    }
+
+    if (sectionKey === "s4") {
+      const updateTally = () => {
+        const counts = { ok: 0, bad: 0, unk: 0 };
+        const checks = checkList();
+        checks.forEach(item => {
+          const value = answer(state, `chk_${item.id}`);
+          if (Object.hasOwn(counts, value)) counts[value]++;
+        });
+        const remaining = checks.length - counts.ok - counts.bad - counts.unk;
+        const tally = document.getElementById("tally");
+        if (!tally) return;
+        tally.innerHTML = `
+          <span class="pill ok">맞음 ${counts.ok}</span>
+          <span class="pill bad">문제 있음 ${counts.bad}</span>
+          <span class="pill unk">모르겠음 ${counts.unk}</span>
+          <span class="small muted">남은 항목 ${remaining}</span>`;
+      };
+      updateTally();
+
+      const bindChecks = () => {
+        container.querySelectorAll("[data-chk]").forEach(button => {
+          button.addEventListener("click", () => {
+            const key = `chk_${button.dataset.chk}`;
+            state.ans[key] = answer(state, key) === button.dataset.v ? "" : button.dataset.v;
+            const row = container.querySelector(`[data-row="${button.dataset.chk}"]`);
+            row.className = `vrow ${answer(state, key)}`;
+            row.querySelectorAll("[data-chk]").forEach(option => {
+              option.setAttribute("aria-pressed", answer(state, key) === option.dataset.v);
+            });
+            updateTally();
+            setAnswer(key, state.ans[key]);
+          });
+        });
+      };
+      bindChecks();
+      if (state.version === "C") {
+        liveHooks.push(key => {
+          if (!/^cc_/.test(key)) return;
+          const list = document.getElementById("vlist");
+          list.innerHTML = checkList().map(verificationRow).join("");
+          bindFields(list);
+          bindChecks();
+          updateTally();
+        });
+      }
+    }
+
+    if (sectionKey === "s5") {
+      document.getElementById("addRound").addEventListener("click", () => {
+        state.ans.rounds_n = Math.max(1, Number(answer(state, "rounds_n")) || 1) + 1;
+        save();
+        renderSection();
+      });
+      container.querySelectorAll("[data-starter]").forEach(button => {
+        button.addEventListener("click", () => {
+          const [round, starter] = button.dataset.starter.split("|");
+          const key = `r${round}_prompt`;
+          state.ans[key] = `${answer(state, key) ? `${answer(state, key)}\n` : ""}${STARTERS[Number(starter)]}`;
+          const field = document.getElementById(`f_${key}`);
+          field.value = state.ans[key];
+          field.focus();
+          setAnswer(key, state.ans[key]);
+        });
+      });
+    }
+
+    if (sectionKey === "s6") {
+      const updateTrustComparison = () => {
+        const before = Number(answer(state, "pre_trust"));
+        const after = Number(answer(state, "post_trust"));
+        const comparison = document.getElementById("trustCmp");
+        if (!comparison) return;
+        comparison.textContent = before && after
+          ? `§0에서 ${before}점 → 지금 ${after}점${after < before
+            ? " (신뢰가 낮아졌습니다. 그 이유를 아래에 써 보세요.)"
+            : after > before
+              ? " (신뢰가 높아졌습니다. 무엇을 확인했기 때문인가요?)"
+              : " (변화 없음)"}`
+          : before ? `§0에서는 ${before}점이었습니다.` : "";
+      };
+      updateTrustComparison();
+      liveHooks.push(updateTrustComparison);
+    }
+
+    if (sectionKey === "sum") {
+      document.getElementById("sumOut").textContent = summaryText();
+      document.getElementById("sumCopy").addEventListener("click", event => copyText(summaryText(), event.currentTarget));
+      document.getElementById("sumDownload").addEventListener("click", downloadSummary);
+      document.getElementById("sumPrint").addEventListener("click", () => window.print());
+      document.getElementById("wipe").addEventListener("click", event => {
+        const button = event.currentTarget;
+        if (button.dataset.armed) {
+          window.clearTimeout(saveTimer);
+          state.ans = {};
+          actions.writeStorage(answerKey(state), {});
+          state.step = 0;
+          state.ans._step = 0;
+          save();
+          renderWork();
+        } else {
+          button.dataset.armed = "1";
+          button.textContent = "한 번 더 누르면 지워집니다";
+          button.classList.add("primary");
+        }
+      });
+    }
+  }
+
+  function footer() {
+    return actions.footer();
+  }
+
+  if (state.act) {
+    loadCurrentAnswer();
+    renderWork();
+  } else {
+    renderStart();
+  }
+}
+
+return { parseCode, verificationStatus, renderStudent };
+})();
+modules["./app.js"] = await (async () => {
+const { SUBJ } = modules["./constants.js"];
+const { CONFIG } = modules["./config.js"];
+const { renderTeacher } = modules["./teacher.js"];
+const { parseCode, renderStudent } = modules["./student.js"];
+
+const app = document.getElementById("app");
+const modeTeacher = document.getElementById("modeT");
+const modeStudent = document.getElementById("modeS");
+const surveyLink = document.getElementById("surveyLink");
+let worksheetData = null;
+let flushStudentAnswers = null;
+
+function reportStorageError(error) {
+  console.error("워크시트 브라우저 저장 오류", error);
+  if (!document.getElementById("storageWarning")) {
+    const warning = document.createElement("p");
+    warning.id = "storageWarning";
+    warning.className = "error wrap";
+    warning.setAttribute("role", "alert");
+    warning.textContent = "브라우저 저장소를 읽거나 저장하지 못했습니다. 자동 저장을 신뢰하지 말고 ‘정리’에서 기록을 복사·저장하세요.";
+    app.before(warning);
+  }
+}
+
+const state = {
+  mode: "teacher",
+  subj: "es",
+  sel: null,
+  teacherActivity: null,
+  version: "A",
+  act: null,
+  step: 0,
+  ans: {},
+};
+
+function readStorage(key) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    reportStorageError(error);
+    return null;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    reportStorageError(error);
+  }
+}
+
+function saveLastView() {
+  writeStorage("evc:last", {
+    mode: state.mode,
+    subj: state.subj,
+    sel: state.sel,
+    teacherActivity: state.teacherActivity,
+    version: state.version,
+    act: state.act,
+    step: state.step,
+  });
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[character]);
+}
+
+function footerMarkup() {
+  const contact = CONFIG.contact.trim();
+  return `
+    <p class="foot">성취기준 출처: 교육부 고시 제2022-33호 [별책 9] 과학과 교육과정(62개 원문 대조). 성취수준: 2022 개정 교육과정에 따른 고등학교 과학과 선택과목 성취수준(현장 보급본). 활동은 교과서와 연계하거나 새로 구성했으며 교과서 본문은 옮기지 않았습니다. 공개 관측값과 실험·문헌·교사 제공 모형 자료를 구별해 사용하세요. A·B·C 구조는 KACE 투고본 표 3을 따르며, 교육적 효과가 검증되었다는 뜻은 아닙니다. 입력 내용은 이 브라우저에만 저장됩니다.</p>
+    <p class="foot-meta">
+      <span>버전: ${escapeHtml(CONFIG.appVersion)}</span>
+      <span>연구자: ${escapeHtml(CONFIG.researcher)}</span>
+      ${contact ? `<a href="mailto:${escapeHtml(contact)}">문의: ${escapeHtml(contact)}</a>` : ""}
+    </p>`;
+}
+
+function setMode(mode, previewStep) {
+  if (flushStudentAnswers) flushStudentAnswers();
+  flushStudentAnswers = null;
+  state.mode = mode;
+  state.previewStep = Number.isInteger(previewStep) ? previewStep : null;
+  modeTeacher.setAttribute("aria-pressed", String(mode === "teacher"));
+  modeStudent.setAttribute("aria-pressed", String(mode === "student"));
+  saveLastView();
+  render();
+}
+
+function render() {
+  if (!worksheetData) return;
+  surveyLink.hidden = state.mode !== "teacher" || !CONFIG.surveyUrl.trim();
+  if (!surveyLink.hidden) surveyLink.href = CONFIG.surveyUrl;
+  if (state.mode === "teacher") {
+    document.getElementById("topSub").textContent = "교사 화면 · 성취기준에서 활동과 비계 수준 고르기";
+    renderTeacher(app, worksheetData, state, {
+      footer: footerMarkup,
+      readStorage,
+      setMode,
+      saveLastView,
+      writeStorage,
+    });
+  } else {
+    document.getElementById("topSub").textContent = "학생 화면 · 수업 코드로 시작하기";
+    renderStudent(app, worksheetData, state, {
+      footer: footerMarkup,
+      setMode,
+      readStorage,
+      writeStorage,
+      saveLastView,
+      registerFlush: flush => { flushStudentAnswers = flush; },
+    });
+  }
+}
+
+async function loadData() {
+  const embedded = document.getElementById("worksheet-data");
+  const embeddedData = embedded ? JSON.parse(embedded.textContent) : null;
+  const files = [
+    ["activities", "../data/activities.json"],
+    ["extraActivities", "../data/activities-extra.json"],
+    ["standards", "../data/standards.json"],
+    ["levels", "../data/levels.json"],
+  ];
+
+  const entries = await Promise.all(files.map(async ([name, path]) => {
+    if (embeddedData) {
+      if (!Object.hasOwn(embeddedData, name)) throw new Error(`Missing embedded worksheet data: ${name}`);
+      return [name, embeddedData[name]];
+    }
+    const response = await fetch(new URL(path, document.baseURI));
+    if (!response.ok) {
+      throw new Error(`Failed to load ${name}: HTTP ${response.status}`);
+    }
+    return [name, await response.json()];
+  }));
+
+  const data = Object.fromEntries(entries);
+  data.activities.push(...data.extraActivities);
+  const ids = new Set();
+  for (const activity of data.activities) {
+    if (ids.has(activity.id) || !data.standards[activity.code] || !activity.questions?.length
+      || !activity.vars?.length || !activity.checks?.length || !activity.tasks?.length) {
+      throw new Error(`활동 데이터의 ID·성취기준·필수 필드를 확인하세요: ${activity.id}`);
+    }
+    ids.add(activity.id);
+  }
+  return data;
+}
+
+function restoreState(data) {
+  const last = readStorage("evc:last");
+  if (last) {
+    state.mode = last.mode === "student" ? "student" : "teacher";
+    state.subj = SUBJ[last.subj] ? last.subj : "es";
+    state.sel = typeof last.sel === "string" ? last.sel : null;
+    state.teacherActivity = data.activities.some(a => a.id === last.teacherActivity) ? last.teacherActivity : null;
+    state.version = ["A", "B", "C"].includes(last.version) ? last.version : "A";
+    state.step = Number.isInteger(last.step) && last.step >= 0 && last.step < 9 ? last.step : 0;
+    state.act = data.activities.some(activity => activity.id === last.act) ? last.act : null;
+  }
+  modeTeacher.setAttribute("aria-pressed", String(state.mode === "teacher"));
+  modeStudent.setAttribute("aria-pressed", String(state.mode === "student"));
+}
+
+modeTeacher.addEventListener("click", () => setMode("teacher"));
+modeStudent.addEventListener("click", () => setMode("student"));
+
+try {
+  worksheetData = await loadData();
+  restoreState(worksheetData);
+  const sharedActivity = parseCode(location.hash, worksheetData.activities);
+  if (sharedActivity) {
+    state.mode = "student";
+    state.act = sharedActivity.id;
+    state.version = sharedActivity.version;
+    state.ans = readStorage(`evc:${state.act}:${state.version}`) || {};
+    state.step = Number.isInteger(state.ans._step) ? state.ans._step : 0;
+    saveLastView();
+  }
+  modeTeacher.setAttribute("aria-pressed", String(state.mode === "teacher"));
+  modeStudent.setAttribute("aria-pressed", String(state.mode === "student"));
+  render();
+} catch (error) {
+  console.error("워크시트 자료를 불러오지 못했습니다.", error);
+  app.innerHTML = '<p class="error" role="alert">자료를 불러오지 못했습니다. 페이지를 새로고침해 주세요.</p>';
+}
+
+window.addEventListener("pagehide", () => {
+  if (flushStudentAnswers) flushStudentAnswers();
+  saveLastView();
+});
+
+
+
+return {  };
+})();
+})().catch(error => {
+  console.error("워크시트 실행 오류", error);
+  document.getElementById("app").textContent = "워크시트를 실행하지 못했습니다. 최신 Chrome 또는 Edge에서 다시 열어 주세요.";
+});
+</script>
+</body>
+</html>
